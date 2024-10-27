@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Ardalis.GuardClauses" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\SharedKernel\Sample.SharedKernel\Sofa.CourseManagement.SharedKernel.csproj" />
+		<ProjectReference Include="..\Sofa.CourseManagement.Domain.Contract\Sofa.CourseManagement.Domain.Contract.csproj" />
+	</ItemGroup>
+</Project>
