@@ -7,8 +7,6 @@ using Sofa.CourseManagement.SharedKernel.SeedWork;
 using Sofa.CourseManagement.Infrastructure.EventProcessing;
 using Sofa.CourseManagement.Domain.Institutes;
 using Sofa.CourseManagement.Infrastructure.Domains.Institutes;
-using Sofa.CourseManagement.Infrastructure.Domains.LessonPlans;
-using Sofa.CourseManagement.Domain.LessonPlans;
 
 namespace Sofa.CourseManagement.Infrastructure
 {
@@ -24,7 +22,6 @@ namespace Sofa.CourseManagement.Infrastructure
             }, 1024);
 
             services.AddScoped<IInstituteRepository, InstituteRepository>();
-			services.AddScoped<ILessonPlanRepository, LessonPlanRepository>();
 			services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IDomainEventsDispatcher, DomainEventsDispatcher>();
 

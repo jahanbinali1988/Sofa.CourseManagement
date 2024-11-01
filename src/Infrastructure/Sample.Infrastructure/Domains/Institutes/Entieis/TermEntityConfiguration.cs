@@ -6,25 +6,27 @@ using Sofa.CourseManagement.Domain.Institutes.Constants;
 
 namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes.Entieis
 {
-    internal class TermEntityConfiguration : IEntityTypeConfiguration<Term>
-    {
-        public void Configure(EntityTypeBuilder<Term> builder)
-        {
-            builder.HasIndex(x => x.Id)
-                .IsUnique();
+	internal class TermEntityConfiguration : BaseEntityTypeConfiguration<Term>
+	{
+		public override void Configure(EntityTypeBuilder<Term> builder)
+		{
 
-            builder.Property(x => x.CreatedAt)
-                .HasDefaultValueSql("SYSDATETIMEOFFSET()");
+			builder.HasIndex(x => x.Id)
+				.IsUnique();
 
-            builder.Property<bool>("IsDeleted")
-                .HasDefaultValue(false);
+			builder.Property(x => x.CreatedAt)
+				.HasDefaultValueSql("SYSDATETIMEOFFSET()");
 
-            builder.Property<DateTimeOffset?>("DeletedAt")
-                .IsRequired(false);
+			builder.Property<bool>("IsDeleted")
+				.HasDefaultValue(false);
 
-            builder.HasQueryFilter(p => EF.Property<bool>(p, "IsDeleted") == false);
+			builder.Property<DateTimeOffset?>("DeletedAt")
+				.IsRequired(false);
 
-            builder.HasOne<Course>(c => c.Course).WithMany(x=> x.Terms).HasForeignKey(x=> x.CourseId.Value);
+			builder.HasQueryFilter(p => EF.Property<bool>(p, "IsDeleted") == false);
+
+			builder.HasMany<Session>(c => c.Sessions).WithOne().HasForeignKey(x => x.TermId).IsRequired().OnDelete(DeleteBehavior.Cascade);
+			builder.HasMany<UserTerm>(c => c.UserTerms).WithOne().HasForeignKey(x => x.TermId).IsRequired().OnDelete(DeleteBehavior.Cascade);
 
 			builder.OwnsOne(p => p.Title, m =>
 			{
@@ -34,15 +36,8 @@ namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes.Entieis
 					.IsRequired(true);
 			});
 
-			builder.OwnsOne(p => p.CourseId, m =>
-			{
-				m.Property(x => x.Value)
-					.HasColumnName(nameof(Term.CourseId))
-					.HasMaxLength(ConstantValues.MaxStringCorelationIdLength)
-					.IsRequired(true);
-			});
-
 			builder.ToTable(nameof(Term));
-        }
-    }
+			base.Configure(builder);
+		}
+	}
 }

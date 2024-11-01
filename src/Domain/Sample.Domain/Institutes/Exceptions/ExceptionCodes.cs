@@ -2,13 +2,15 @@
 {
 	public enum ExceptionCodes
 	{
-		InvalidTitleValueException = 2000,
-		InvalidCorelationIdValueException = 2001,
-		InvalidCodeValueException = 2002,
-		InvalidWebsiteUrlValueException = 2003,
-		InvalidEmailValueException = 2004,
-		InvalidNameValueException = 2005,
-		InvalidPhoneNumberValueException = 2006,
-		InvalidUserNameValueException = 2007,
+		InvalidCorelationIdValueException = 1000,
+		InvalidTitleValueException = 1001,
+		InvalidContentValueException = 1002,
+		InvalidOccurredDateValueException = 1003,
+		InvalidCodeValueException = 1004,
+		InvalidWebsiteUrlValueException = 1005,
+		InvalidEmailValueException = 1006,
+		InvalidNameValueException = 1007,
+		InvalidPhoneNumberValueException = 1008,
+		InvalidUserNameValueException = 1009,
 	}
 }

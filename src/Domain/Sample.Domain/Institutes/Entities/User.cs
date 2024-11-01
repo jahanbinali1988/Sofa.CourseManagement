@@ -1,6 +1,5 @@
 ﻿using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
 using Sofa.CourseManagement.Domain.Institutes.ValueObjects;
-using Sofa.CourseManagement.Domain.Shared.ValueObjects;
 using Sofa.CourseManagement.SharedKernel.Generators;
 using Sofa.CourseManagement.SharedKernel.SeedWork;
 using System;
@@ -18,14 +17,13 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
         public Email Email { get; private set; }
         public UserRole Role { get; private set; }
         public UserLevel Level { get; private set; }
-        public CorelationId InstituteId { get; private set; }
+        public Guid InstituteId { get; private set; }
 
-        public Institute Institute { get; private set; }
-		public ICollection<UserCourse> UserCourses { get; set; }
+		public ICollection<UserTerm> UserTerms { get; private set; }
 
 		private User()
         {
-            UserCourses = new List<UserCourse>();
+			UserTerms = new List<UserTerm>();
         }
 
         public void ChangePassword(string newPassword)

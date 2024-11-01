@@ -1,5 +1,4 @@
-﻿using Sofa.CourseManagement.Domain.Shared.ValueObjects;
-using Sofa.CourseManagement.SharedKernel.SeedWork;
+﻿using Sofa.CourseManagement.SharedKernel.SeedWork;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +9,7 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
     {
         public Title Title { get; private set; }
 
-        public CorelationId InstituteId { get; private set; }
-        public Institute Institute { get; private set; }
+        public Guid InstituteId { get; private set; }
         public ICollection<Course> Courses { get; set; }
 
         private Field()
@@ -21,7 +19,6 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
 
         public void AssignTitle(string title) { this.Title = title; }
         public void AssignInstitute(Guid instituteId) { this.InstituteId = instituteId; }
-        public void AssignInstitute(Institute institute) { this.InstituteId = institute.Id; this.Institute = institute; }
         public void AssignCourses(IEnumerable<Course> courses)
         {
             if (Courses.Any())

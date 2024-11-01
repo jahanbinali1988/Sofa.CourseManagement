@@ -2,7 +2,7 @@
 using Sofa.CourseManagement.Application.Contract.Posts.Commands;
 using Sofa.CourseManagement.Application.Contract.Posts.Converter;
 using Sofa.CourseManagement.Application.Contract.Posts.Dtos;
-using Sofa.CourseManagement.Domain.LessonPlans;
+using Sofa.CourseManagement.Domain.Institutes;
 using Sofa.CourseManagement.SharedKernel.Application;
 using Sofa.CourseManagement.SharedKernel.SeedWork;
 using System;
@@ -13,11 +13,11 @@ namespace Sofa.CourseManagement.Application.Posts.Commands
 {
 	internal class UpdatePostCommandHandler : ICommandHandler<UpdatePostCommand>
 	{
-		private readonly ILessonPlanRepository _lessonPlanRepository;
+		private readonly IInstituteRepository _repository;
 		private readonly IUnitOfWork _unitOfWork;
-		public UpdatePostCommandHandler(ILessonPlanRepository lessonPlanRepository, IUnitOfWork unitOfWork)
+		public UpdatePostCommandHandler(IInstituteRepository repository, IUnitOfWork unitOfWork)
 		{
-			_lessonPlanRepository = lessonPlanRepository;
+			_repository = repository;
 			_unitOfWork = unitOfWork;
 		}
 

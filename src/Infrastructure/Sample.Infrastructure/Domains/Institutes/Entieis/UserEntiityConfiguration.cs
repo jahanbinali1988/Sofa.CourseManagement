@@ -1,31 +1,29 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using System;
-using Sofa.CourseManagement.Domain.Institutes;
 using Sofa.CourseManagement.Domain.Institutes.Constants;
 using Sofa.CourseManagement.Domain.Institutes.Entities;
 
 namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes.Entieis
 {
-	internal class UserEntiityConfiguration : IEntityTypeConfiguration<User>
-    {
-        public void Configure(EntityTypeBuilder<User> builder)
-        {
-            builder.HasIndex(x => x.Id)
-                .IsUnique();
+	internal class UserEntiityConfiguration : BaseEntityTypeConfiguration<User>
+	{
+		public override void Configure(EntityTypeBuilder<User> builder)
+		{
 
-            builder.Property(x => x.CreatedAt)
-                .HasDefaultValueSql("SYSDATETIMEOFFSET()");
+			builder.HasIndex(x => x.Id)
+				.IsUnique();
 
-            builder.Property<bool>("IsDeleted")
-                .HasDefaultValue(false);
+			builder.Property(x => x.CreatedAt)
+				.HasDefaultValueSql("SYSDATETIMEOFFSET()");
 
-            builder.Property<DateTimeOffset?>("DeletedAt")
-                .IsRequired(false);
+			builder.Property<bool>("IsDeleted")
+				.HasDefaultValue(false);
 
-            builder.HasQueryFilter(p => EF.Property<bool>(p, "IsDeleted") == false);
+			builder.Property<DateTimeOffset?>("DeletedAt")
+				.IsRequired(false);
 
-			builder.HasOne<Institute>(c => c.Institute).WithMany(x => x.Users).HasForeignKey(x => x.InstituteId.Value);
+			builder.HasQueryFilter(p => EF.Property<bool>(p, "IsDeleted") == false);
 
 			builder.Property(x => x.PasswordHash).HasMaxLength(64);
 
@@ -69,14 +67,6 @@ namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes.Entieis
 					.IsRequired(true);
 			});
 
-			builder.OwnsOne(p => p.InstituteId, m =>
-			{
-				m.Property(x => x.Value)
-					.HasColumnName(nameof(User.InstituteId))
-					.HasMaxLength(ConstantValues.MaxStringCorelationIdLength)
-					.IsRequired(true);
-			});
-
 			builder.OwnsOne(p => p.Level, m =>
 			{
 				m.Property(x => x.Title)
@@ -102,6 +92,7 @@ namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes.Entieis
 			});
 
 			builder.ToTable(nameof(User));
-        }
-    }
+			base.Configure(builder);
+		}
+	}
 }

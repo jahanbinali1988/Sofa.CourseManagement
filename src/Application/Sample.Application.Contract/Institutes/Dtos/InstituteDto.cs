@@ -16,7 +16,7 @@ namespace Sofa.CourseManagement.Application.Contract.Institutes.Dtos
 		{
 			return new InstituteDto()
 			{
-				Title = institute.Title.Value,
+				//Title = institute.Title.Value,
 				WebsiteUrl = institute.WebsiteUrl.Value,
 				Address = institute.Address,
 				Code = institute.Code.Value,
