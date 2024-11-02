@@ -1,10 +1,13 @@
-﻿using Sofa.CourseManagement.Application.Contract.Posts.Commands;
+﻿using Sofa.CourseManagement.Application.Contract.Exceptions;
+using Sofa.CourseManagement.Application.Contract.Posts.Commands;
 using Sofa.CourseManagement.Application.Contract.Posts.Converter;
 using Sofa.CourseManagement.Application.Contract.Posts.Dtos;
 using Sofa.CourseManagement.Domain.Institutes;
+using Sofa.CourseManagement.Domain.Institutes.Entities;
 using Sofa.CourseManagement.SharedKernel.Application;
+using Sofa.CourseManagement.SharedKernel.Generators;
 using Sofa.CourseManagement.SharedKernel.SeedWork;
-using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,26 +15,83 @@ namespace Sofa.CourseManagement.Application.Posts.Commands
 {
 	internal class AddPostCommandHandler : ICommandHandler<AddPostCommand, PostBaseDto>
 	{
-		private readonly IInstituteRepository _repository;
+		private readonly IInstituteRepository _instituteRepository;
 		private readonly IUnitOfWork _unitOfWork;
-		public AddPostCommandHandler(IInstituteRepository repository, IUnitOfWork unitOfWork)
+		private readonly IIdGenerator _idGenerator;
+		public AddPostCommandHandler(IInstituteRepository repository, IUnitOfWork unitOfWork, IIdGenerator idGenerator)
 		{
-			_repository = repository;
+			_instituteRepository = repository;
 			_unitOfWork = unitOfWork;
+			_idGenerator = idGenerator;
 		}
 
-		public Task<PostBaseDto> Handle(AddPostCommand request, CancellationToken cancellationToken)
+		public async Task<PostBaseDto> Handle(AddPostCommand request, CancellationToken cancellationToken)
 		{
-			var post = Convert(request);
+			var institute = await _instituteRepository.GetAsync(request.InstituteId, cancellationToken);
+			if (institute == null)
+				throw new EntityNotFoundException($"Could not find Institute entity with Id {request.InstituteId}");
 
-			throw new NotImplementedException();
+			var field = institute.Fields.SingleOrDefault(c => c.Id == request.FieldId);
+			if (field == null)
+				throw new EntityNotFoundException($"Could not find Field entity with Id {request.FieldId}");
+
+			var course = field.Courses.SingleOrDefault(c => c.Id == request.CourseId);
+			if (course == null)
+				throw new EntityNotFoundException($"Could not find Course entity with Id {request.CourseId}");
+
+			var term = course.Terms.SingleOrDefault(c => c.Id == request.TermId);
+			if (term == null)
+				throw new EntityNotFoundException($"Could not find Term entity with Id {request.TermId}");
+
+			var session = term.Sessions.SingleOrDefault(c => c.Id == request.SessionId);
+			if (session == null)
+				throw new EntityNotFoundException($"Could not find Session entity with Id {request.SessionId}");
+
+			LessonPlan? lessonplan = session.LessonPlan.Id == request.LessonPlanId ? session.LessonPlan : null;
+			if (lessonplan == null)
+				throw new EntityNotFoundException($"Could not find LessonPlan entity with Id {request.LessonPlanId}");
+
+			var postDto = Convert(request);
+			var post = CreateEntity(postDto);
+			lessonplan.AddPost(post);
+
+			await _unitOfWork.CommitAsync(cancellationToken);
+
+			return new PostBaseDto()
+			{
+				Id = post.Id,
+				LessonPlanId = lessonplan.Id,
+				Content = post.Content.Value,
+				ContentType = post.ContentType.Value,
+				Order = post.Order,
+				Title = post.Title.Value
+			};
 		}
 
 		private PostBaseDto Convert(AddPostCommand request)
 		{
 			var post = PostFactory.Instance.SetContentType(request.ContentType).SetJson(request.Post.ToString()).CreatePost();
+			
+			return (PostBaseDto)post;
+		}
 
-			return post;
+		private PostBase? CreateEntity(PostBaseDto postBaseDto)
+		{
+			switch (postBaseDto.ContentType)
+			{
+				case Domain.Contract.Institutes.Enums.ContentTypeEnum.Text:
+					return TextPost.CreateInstance(_idGenerator.GetNewId(), postBaseDto.Title, postBaseDto.Order, postBaseDto.Content, postBaseDto.LessonPlanId);
+				case Domain.Contract.Institutes.Enums.ContentTypeEnum.Image:
+					return ImagePost.CreateInstance(_idGenerator.GetNewId(), postBaseDto.Title, postBaseDto.Order, postBaseDto.Content, postBaseDto.LessonPlanId);
+				case Domain.Contract.Institutes.Enums.ContentTypeEnum.Sound:
+					return SoundPost.CreateInstance(_idGenerator.GetNewId(), postBaseDto.Title, postBaseDto.Order, postBaseDto.Content, postBaseDto.LessonPlanId);
+				case Domain.Contract.Institutes.Enums.ContentTypeEnum.Video:
+					return VideoPost.CreateInstance(_idGenerator.GetNewId(), postBaseDto.Title, postBaseDto.Order, postBaseDto.Content, postBaseDto.LessonPlanId);
+				default:
+					break;
+			}
+
+			return null;
 		}
 	}
 }

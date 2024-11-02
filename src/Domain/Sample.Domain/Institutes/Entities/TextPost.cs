@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
+using System;
 
 namespace Sofa.CourseManagement.Domain.Institutes.Entities
 {
@@ -16,5 +17,13 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
 
             return post;
         }
-    }
+
+		public override void Update(string title, string content, ContentTypeEnum contentType, short order)
+		{
+            AssignTitle(title);
+            AssignContent(content);
+            AssignContentType(contentType);
+            AssignOrder(order);
+		}
+	}
 }

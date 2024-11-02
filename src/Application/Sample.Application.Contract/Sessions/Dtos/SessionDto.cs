@@ -14,5 +14,6 @@ namespace Sofa.CourseManagement.Application.Contract.Sessions.Dtos
 		public string FieldTitle { get; set; }
 		public Guid InstituteId { get; set; }
 		public string InstituteTitle { get; set; }
+		public DateTimeOffset? OccurredDate { get; set; }
 	}
 }

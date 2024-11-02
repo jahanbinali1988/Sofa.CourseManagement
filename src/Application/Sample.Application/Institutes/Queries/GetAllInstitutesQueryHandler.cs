@@ -3,6 +3,7 @@ using Sofa.CourseManagement.Application.Contract.Institutes.Queries;
 using Sofa.CourseManagement.Domain.Institutes;
 using Sofa.CourseManagement.SharedKernel.Application;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,9 +17,15 @@ namespace Sofa.CourseManagement.Application.Institutes.Queries
 			_instituteRepository = instituteRepository;
 		}
 
-		public Task<Pagination<InstituteDto>> Handle(GetAllInstitutesQuery request, CancellationToken cancellationToken)
+		public async Task<Pagination<InstituteDto>> Handle(GetAllInstitutesQuery request, CancellationToken cancellationToken)
 		{
-			throw new NotImplementedException();
+			var institutes = await _instituteRepository.GetListAsync(x=> x.Title.Value == request.Keyword);
+
+			return new Pagination<InstituteDto>()
+			{
+				Items = institutes.Select(s => InstituteDto.CreateDto(s)).Skip(request.Offset * request.Count).Take(request.Count),
+				TotalItems = institutes.Count()
+			};
 		}
 	}
 }

@@ -5,6 +5,7 @@ namespace Sofa.CourseManagement.RestApi.Models.Sessions
 	public class CreateSessionViewModel : ViewModelBase
 	{
 		public string Title { get; set; }
+		public DateTimeOffset OccurredDate { get; set; }
 
 		internal AddSessionCommand ToCommand(Guid instituteId, Guid fieldId, Guid courseId, Guid termId)
 		{
@@ -14,7 +15,8 @@ namespace Sofa.CourseManagement.RestApi.Models.Sessions
 				InstituteId = instituteId,
 				FieldId = fieldId,
 				CourseId = courseId,
-				TermId = termId
+				TermId = termId,
+				OccurredDate = OccurredDate
 			};
 		}
 
@@ -27,7 +29,8 @@ namespace Sofa.CourseManagement.RestApi.Models.Sessions
 				FieldId = fieldId,
 				CourseId = courseId,
 				TermId = termId,
-				Id = id
+				Id = id,
+				OccurredDate = OccurredDate
 			};
 		}
 	}

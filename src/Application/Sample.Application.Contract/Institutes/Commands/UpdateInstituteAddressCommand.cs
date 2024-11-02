@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Sofa.CourseManagement.SharedKernel.Application;
+using System;
 
 namespace Sofa.CourseManagement.Application.Contract.Institutes.Commands
 {
-	public class UpdateInstituteAddressCommand
+	public class UpdateInstituteAddressCommand : CommandBase
 	{
         public Guid Id { get; set; }
         public String Street { get; set; }

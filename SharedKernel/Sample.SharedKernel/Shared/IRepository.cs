@@ -1,5 +1,7 @@
 ﻿using Sofa.CourseManagement.SharedKernel.SeedWork;
 using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,7 +16,10 @@ namespace Sofa.CourseManagement.SharedKernel.Shared
         Task DeleteAsync(TEntity entity, CancellationToken cancellationToken);
 
         Task<TEntity> GetAsync(Tkey id, CancellationToken cancellationToken);
-    }
+
+		Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate);
+
+	}
 
     public interface IRepository<TEntity> : IRepository<TEntity, Guid> where TEntity : Entity<Guid>, IAggregateRoot
     {

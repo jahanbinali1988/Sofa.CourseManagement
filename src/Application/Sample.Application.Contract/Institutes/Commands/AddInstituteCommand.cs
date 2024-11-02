@@ -8,5 +8,7 @@ namespace Sofa.CourseManagement.Application.Contract.Institutes.Commands
 		public string Title { get; set; }
 		public string WebsiteUrl { get; set; }
 		public string Code { get; set; }
+        public bool IsActive { get; set; }
+		public string Description { get; set; }
 	}
 }

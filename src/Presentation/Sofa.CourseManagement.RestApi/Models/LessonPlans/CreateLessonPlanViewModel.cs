@@ -1,31 +1,45 @@
 ﻿using Sofa.CourseManagement.Application.Contract.LessonPlans.Commands;
 using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
+using Sofa.CourseManagement.Domain.Institutes.Entities;
+using Sofa.CourseManagement.Domain.Institutes;
+using Sentry;
 
 namespace Sofa.CourseManagement.RestApi.Models.LessonPlans
 {
     public class CreateLessonPlanViewModel : ViewModelBase
 	{
+		public Guid InstituteId { get; }
+		public Guid FieldId { get; }
+		public Guid CourseId { get; }
+		public Guid TermId { get; }
+		public Guid SessionId { get; }
 		public string Title { get; set; }
 		public LevelEnum Level { get; set; }
-		public Guid SessionId { get; set; }
-
-		internal AddLessonPlanCommand ToCommand()
+		internal AddLessonPlanCommand ToCommand(Guid instituteId, Guid fieldId, Guid courseId, Guid termId, Guid sessionId)
 		{
-			return new AddLessonPlanCommand() 
+			return new AddLessonPlanCommand()
 			{
+				InstituteId = instituteId,
+				FieldId = fieldId,
+				CourseId = courseId,
+				TermId = termId,
+				SessionId = sessionId,
 				Title = Title,
-				Level = Level,
-				SessionId = SessionId
+				Level = Level
 			};
 		}
 
-		internal UpdateLessonPlanCommand ToCommand(Guid id)
+		internal UpdateLessonPlanCommand ToCommand(Guid instituteId, Guid fieldId, Guid courseId, Guid termId, Guid sessionId, Guid lessonplanId)
 		{
 			return new UpdateLessonPlanCommand()
 			{
-				Id = id,
+				InstituteId = instituteId,
+				FieldId = fieldId,
+				CourseId = courseId,
+				TermId = termId,
+				SessionId = sessionId,
+				LessonplanId = lessonplanId,
 				Title = Title,
-				SessionId = SessionId,
 				Level = Level
 			};
 		}

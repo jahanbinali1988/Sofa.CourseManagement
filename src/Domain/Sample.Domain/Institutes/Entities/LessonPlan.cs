@@ -13,25 +13,18 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
         public LessonPlanLevel Level { get; private set; }
 
         public Guid SessionId { get; private set; }
-        public ICollection<PostBase> Posts { get; set; }
+        public ICollection<PostBase> Posts { get; private set; }
 
         private LessonPlan()
         {
             Posts = new List<PostBase>();
         }
 
-        public void AssignTitle(string title) { Title = title; }
-        public void AssignLevel(LevelEnum level) { Level = level; }
-        public void AssignSession(Guid sessionId) { SessionId = sessionId; }
-        public void AssignPosts(IEnumerable<PostBase> posts)
-        {
-            if (Posts.Any())
-                Posts.ToList().AddRange(posts);
-            else
-                Posts = posts.ToArray();
-        }
+        private void AssignTitle(string title) { Title = title; }
+		private void AssignLevel(LevelEnum level) { Level = level; }
+		private void AssignSession(Guid sessionId) { SessionId = sessionId; }
 
-        public static LessonPlan CreateInstance(Guid id, string title, LevelEnum level, Guid sessionId, bool isActive, string description)
+        public static LessonPlan CreateInstance(Guid id, string title, LevelEnum level, Guid sessionId)
         {
             var lessonPlan = new LessonPlan();
 
@@ -42,5 +35,21 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
 
             return lessonPlan;
         }
-    }
+
+		public void Update(string title, LevelEnum level)
+		{
+			AssignTitle(title);
+			AssignLevel(level);
+		}
+
+		public void AddPost(PostBase post)
+		{
+            Posts.Add(post);
+		}
+
+		public void DeletePost(PostBase post)
+		{
+            Posts.Remove(post);
+		}
+	}
 }

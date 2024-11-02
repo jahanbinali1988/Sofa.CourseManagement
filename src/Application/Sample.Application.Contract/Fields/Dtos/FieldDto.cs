@@ -7,5 +7,6 @@ namespace Sofa.CourseManagement.Application.Contract.Fields.Dtos
 	{
 		public string Title { get; set; }
 		public Guid InstituteId { get; set; }
+		public string InstituteTitle { get; set; }
 	}
 }

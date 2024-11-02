@@ -3,10 +3,6 @@ using Sofa.CourseManagement.Application.Contract.Institutes.Dtos;
 using Sofa.CourseManagement.Application.Contract.Institutes.Queries;
 using Sofa.CourseManagement.Domain.Institutes;
 using Sofa.CourseManagement.SharedKernel.Application;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -20,9 +16,11 @@ namespace Sofa.CourseManagement.Application.Institutes.Queries
 			_instituteRepository = instituteRepository;
 		}
 
-		public Task<InstituteDto> Handle(GetInstituteByIdQuery request, CancellationToken cancellationToken)
+		public async Task<InstituteDto> Handle(GetInstituteByIdQuery request, CancellationToken cancellationToken)
 		{
-			throw new NotImplementedException();
+			var institute = await _instituteRepository.GetAsync(request.Id, cancellationToken);
+
+			return InstituteDto.CreateDto(institute);
 		}
 	}
 }

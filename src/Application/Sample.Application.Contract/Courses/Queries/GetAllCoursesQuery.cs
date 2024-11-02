@@ -1,7 +1,5 @@
 ﻿using Sofa.CourseManagement.Application.Contract.Courses.Dtos;
 using Sofa.CourseManagement.Application.Contract.Shared;
-using Sofa.CourseManagement.Domain.Institutes.Entities;
-using Sofa.CourseManagement.Domain.Institutes;
 using Sofa.CourseManagement.SharedKernel.Application;
 using System;
 

@@ -8,14 +8,23 @@ using System.Threading.Tasks;
 using Sofa.CourseManagement.Infrastructure.Persistence.Extensions;
 using Sofa.CourseManagement.SharedKernel.SeedWork;
 using Sofa.CourseManagement.SharedKernel.Shared;
+using System.Collections.Generic;
 
 namespace Sofa.CourseManagement.Infrastructure.Persistence
 {
-    public class RepositoryBase<TEntity, Tkey> : IRepository<TEntity, Tkey> where TEntity : Entity<Tkey>, IAggregateRoot
+    public abstract class RepositoryBase<TEntity, Tkey> : IRepository<TEntity, Tkey> where TEntity : Entity<Tkey>, IAggregateRoot
     {
-        protected readonly CourseManagementDbContext DbContext;
+        protected readonly DbContext DbContext;
 
-        protected virtual IQueryable<TEntity> ConfigureInclude(IQueryable<TEntity> query)
+		protected DbSet<TEntity> DbSet;
+
+		protected RepositoryBase(DbContext context)
+		{
+			DbSet = context.Set<TEntity>();
+			DbContext = context;
+		}
+
+		protected virtual IQueryable<TEntity> ConfigureInclude(IQueryable<TEntity> query)
         {
             return query;
         }
@@ -55,10 +64,19 @@ namespace Sofa.CourseManagement.Infrastructure.Persistence
                 .AsNoTracking()
                 .Apply(ConfigureInclude)
                 .SingleOrDefaultAsync(x => x.Id.Equals(id), cancellationToken);
-        }
-    }
+		}
 
-    public class RepositoryBase<TEntity> : RepositoryBase<TEntity, Guid> where TEntity : Entity<Guid>, IAggregateRoot
+		public virtual Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate)
+		{
+			return DbContext.Set<TEntity>()
+				.AsNoTracking()
+				.Apply(ConfigureInclude)
+				.Where(predicate)
+                .ToListAsync();
+		}
+	}
+
+    public abstract class RepositoryBase<TEntity> : RepositoryBase<TEntity, Guid> where TEntity : Entity<Guid>, IAggregateRoot
     {
         public RepositoryBase(CourseManagementDbContext dbContext) : base(dbContext)
         {

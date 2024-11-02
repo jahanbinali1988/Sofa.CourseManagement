@@ -8,31 +8,49 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
     {
         public Title Title { get; private set; }
 		public OccurredDate OccurredDate { get; private set; }
-
 		public Guid TermId { get; private set; }
-        public Guid LessonPlanId { get; private set; }
+        public Guid? LessonPlanId { get; private set; }
 
-        private Session()
+		public LessonPlan? LessonPlan { get; private set; }
+
+		private Session()
         {
 
         }
 
-        public void AssignTitle(string title) { this.Title = title; }
-        public void AssignTerm(Guid termId) { this.TermId = termId; }
-        public void AssignLessonPlan(Guid lessonPlanId) { this.LessonPlanId = lessonPlanId; }
-		public void AssignOccurredDate(DateTimeOffset occurredDate) { this.OccurredDate = occurredDate; }
+        private void AssignTitle(string title) { this.Title = title; }
+        private void AssignTermId(Guid termId) { this.TermId = termId; }
+        private void AssignLessonPlanId(Guid lessonPlanId) { this.LessonPlanId = lessonPlanId; }
+		private void AssignLessonPlan(LessonPlan lessonPlan) { this.LessonPlan = lessonPlan; }
+		private void AssignOccurredDate(DateTimeOffset occurredDate) { this.OccurredDate = occurredDate; }
 
-		public static Session CreateInstance(Guid id, string title, Guid lessonPlanId, Guid termId, DateTimeOffset occurredDate)
+		public static Session CreateInstance(Guid id, string title, Guid termId, DateTimeOffset occurredDate)
         {
             var session = new Session();
 
             session.AssignId(id);
             session.AssignTitle(title);
-            session.AssignLessonPlan(lessonPlanId);
-            session.AssignTerm(termId);
+            session.AssignTermId(termId);
             session.AssignOccurredDate(occurredDate);
 
             return session;
         }
-    }
+
+		public void Update(string title, DateTimeOffset occurredDate)
+		{
+            AssignTitle(title);
+            AssignOccurredDate(occurredDate);
+		}
+
+		public void AddLessonPlan(LessonPlan lessonplan)
+		{
+            AssignLessonPlanId(lessonplan.Id);
+            AssignLessonPlan(lessonplan);
+		}
+
+		public void DeleteLessonPlan(LessonPlan lessonplan)
+		{
+            LessonPlan = null;
+		}
+	}
 }

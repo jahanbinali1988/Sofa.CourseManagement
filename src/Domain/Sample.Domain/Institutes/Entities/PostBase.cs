@@ -5,7 +5,7 @@ using System;
 
 namespace Sofa.CourseManagement.Domain.Institutes.Entities
 {
-    public class PostBase : Entity<Guid>
+    public abstract class PostBase : Entity<Guid>
     {
         public Title Title { get; private set; }
         public short Order { get; private set; }
@@ -23,5 +23,6 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
         protected void AssignContentType(ContentTypeEnum contentType) { ContentType = contentType; }
         protected void AssignLessonPlan(Guid lessonPlanId) { LessonPlanId = lessonPlanId; }
 
-    }
+        public abstract void Update(string title, string content, ContentTypeEnum contentType, short order);
+	}
 }

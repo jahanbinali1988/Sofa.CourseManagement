@@ -1,43 +1,50 @@
 ﻿using Sofa.CourseManagement.SharedKernel.SeedWork;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Sofa.CourseManagement.Domain.Institutes.Entities
 {
-    public class Term : Entity<Guid>
-    {
-        public Title Title { get; private set; }
+	public class Term : Entity<Guid>
+	{
+		public Title Title { get; private set; }
+		public Guid CourseId { get; private set; }
 
-        public Guid CourseId { get; private set; }
-        public ICollection<Session> Sessions { get; set; }
-		public ICollection<UserTerm> UserTerms { get; set; }
+		public ICollection<Session> Sessions { get; private set; }
+		public ICollection<UserTerm> UserTerms { get; private set; }
 
 		private Term()
-        {
-            Sessions = new List<Session>();
-            UserTerms = new List<UserTerm>();
-        }
+		{
+			Sessions = new List<Session>();
+			UserTerms = new List<UserTerm>();
+		}
 
-        public void AssignTitle(string title) { this.Title = title; }
-        public void AssignCourse(Guid courseId) { this.CourseId = courseId; }
-        public void AssignSessions(IEnumerable<Session> sessions)
-        {
-            //if (this.Sessions.Any())
-            //    this.Sessions.ToList().AddRange(sessions);
-            //else
-            //    this.Sessions = sessions.ToArray();
-        }
+		private void AssignTitle(string title) { this.Title = title; }
+		private void AssignCourse(Guid courseId) { this.CourseId = courseId; }
 
-        public static Term CreateInstance(Guid id, string title, Guid courseId, bool isActive, string description)
-        {
-            var term = new Term();
+		public static Term CreateInstance(Guid id, string title, Guid courseId)
+		{
+			var term = new Term();
 
-            term.AssignId(id);
-            term.AssignTitle(title);
-            term.AssignCourse(courseId);
+			term.AssignId(id);
+			term.AssignTitle(title);
+			term.AssignCourse(courseId);
 
-            return term;
-        }
-    }
+			return term;
+		}
+
+		public void Update(string title)
+		{
+			AssignTitle(title);
+		}
+
+		public void AddSession(Session session)
+		{
+			Sessions.Add(session);
+		}
+
+		public void DeleteSession(Session session)
+		{
+			Sessions.Remove(session);
+		}
+	}
 }

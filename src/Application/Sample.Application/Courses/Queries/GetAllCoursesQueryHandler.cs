@@ -2,8 +2,8 @@
 using Sofa.CourseManagement.Application.Contract.Courses.Queries;
 using Sofa.CourseManagement.Domain.Institutes;
 using Sofa.CourseManagement.SharedKernel.Application;
-using Sofa.CourseManagement.SharedKernel.SeedWork;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,9 +17,36 @@ namespace Sofa.CourseManagement.Application.Courses.Queries
 			_instituteRepository = instituteRepository;
 		}
 
-		public Task<Pagination<CourseDto>> Handle(GetAllCoursesQuery request, CancellationToken cancellationToken)
+		public async Task<Pagination<CourseDto>> Handle(GetAllCoursesQuery request, CancellationToken cancellationToken)
 		{
-			throw new NotImplementedException();
+			var institute = await _instituteRepository.GetAsync(request.InstituteId, cancellationToken);
+			if (institute == null)
+				return null;
+
+			var field = institute.Fields.SingleOrDefault(c => c.Id == request.FieldId);
+			if(field == null)
+				return null;
+
+			var courses = field.Courses.Where(c => c.Title.Value == request.Keyword);
+			var courseDtos = courses
+				.Skip(request.Offset * request.Count)
+				.Take(request.Count)
+				.Select(s => new CourseDto()
+				{
+					Id = s.Id,
+					InstituteId = request.InstituteId,
+					Title = s.Title.Value,
+					AgeRange = s.AgeRange.Value,
+					FieldId = field.Id,
+					FieldTitle = field.Title.Value,
+					InstitueTitle = institute.Title.Value
+				});
+
+			return new Pagination<CourseDto>()
+			{
+				Items = courseDtos,
+				TotalItems = courses.Count()
+			};
 		}
 	}
 }

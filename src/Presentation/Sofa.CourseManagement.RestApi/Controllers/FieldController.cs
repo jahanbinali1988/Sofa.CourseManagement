@@ -1,5 +1,4 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Sofa.CourseManagement.RestApi.Models;
 using Sofa.CourseManagement.RestApi.Models.Fields;
 using Sofa.CourseManagement.Application.Contract.Fields.Commands;

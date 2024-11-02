@@ -10,5 +10,7 @@ namespace Sofa.CourseManagement.Application.Contract.Courses.Dtos
 		public AgeRangeEnum AgeRange { get; set; }
 		public Guid FieldId { get; set; }
 		public Guid InstituteId { get; set; }
+		public string FieldTitle { get; set; }
+		public string InstitueTitle { get; set; }
 	}
 }

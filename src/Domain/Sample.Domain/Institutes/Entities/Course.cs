@@ -11,9 +11,9 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
 	{
 		public Title Title { get; private set; }
 		public AgeRange AgeRange { get; private set; }
-
         public Guid FieldId { get; private set; }
-        public ICollection<Term> Terms { get; set; }
+
+        public ICollection<Term> Terms { get; private set; }
 
 		private Course()
         {
@@ -21,27 +21,36 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
 
         }
 
-        public void AssignTitle(string title) { this.Title = title; }
-        public void AssignAgeRange(AgeRangeEnum ageRange) { this.AgeRange = ageRange; }
-        public void AssignField(Guid fieldId) { this.FieldId = fieldId; }
-        public void AssignTerms(IEnumerable<Term> terms)
-        {
-            if (Terms.Any())
-                this.Terms.ToList().AddRange(terms);
-            else
-                this.Terms = terms.ToArray();
-        }
+        private void AssignTitle(string title) { this.Title = title; }
+		private void AssignAgeRange(AgeRangeEnum ageRange) { this.AgeRange = ageRange; }
+		private void AssignFieldId(Guid fieldId) { this.FieldId = fieldId; }
 
-        public static Course CreateInstance(Guid id, string title, AgeRangeEnum ageRange, Guid fieldId, bool isActive, string description)
+        public static Course CreateInstance(Guid id, string title, AgeRangeEnum ageRange, Guid fieldId)
         {
             var course = new Course();
 
             course.AssignId(id);
             course.AssignTitle(title);
             course.AssignAgeRange(ageRange);
-            course.AssignField(fieldId);
+            course.AssignFieldId(fieldId);
 
             return course;
         }
-    }
+
+		public void Update(string title, AgeRangeEnum ageRange)
+		{
+			AssignTitle(title);
+			AssignAgeRange(ageRange);
+		}
+
+		public void AddTerm(Term term)
+		{
+            Terms.Add(term);
+		}
+
+		public void DeleteTerm(Term term)
+		{
+            Terms.Remove(term);
+		}
+	}
 }

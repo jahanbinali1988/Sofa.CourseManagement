@@ -28,9 +28,10 @@ namespace Sofa.CourseManagement.Application.Institutes.Commands
 
 		public async Task<InstituteDto> Handle(AddInstituteCommand request, CancellationToken cancellationToken)
 		{
-			var institute = Institute.CreateInstance(_idGenerator.GetNewId(), request.Title, request.Code, request.WebsiteUrl, false, "");
+			var institute = Institute.CreateInstance(_idGenerator.GetNewId(), request.Title, request.Code, request.WebsiteUrl, request.IsActive, request.Description);
 			
 			await _instituteRepository.AddAsync(institute, cancellationToken);
+
 			await _unitOfWork.CommitAsync(cancellationToken);
 
 			return InstituteDto.CreateDto(institute);
