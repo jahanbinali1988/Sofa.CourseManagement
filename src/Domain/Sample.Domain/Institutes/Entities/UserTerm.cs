@@ -18,10 +18,6 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
         public Guid TermId { get; private set; }
 		public Guid UserId { get; private set; }
 
-		public Term Term { get; private set; }
-		public User User { get; private set; }
-
-
 		public void AssignUserId(Guid userId) { UserId = userId; }
 		public void AssignCourseId(Guid termId) { TermId = termId; }
 

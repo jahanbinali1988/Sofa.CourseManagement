@@ -3,7 +3,7 @@ using Sofa.CourseManagement.SharedKernel.SeedWork;
 using System;
 using System.Collections.Generic;
 
-namespace Sofa.CourseManagement.Domain.Institutes.Entities
+namespace Sofa.CourseManagement.Domain.Institutes.ValueObjects
 {
     public class CorelationId : ValueObject
     {

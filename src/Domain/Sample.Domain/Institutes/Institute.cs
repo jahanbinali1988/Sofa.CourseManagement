@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Sofa.CourseManagement.Domain.Institutes
 {
-	public class Institute : Entity<Guid>, IAggregateRoot
+    public class Institute : Entity<Guid>, IAggregateRoot
 	{
 		public Title Title { get; private set; }
 		public WebsiteUrl WebsiteUrl { get; private set; }

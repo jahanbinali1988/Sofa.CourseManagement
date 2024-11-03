@@ -7,8 +7,6 @@ namespace Sofa.CourseManagement.RestApi.Models.Institutes
 		public string Title { get; set; }
 		public string WebsiteUrl { get; set; }
 		public string Code { get; set; }
-		public bool IsActive { get; set; }
-		public string Description { get; set; }
 
 		internal AddInstituteCommand ToCommand()
 		{
@@ -16,9 +14,7 @@ namespace Sofa.CourseManagement.RestApi.Models.Institutes
 			{
 				Title = this.Title,
 				WebsiteUrl = this.WebsiteUrl,
-				Code = this.Code,
-				IsActive = this.IsActive,
-				Description = this.Description
+				Code = this.Code
 			};
 		}
 		internal UpdateInstituteCommand ToCommand(Guid id)
@@ -28,9 +24,7 @@ namespace Sofa.CourseManagement.RestApi.Models.Institutes
 				Id = id,
 				Title = this.Title,
 				WebsiteUrl = this.WebsiteUrl,
-				Code = this.Code,
-				IsActive = this.IsActive,
-				Description = this.Description
+				Code = this.Code
 			};
 		}
 	}

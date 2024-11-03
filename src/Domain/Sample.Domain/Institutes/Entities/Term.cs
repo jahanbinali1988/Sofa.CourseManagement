@@ -1,10 +1,11 @@
-﻿using Sofa.CourseManagement.SharedKernel.SeedWork;
+﻿using Sofa.CourseManagement.Domain.Institutes.ValueObjects;
+using Sofa.CourseManagement.SharedKernel.SeedWork;
 using System;
 using System.Collections.Generic;
 
 namespace Sofa.CourseManagement.Domain.Institutes.Entities
 {
-	public class Term : Entity<Guid>
+    public class Term : Entity<Guid>
 	{
 		public Title Title { get; private set; }
 		public Guid CourseId { get; private set; }

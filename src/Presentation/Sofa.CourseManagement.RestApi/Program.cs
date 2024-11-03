@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
 using Sofa.CourseManagement.RestApi.Extensions;
+using System.Security.Claims;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +24,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 			IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
 		};
 	});
+
+builder.Services.AddAuthorization(options =>
+{
+	options.AddPolicy(AuthorizationPolicies.AdminPolicy, policy =>
+			policy.RequireRole(UserRoleEnum.Supervisor.ToString(), UserRoleEnum.Admin.ToString())
+		);
+	options.AddPolicy(AuthorizationPolicies.TeacherPolicy, policy =>
+			policy.RequireRole(UserRoleEnum.Supervisor.ToString(), UserRoleEnum.Teacher.ToString(), UserRoleEnum.Admin.ToString())
+		);
+});
 
 builder.Services.AddAuthorization();
 

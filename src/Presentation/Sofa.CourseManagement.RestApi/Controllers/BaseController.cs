@@ -192,7 +192,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
                 count = int.Parse(countStr);
             }
 
-            if (value.Items is null || count != value.Items.Count)
+            if (value.Items is null || count != value.Items.Count())
                 return value.Items.Adapt<List<TViewModel>>();
 
             param.Add(!Request.Query.TryGetValue("offset", out var offsetStr)

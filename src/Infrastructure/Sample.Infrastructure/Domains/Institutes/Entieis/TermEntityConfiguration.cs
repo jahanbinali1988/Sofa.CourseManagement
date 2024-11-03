@@ -26,7 +26,7 @@ namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes.Entieis
 			builder.HasQueryFilter(p => EF.Property<bool>(p, "IsDeleted") == false);
 
 			builder.HasMany<Session>(c => c.Sessions).WithOne().HasForeignKey(x => x.TermId).IsRequired().OnDelete(DeleteBehavior.Cascade);
-			builder.HasMany<UserTerm>(c => c.UserTerms).WithOne().HasForeignKey(x => x.TermId).IsRequired().OnDelete(DeleteBehavior.Cascade);
+			builder.HasMany<UserTerm>(c => c.UserTerms).WithOne().HasForeignKey(x => x.TermId).IsRequired().OnDelete(DeleteBehavior.NoAction);
 
 			builder.OwnsOne(p => p.Title, m =>
 			{

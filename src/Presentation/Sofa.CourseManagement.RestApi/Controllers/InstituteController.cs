@@ -28,7 +28,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <param name="request"></param>
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
-		[Authorize]		
+		[Authorize(Policy = AuthorizationPolicies.AdminPolicy)]
 		[HttpPost]
         public async Task<ActionResult<InstituteViewModel>> CreateInstituteAsync([FromBody] CreateInstituteViewModel request)
         {

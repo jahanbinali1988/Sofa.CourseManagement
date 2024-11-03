@@ -3,7 +3,7 @@ using Sofa.CourseManagement.Domain.Institutes.Exceptions;
 using Sofa.CourseManagement.SharedKernel.SeedWork;
 using System.Collections.Generic;
 
-namespace Sofa.CourseManagement.Domain.Institutes.Entities
+namespace Sofa.CourseManagement.Domain.Institutes.ValueObjects
 {
     public class Title : ValueObject
     {
