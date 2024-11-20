@@ -1,8 +1,8 @@
-﻿using Sofa.CourseManagement.Domain.Institutes.Constants;
+﻿using Sofa.CourseManagement.Domain.Shared.Constants;
 
 namespace Sofa.CourseManagement.Domain.Institutes.Services
 {
-    public interface ITitleLengthService
+	public interface ITitleLengthService
     {
         bool IsValid(string value);
     }

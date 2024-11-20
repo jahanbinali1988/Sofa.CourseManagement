@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Sofa.CourseManagement.Domain.Institutes;
 using Sofa.CourseManagement.Domain.Institutes.Entities;
+using Sofa.CourseManagement.Domain.Users;
 using Sofa.CourseManagement.Infrastructure.Domains.Institutes;
 using Sofa.CourseManagement.Infrastructure.Domains.Institutes.Entieis;
+using Sofa.CourseManagement.Infrastructure.Domains.Users;
 
 namespace Sofa.CourseManagement.Infrastructure.Persistence
 {
@@ -18,6 +20,7 @@ namespace Sofa.CourseManagement.Infrastructure.Persistence
 			builder.ApplyConfiguration(new InstituteEntityConfiguration());
             builder.ApplyConfiguration(new UserEntiityConfiguration());
             builder.ApplyConfiguration(new UserTermEntiityConfiguration());
+            builder.ApplyConfiguration(new InstituteUserEntiityConfiguration());
             builder.ApplyConfiguration(new FieldEntityConfiguration());
             builder.ApplyConfiguration(new TermEntityConfiguration());
             builder.ApplyConfiguration(new SessionEntityConfiguration());
@@ -28,7 +31,7 @@ namespace Sofa.CourseManagement.Infrastructure.Persistence
             builder.ApplyConfiguration(new SoundPostEntityConfiguration());
             builder.ApplyConfiguration(new TextPostEntityConfiguration());
             builder.ApplyConfiguration(new VideoPostEntityConfiguration());
-
+            
             base.OnModelCreating(builder);
             //builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 

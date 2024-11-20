@@ -3,10 +3,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Sofa.CourseManagement.Infrastructure.Persistence;
 using Sofa.CourseManagement.SharedKernel.EventProcessing.DomainEvent;
-using Sofa.CourseManagement.SharedKernel.SeedWork;
 using Sofa.CourseManagement.Infrastructure.EventProcessing;
 using Sofa.CourseManagement.Domain.Institutes;
 using Sofa.CourseManagement.Infrastructure.Domains.Institutes;
+using Sofa.CourseManagement.Infrastructure.Domains.Users;
+using Sofa.CourseManagement.Domain.Users;
+using Sofa.CourseManagement.SharedKernel.SeedWork;
+using Sofa.CourseManagement.Domain.Shared;
 
 namespace Sofa.CourseManagement.Infrastructure
 {
@@ -17,15 +20,18 @@ namespace Sofa.CourseManagement.Infrastructure
             services.AddDbContextPool<CourseManagementDbContext>(options =>
             {
                 options.UseSqlServer(mssqlConnection);
-                options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+                options.UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll);
                 options.EnableSensitiveDataLogging(true);
+                options.UseLazyLoadingProxies(false);
             }, 1024);
 
-            services.AddScoped<IInstituteRepository, InstituteRepository>();
+			services.AddScoped<IInstituteRepository, InstituteRepository>();
+			services.AddScoped<IUserRepository, UserRepository>();
+			services.AddScoped<IDomainEventsDispatcher, DomainEventsDispatcher>();
 			services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IDomainEventsDispatcher, DomainEventsDispatcher>();
+			services.AddScoped<ICourseManagementUnitOfWork, UnitOfWork>();
 
-            return services;
+			return services;
         }
 
         public static IServiceCollection AddConnection(this IServiceCollection services, IConfiguration configuration)

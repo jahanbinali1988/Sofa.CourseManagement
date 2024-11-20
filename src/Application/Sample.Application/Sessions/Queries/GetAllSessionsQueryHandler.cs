@@ -37,7 +37,7 @@ namespace Sofa.CourseManagement.Application.Sessions.Queries
 
 			var sessions = term.Sessions.Where(c => c.Title.Value.ToLower().Contains(request.Keyword));
 			var sessionsDtos = sessions
-				.Skip(request.Offset * request.Count)
+				.Skip(request.Offset - 1 * request.Count)
 				.Take(request.Count)
 				.Select(s => new SessionDto()
 				{

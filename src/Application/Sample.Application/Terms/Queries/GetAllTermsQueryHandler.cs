@@ -34,7 +34,7 @@ namespace Sofa.CourseManagement.Application.Terms.Queries
 
 			var terms = course.Terms.Where(c => c.Title.Value.ToLower().Contains(request.Keyword));
 			var termDtos = terms
-				.Skip(request.Offset * request.Count)
+				.Skip(request.Offset - 1 * request.Count)
 				.Take(request.Count)
 				.Select(s => new TermDto()
 				{

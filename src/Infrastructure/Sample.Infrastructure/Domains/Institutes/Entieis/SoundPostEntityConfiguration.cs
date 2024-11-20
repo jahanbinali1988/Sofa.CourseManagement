@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Sofa.CourseManagement.Domain.Institutes.Entities;
-using Sofa.CourseManagement.Domain.Institutes.Constants;
 using System;
+using Sofa.CourseManagement.Domain.Shared.Constants;
 
 namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes.Entieis
 {
-    public class SoundPostEntityConfiguration : IEntityTypeConfiguration<SoundPost>
+	public class SoundPostEntityConfiguration : IEntityTypeConfiguration<SoundPost>
     {
         public void Configure(EntityTypeBuilder<SoundPost> builder)
         {

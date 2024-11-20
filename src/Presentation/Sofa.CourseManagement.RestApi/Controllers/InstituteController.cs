@@ -6,6 +6,10 @@ using Sofa.CourseManagement.Application.Contract.Institutes.Commands;
 using Sofa.CourseManagement.Application.Contract.Institutes.Dtos;
 using Sofa.CourseManagement.Application.Contract.Institutes.Queries;
 using Microsoft.AspNetCore.Authorization;
+using Sofa.CourseManagement.Application.Contract.InstituteUsers.Commands;
+using Sofa.CourseManagement.Application.Contract.InstituteUsers.Dtos;
+using Sofa.CourseManagement.Application.Contract.InstituteUsers.Queries;
+using Sofa.CourseManagement.RestApi.Models.InstituteUsers;
 
 namespace Sofa.CourseManagement.RestApi.Controllers
 {
@@ -28,7 +32,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <param name="request"></param>
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
-		[Authorize(Policy = AuthorizationPolicies.AdminPolicy)]
+		//[Authorize(Policy = AuthorizationPolicies.AdminPolicy)]
 		[HttpPost]
         public async Task<ActionResult<InstituteViewModel>> CreateInstituteAsync([FromBody] CreateInstituteViewModel request)
         {
@@ -118,6 +122,57 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		{
 			var command = new DeleteInstituteCommand(id);
 			
+			await _mediator.Send(command);
+
+			return NoContent();
+		}
+
+		/// <summary>
+		/// Get Institute Users list
+		/// </summary>
+		/// <param name="request"></param>
+		/// <response code="200">Successfully get entities</response>
+		/// <response code="400">Entity has missing/invalid values</response>
+		/// <response code="404">Entity not found</response>
+		[HttpGet("{id:required}/user")]
+		public async Task<ActionResult<IEnumerable<InstituteUserViewModel>>> GetInstituteUsersListAsync([FromQuery] Guid instituteId, [FromQuery] GetListRequest request)
+		{
+			var query = new GetAllInstituteUsersQuery(request.Offset, request.Count, request.Keyword, null, instituteId);
+
+			var users = await _mediator.Send(query, HttpContext.RequestAborted);
+
+			return List<InstituteUserDto, InstituteUserViewModel>(users);
+		}
+
+		/// <summary>
+		/// Add Institute to User entity
+		/// </summary>
+		/// <param name="id"></param>
+		/// <param name="request"></param>
+		/// <response code="201" >Entity created</response>
+		/// <response code="400">Entity has missing/invalid values</response>
+		[HttpPut("{id:required}/user")]
+		public async Task<ActionResult<InstituteUserViewModel>> AddInstituteToUserAsync([FromQuery] Guid instituteId, [FromBody] Guid userId)
+		{
+			var command = new AddInstituteUserCommand(instituteId, userId);
+
+			await _mediator.Send(command);
+
+			return Ok();
+		}
+
+		/// <summary>
+		/// Delete Institute from User entity
+		/// </summary>
+		/// <param name="id"></param>
+		/// <param name="request"></param>
+		/// <response code="201" >Entity created</response>
+		/// <response code="400">Entity has missing/invalid values</response>
+		[HttpDelete("{id:required}/user/{userId:required}/")]
+		public async Task<ActionResult> RemoveInstituteFromUserAsync([FromQuery] Guid instituteId, [FromQuery] Guid userId)
+		{
+			var command = new DeleteInstituteUserCommand(userId, instituteId);
+
 			await _mediator.Send(command);
 
 			return NoContent();

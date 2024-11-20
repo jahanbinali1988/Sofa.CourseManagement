@@ -24,7 +24,6 @@ namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes.Entieis
 
 			builder.HasQueryFilter(p => EF.Property<bool>(p, "IsDeleted") == false);
 
-			builder.ToTable(nameof(UserTerm));
 			base.Configure(builder);
 		}
 	}

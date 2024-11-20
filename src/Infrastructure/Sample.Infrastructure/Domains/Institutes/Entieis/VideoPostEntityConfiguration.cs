@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Sofa.CourseManagement.Domain.Institutes.Entities;
-using Sofa.CourseManagement.Domain.Institutes.Constants;
 using System;
+using Sofa.CourseManagement.Domain.Shared.Constants;
 
 namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes.Entieis
 {
-    public class VideoPostEntityConfiguration : IEntityTypeConfiguration<VideoPost>
+	public class VideoPostEntityConfiguration : IEntityTypeConfiguration<VideoPost>
     {
 		public void Configure(EntityTypeBuilder<VideoPost> builder)
         {

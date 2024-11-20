@@ -187,7 +187,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 
             List<KeyValuePair<string, string>> param = new List<KeyValuePair<string, string>>();
             int count = 20;
-            if (Request.Query.TryGetValue("count", out var countStr))
+            if (Request.Query.TryGetValue("Count", out var countStr))
             {
                 count = int.Parse(countStr);
             }

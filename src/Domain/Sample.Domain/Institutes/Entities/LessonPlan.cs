@@ -1,9 +1,9 @@
-﻿using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
+﻿using Sofa.CourseManagement.Domain.Contract.Institutes.Events.LessonPlans;
+using Sofa.CourseManagement.Domain.Contract.Users.Enums;
 using Sofa.CourseManagement.Domain.Institutes.ValueObjects;
 using Sofa.CourseManagement.SharedKernel.SeedWork;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Sofa.CourseManagement.Domain.Institutes.Entities
 {
@@ -15,7 +15,7 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
         public Guid SessionId { get; private set; }
         public ICollection<PostBase> Posts { get; private set; }
 
-        private LessonPlan()
+        private LessonPlan() : base()
         {
             Posts = new List<PostBase>();
         }
@@ -33,14 +33,25 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
             lessonPlan.AssignLevel(level);
             lessonPlan.AssignSession(sessionId);
 
-            return lessonPlan;
+			lessonPlan.AddDomainEvent(new AddLessonPlanDomainEvent(lessonPlan.Id, lessonPlan.Title.Value, lessonPlan.Level.Value, lessonPlan.SessionId));
+
+			return lessonPlan;
         }
 
 		public void Update(string title, LevelEnum level)
 		{
 			AssignTitle(title);
 			AssignLevel(level);
+			base.MarkAsUpdated();
+
+			AddDomainEvent(new UpdateLessonPlanDomainEvent(Id, Title.Value, Level.Value, SessionId));
 		}
+
+        public void Delete()
+		{
+			MarkAsDeleted();
+			AddDomainEvent(new DeleteLessonPlanDomainEvent(Id));
+        }
 
 		public void AddPost(PostBase post)
 		{

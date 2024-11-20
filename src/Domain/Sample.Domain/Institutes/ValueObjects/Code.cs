@@ -1,6 +1,6 @@
 ﻿using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
-using Sofa.CourseManagement.Domain.Institutes.Constants;
 using Sofa.CourseManagement.Domain.Institutes.Exceptions;
+using Sofa.CourseManagement.Domain.Shared.Constants;
 using Sofa.CourseManagement.SharedKernel.SeedWork;
 using System.Collections.Generic;
 

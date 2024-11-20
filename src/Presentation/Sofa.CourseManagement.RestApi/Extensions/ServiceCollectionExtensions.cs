@@ -21,7 +21,11 @@ namespace Sofa.CourseManagement.RestApi.Extensions
 			services.AddMediatR(typeof(Bootstraper).Assembly, typeof(AssembelyRecognizer).Assembly);
 
 			//Endpoint
-			services.AddControllers();
+			services.AddControllers().AddJsonOptions(options =>
+			{
+				options.JsonSerializerOptions.MaxDepth = 64;
+				options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+			});
 			services.AddEndpointsApiExplorer();
 			services.AddSwaggerGen(c =>
 			{

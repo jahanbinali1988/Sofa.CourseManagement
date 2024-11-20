@@ -3,9 +3,9 @@ using Sofa.CourseManagement.Application.Contract.LessonPlans.Commands;
 using Sofa.CourseManagement.Application.Contract.LessonPlans.Dtos;
 using Sofa.CourseManagement.Domain.Institutes;
 using Sofa.CourseManagement.Domain.Institutes.Entities;
+using Sofa.CourseManagement.Domain.Shared;
 using Sofa.CourseManagement.SharedKernel.Application;
 using Sofa.CourseManagement.SharedKernel.Generators;
-using Sofa.CourseManagement.SharedKernel.SeedWork;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,19 +14,17 @@ namespace Sofa.CourseManagement.Application.LessonPlans.Commands
 {
 	internal class AddLessonPlanCommandHandler : ICommandHandler<AddLessonPlanCommand, LessonPlanDto>
 	{
-		private readonly IInstituteRepository _instituteRepository;
-		private readonly IUnitOfWork _unitOfWork;
+		private readonly ICourseManagementUnitOfWork _unitOfWork;
 		private readonly IIdGenerator _idGenerator;
-		public AddLessonPlanCommandHandler(IInstituteRepository repository, IUnitOfWork unitOfWork, IIdGenerator idGenerator)
+		public AddLessonPlanCommandHandler(IInstituteRepository repository, ICourseManagementUnitOfWork unitOfWork, IIdGenerator idGenerator)
 		{
-			_instituteRepository = repository;
 			_unitOfWork = unitOfWork;
 			_idGenerator = idGenerator;
 		}
 
 		public async Task<LessonPlanDto> Handle(AddLessonPlanCommand request, CancellationToken cancellationToken)
 		{
-			var institute = await _instituteRepository.GetAsync(request.InstituteId, cancellationToken);
+			var institute = await _unitOfWork.InstituteRepository.GetAsync(request.InstituteId, cancellationToken);
 			if (institute == null)
 				throw new EntityNotFoundException($"Could not find Institute entity with Id {request.InstituteId}");
 

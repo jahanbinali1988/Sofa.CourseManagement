@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using Sofa.CourseManagement.Domain.Institutes.Entities;
-using Sofa.CourseManagement.Domain.Institutes.Constants;
+using Sofa.CourseManagement.Domain.Shared.Constants;
 
 namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes.Entieis
 {
@@ -36,7 +36,6 @@ namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes.Entieis
 					.IsRequired(true);
 			});
 
-			builder.ToTable(nameof(Term));
 			base.Configure(builder);
 		}
 	}

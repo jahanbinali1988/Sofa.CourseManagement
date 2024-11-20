@@ -1,8 +1,8 @@
 ﻿using Sofa.CourseManagement.Application.Contract.LessonPlans.Commands;
-using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
 using Sofa.CourseManagement.Domain.Institutes.Entities;
 using Sofa.CourseManagement.Domain.Institutes;
 using Sentry;
+using Sofa.CourseManagement.Domain.Contract.Users.Enums;
 
 namespace Sofa.CourseManagement.RestApi.Models.LessonPlans
 {

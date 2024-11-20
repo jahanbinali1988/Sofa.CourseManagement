@@ -1,9 +1,10 @@
-﻿using Sofa.CourseManagement.SharedKernel.Shared;
+﻿using Sofa.CourseManagement.Domain.Shared.Exceptions;
+using Sofa.CourseManagement.SharedKernel.Shared;
 using System;
 
 namespace Sofa.CourseManagement.Domain.Institutes.Exceptions
 {
-	public class InvalidCodeValueException : BusinessException
+    public class InvalidCodeValueException : BusinessException
 	{
 		private readonly string _value;
 		public InvalidCodeValueException(string value)

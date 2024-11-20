@@ -29,7 +29,7 @@ namespace Sofa.CourseManagement.Application.Courses.Queries
 
 			var courses = field.Courses.Where(c => c.Title.Value == request.Keyword);
 			var courseDtos = courses
-				.Skip(request.Offset * request.Count)
+				.Skip(request.Offset - 1 * request.Count)
 				.Take(request.Count)
 				.Select(s => new CourseDto()
 				{

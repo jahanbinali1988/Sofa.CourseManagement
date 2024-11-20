@@ -2,11 +2,10 @@
 using Sofa.CourseManagement.Application.Contract.Posts.Commands;
 using Sofa.CourseManagement.Application.Contract.Posts.Converter;
 using Sofa.CourseManagement.Application.Contract.Posts.Dtos;
-using Sofa.CourseManagement.Domain.Institutes;
 using Sofa.CourseManagement.Domain.Institutes.Entities;
+using Sofa.CourseManagement.Domain.Shared;
 using Sofa.CourseManagement.SharedKernel.Application;
 using Sofa.CourseManagement.SharedKernel.Generators;
-using Sofa.CourseManagement.SharedKernel.SeedWork;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,19 +14,17 @@ namespace Sofa.CourseManagement.Application.Posts.Commands
 {
 	internal class AddPostCommandHandler : ICommandHandler<AddPostCommand, PostBaseDto>
 	{
-		private readonly IInstituteRepository _instituteRepository;
-		private readonly IUnitOfWork _unitOfWork;
+		private readonly ICourseManagementUnitOfWork _unitOfWork;
 		private readonly IIdGenerator _idGenerator;
-		public AddPostCommandHandler(IInstituteRepository repository, IUnitOfWork unitOfWork, IIdGenerator idGenerator)
+		public AddPostCommandHandler(ICourseManagementUnitOfWork unitOfWork, IIdGenerator idGenerator)
 		{
-			_instituteRepository = repository;
 			_unitOfWork = unitOfWork;
 			_idGenerator = idGenerator;
 		}
 
 		public async Task<PostBaseDto> Handle(AddPostCommand request, CancellationToken cancellationToken)
 		{
-			var institute = await _instituteRepository.GetAsync(request.InstituteId, cancellationToken);
+			var institute = await _unitOfWork.InstituteRepository.GetAsync(request.InstituteId, cancellationToken);
 			if (institute == null)
 				throw new EntityNotFoundException($"Could not find Institute entity with Id {request.InstituteId}");
 

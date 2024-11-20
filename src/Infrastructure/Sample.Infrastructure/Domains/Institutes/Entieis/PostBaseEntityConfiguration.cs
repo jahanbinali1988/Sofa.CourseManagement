@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using System;
-using Sofa.CourseManagement.Domain.Institutes.Constants;
 using Sofa.CourseManagement.Domain.Institutes.Entities;
+using Sofa.CourseManagement.Domain.Shared.Constants;
 
 namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes.Entieis
 {
-    internal class PostBaseEntityConfiguration : BaseEntityTypeConfiguration<PostBase>
+	internal class PostBaseEntityConfiguration : BaseEntityTypeConfiguration<PostBase>
     {
 		public override void Configure(EntityTypeBuilder<PostBase> builder)
         {
@@ -45,7 +45,6 @@ namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes.Entieis
 
             builder.Ignore(b => b.DomainEvents);
 
-            builder.ToTable(nameof(PostBase));
 			base.Configure(builder);
 		}
     }

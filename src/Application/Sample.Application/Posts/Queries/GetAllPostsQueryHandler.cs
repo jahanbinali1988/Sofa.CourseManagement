@@ -48,7 +48,7 @@ namespace Sofa.CourseManagement.Application.Posts.Queries
 
 			var posts = lessonplan.Posts.Where(c => c.Title.Value.ToLower().Contains(request.Keyword));
 			var postDtos = posts
-				.Skip(request.Offset * request.Count)
+				.Skip(request.Offset - 1 * request.Count)
 				.Take(request.Count)
 				.Select(s => new PostBaseDto()
 				{

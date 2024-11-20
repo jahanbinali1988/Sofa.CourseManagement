@@ -3,11 +3,9 @@ using Sofa.CourseManagement.Application.Contract.Exceptions;
 using Sofa.CourseManagement.Application.Contract.Posts.Commands;
 using Sofa.CourseManagement.Application.Contract.Posts.Converter;
 using Sofa.CourseManagement.Application.Contract.Posts.Dtos;
-using Sofa.CourseManagement.Domain.Institutes;
 using Sofa.CourseManagement.Domain.Institutes.Entities;
+using Sofa.CourseManagement.Domain.Shared;
 using Sofa.CourseManagement.SharedKernel.Application;
-using Sofa.CourseManagement.SharedKernel.SeedWork;
-using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,17 +14,15 @@ namespace Sofa.CourseManagement.Application.Posts.Commands
 {
 	internal class UpdatePostCommandHandler : ICommandHandler<UpdatePostCommand>
 	{
-		private readonly IInstituteRepository _instituteRepository;
-		private readonly IUnitOfWork _unitOfWork;
-		public UpdatePostCommandHandler(IInstituteRepository repository, IUnitOfWork unitOfWork)
+		private readonly ICourseManagementUnitOfWork _unitOfWork;
+		public UpdatePostCommandHandler(ICourseManagementUnitOfWork unitOfWork)
 		{
-			_instituteRepository = repository;
 			_unitOfWork = unitOfWork;
 		}
 
 		public async Task<Unit> Handle(UpdatePostCommand request, CancellationToken cancellationToken)
 		{
-			var institute = await _instituteRepository.GetAsync(request.InstituteId, cancellationToken);
+			var institute = await _unitOfWork.InstituteRepository.GetAsync(request.InstituteId, cancellationToken);
 			if (institute == null)
 				throw new EntityNotFoundException($"Could not find Institute entity with Id {request.InstituteId}");
 

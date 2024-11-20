@@ -2,10 +2,10 @@
 {
     public class GetListRequest
     {
-        public string Keyword { get; set; }
+        public string? Keyword { get; set; } = "";
 
-        public virtual int Offset { get; set; }
+        public int Offset { get; set; } = 1;
 
-        public virtual int Count { get; set; }
+        public int Count { get; set; } = 10;
     }
 }

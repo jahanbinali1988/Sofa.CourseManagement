@@ -1,4 +1,5 @@
-﻿using Sofa.CourseManagement.Domain.Institutes.ValueObjects;
+﻿using Sofa.CourseManagement.Domain.Contract.Institutes.Events.Fields;
+using Sofa.CourseManagement.Domain.Institutes.ValueObjects;
 using Sofa.CourseManagement.SharedKernel.SeedWork;
 using System;
 using System.Collections.Generic;
@@ -8,13 +9,15 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
     public class Field : Entity<Guid>
     {
         public Title Title { get; private set; }
-
         public Guid InstituteId { get; private set; }
-        public ICollection<Course> Courses { get; set; }
 
-        private Field()
+		public Institute Institute { get; private set; }
+		private readonly List<Course> _courses;
+		public IReadOnlyList<Course> Courses => _courses.AsReadOnly();
+
+		private Field() : base()
         {
-            Courses = new List<Course>();
+			_courses = new List<Course>();
         }
 
         private void AssignTitle(string title) { this.Title = title; }
@@ -28,22 +31,33 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
             field.AssignTitle(title);
             field.AssignInstitute(instituteId);
 
+            field.AddDomainEvent(new AddFieldDomainEvent(field.Id, field.Title.Value, field.InstituteId));
+
             return field;
         }
 
 		public void Update(string title)
 		{
 			AssignTitle(title);
+			base.MarkAsUpdated();
+
+			AddDomainEvent(new UpdateFieldDomainEvent(Id, Title.Value, InstituteId));
+		}
+
+		public void Delete()
+		{
+			MarkAsDeleted();
+			AddDomainEvent(new DeleteFieldDomainEvent(Id));
 		}
 
 		public void AddCourse(Course course)
 		{
-            Courses.Add(course);
+			_courses.Add(course);
 		}
 
-		public void Delete(Course course)
+		public void DeleteCourse(Course course)
 		{
-            Courses.Remove(course);
+			_courses.Remove(course);
 		}
 	}
 }

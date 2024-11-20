@@ -19,12 +19,14 @@ namespace Sofa.CourseManagement.Application.Institutes.Queries
 
 		public async Task<Pagination<InstituteDto>> Handle(GetAllInstitutesQuery request, CancellationToken cancellationToken)
 		{
-			var institutes = await _instituteRepository.GetListAsync(x=> x.Title.Value == request.Keyword);
+			var institutes = await _instituteRepository.GetListAsync(x =>
+				string.IsNullOrEmpty(request.Keyword) || x.Title.Value.ToLower().Contains(request.Keyword.ToLower()), request.Offset, request.Count);
+			var count = await _instituteRepository.CountAsync(x=> true);
 
 			return new Pagination<InstituteDto>()
 			{
-				Items = institutes.Select(s => InstituteDto.CreateDto(s)).Skip(request.Offset * request.Count).Take(request.Count),
-				TotalItems = institutes.Count()
+				Items = institutes.Select(s => InstituteDto.CreateDto(s)),
+				TotalItems = count
 			};
 		}
 	}

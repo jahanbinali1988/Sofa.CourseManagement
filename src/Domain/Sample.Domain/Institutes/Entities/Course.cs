@@ -1,9 +1,9 @@
 ﻿using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
+using Sofa.CourseManagement.Domain.Contract.Institutes.Events.Courses;
 using Sofa.CourseManagement.Domain.Institutes.ValueObjects;
 using Sofa.CourseManagement.SharedKernel.SeedWork;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Sofa.CourseManagement.Domain.Institutes.Entities
 {
@@ -15,10 +15,9 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
 
         public ICollection<Term> Terms { get; private set; }
 
-		private Course()
+		private Course() : base()
         {
             Terms = new List<Term>();
-
         }
 
         private void AssignTitle(string title) { this.Title = title; }
@@ -34,6 +33,8 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
             course.AssignAgeRange(ageRange);
             course.AssignFieldId(fieldId);
 
+			course.AddDomainEvent(new AddCourseDomainEvent(course.Id, course.Title.Value, course.AgeRange.Value, course.FieldId));
+
             return course;
         }
 
@@ -41,6 +42,15 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
 		{
 			AssignTitle(title);
 			AssignAgeRange(ageRange);
+			base.MarkAsUpdated();
+
+			AddDomainEvent(new UpdateCourseDomainEvent(Id, Title.Value, AgeRange.Value, FieldId));
+		}
+
+		public void Delete()
+		{
+			base.MarkAsDeleted();
+			AddDomainEvent(new DeleteCourseDomainEvent(Id));
 		}
 
 		public void AddTerm(Term term)

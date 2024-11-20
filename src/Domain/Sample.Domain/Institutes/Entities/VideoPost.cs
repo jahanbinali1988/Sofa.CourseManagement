@@ -1,10 +1,15 @@
 ﻿using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
+using Sofa.CourseManagement.Domain.Contract.Institutes.Events.Posts;
 using System;
 
 namespace Sofa.CourseManagement.Domain.Institutes.Entities
 {
     public class VideoPost : PostBase
     {
+        public VideoPost() : base()
+        {
+            
+        }
         public static VideoPost CreateInstance(Guid id, string title, short order, string content, Guid LessonPlanId)
         {
             var post = new VideoPost();
@@ -15,7 +20,15 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
             post.AssignContent(content);
             post.AssignLessonPlan(LessonPlanId);
 
-            return post;
+			post.AddDomainEvent(new AddVideoPostDomainEvent(post.Id, post.Title.Value, post.Order, post.Content.Value, post.ContentType.Value, post.LessonPlanId));
+
+			return post;
+		}
+
+		public override void Delete()
+		{
+			MarkAsDeleted();
+			AddDomainEvent(new DeleteVideoPostDomainEvent(Id));
 		}
 
 		public override void Update(string title, string content, ContentTypeEnum contentType, short order)
@@ -24,6 +37,9 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
 			AssignContent(content);
 			AssignContentType(contentType);
 			AssignOrder(order);
+			base.MarkAsUpdated();
+
+			AddDomainEvent(new UpdateVideoPostDomainEvent(Id, Title.Value, Order, Content.Value, ContentType.Value, LessonPlanId));
 		}
 	}
 }

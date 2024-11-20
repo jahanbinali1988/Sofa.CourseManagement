@@ -1,9 +1,10 @@
-﻿using Sofa.CourseManagement.SharedKernel.Shared;
+﻿using Sofa.CourseManagement.Domain.Shared.Exceptions;
+using Sofa.CourseManagement.SharedKernel.Shared;
 using System;
 
 namespace Sofa.CourseManagement.Domain.Institutes.Exceptions
 {
-	public class InvalidWebsiteUrlValueException : BusinessException
+    public class InvalidWebsiteUrlValueException : BusinessException
 	{
 
 		private readonly string _value;

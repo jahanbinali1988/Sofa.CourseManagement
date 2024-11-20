@@ -5,6 +5,10 @@ using Sofa.CourseManagement.Application.Contract.Terms.Commands;
 using Sofa.CourseManagement.Application.Contract.Terms.Dtos;
 using Sofa.CourseManagement.Application.Contract.Terms.Queries;
 using Sofa.CourseManagement.Domain.Institutes.Entities;
+using Sofa.CourseManagement.Application.Contract.UserTerms.Commands;
+using Sofa.CourseManagement.Application.Contract.UserTerms.Dtos;
+using Sofa.CourseManagement.Application.Contract.UserTerms.Queries;
+using Sofa.CourseManagement.RestApi.Models.UserTerms;
 
 namespace Sofa.CourseManagement.RestApi.Controllers
 {
@@ -92,5 +96,60 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 
 			return NoContent();
 		}
+
+		/// <summary>
+		/// Get User Terms list
+		/// </summary>
+		/// <param name="request"></param>
+		/// <response code="200">Successfully get entities</response>
+		/// <response code="400">Entity has missing/invalid values</response>
+		/// <response code="404">Entity not found</response>
+		[HttpGet("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/term/{termId:required}/user")]
+		public async Task<ActionResult<IEnumerable<UserTermViewModel>>> GetUserTermListAsync([FromQuery] Guid instituteId, [FromQuery] Guid fieldId,
+			[FromQuery] Guid courseId, [FromQuery] Guid termId, [FromQuery] GetListRequest request)
+		{
+			var query = new GetAllUserTermsQuery(request.Offset, request.Count, request.Keyword, instituteId, fieldId, courseId, termId);
+
+			var users = await _mediator.Send(query, HttpContext.RequestAborted);
+
+			return List<UserTermDto, UserTermViewModel>(users);
+		}
+
+		/// <summary>
+		/// Add Term to User entity
+		/// </summary>
+		/// <param name="id"></param>
+		/// <param name="request"></param>
+		/// <response code="201" >Entity created</response>
+		/// <response code="400">Entity has missing/invalid values</response>
+		[HttpPut("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/term/{termId:required}/user")]
+		public async Task<ActionResult<UserTermViewModel>> AddUserToTermAsync([FromQuery] Guid instituteId, [FromQuery] Guid fieldId, 
+			[FromQuery] Guid courseId, [FromQuery] Guid termId, [FromBody] Guid userId)
+		{
+			var command = new AddUserTermCommand(instituteId, fieldId, courseId, termId, userId);
+
+			await _mediator.Send(command);
+
+			return Ok();
+		}
+
+		/// <summary>
+		/// Remove Term from User entity
+		/// </summary>
+		/// <param name="id"></param>
+		/// <param name="request"></param>
+		/// <response code="201" >Entity created</response>
+		/// <response code="400">Entity has missing/invalid values</response>
+		[HttpDelete("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/term/{termId:required}/user/{userId:required}")]
+		public async Task<ActionResult> RemoveUserFromTermAsync([FromQuery] Guid instituteId, [FromQuery] Guid fieldId, [FromQuery] Guid courseId, 
+			[FromQuery] Guid termId, [FromQuery] Guid userId)
+		{
+			var command = new DeleteUserTermCommand(instituteId, fieldId, courseId, termId, userId);
+
+			await _mediator.Send(command);
+
+			return Ok();
+		}
+
 	}
 }

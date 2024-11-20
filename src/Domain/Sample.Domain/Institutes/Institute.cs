@@ -1,4 +1,5 @@
-﻿using Sofa.CourseManagement.Domain.Institutes.Entities;
+﻿using Sofa.CourseManagement.Domain.Contract.Institutes.Events.Institutes;
+using Sofa.CourseManagement.Domain.Institutes.Entities;
 using Sofa.CourseManagement.Domain.Institutes.ValueObjects;
 using Sofa.CourseManagement.SharedKernel.SeedWork;
 using System;
@@ -13,16 +14,19 @@ namespace Sofa.CourseManagement.Domain.Institutes
 		public Address Address { get; private set; }
 		public Code Code { get; private set; }
 
-		public ICollection<Field> Fields { get; set; }
-		public ICollection<User> Users { get; set; }
+		private readonly List<Field> _fields;
+		public IReadOnlyList<Field> Fields => _fields.AsReadOnly();
 
-		private Institute()
+		private readonly List<InstituteUser> _instituteUsers;
+		public IReadOnlyList<InstituteUser> InstituteUsers => _instituteUsers.AsReadOnly();
+        
+		private Institute() : base()
 		{
-			Fields = new List<Field>();
-			Users = new List<User>();
+			_fields = new List<Field>();
+			_instituteUsers = new List<InstituteUser>();
 		}
 
-		public void AssignAddress(Address address)
+		private void AssignAddress(Address address)
 		{
 			if (Address is null)
 			{
@@ -47,10 +51,6 @@ namespace Sofa.CourseManagement.Domain.Institutes
 		{
 			this.WebsiteUrl = websiteUrl;
 		}
-		public void AssignField(Field field)
-		{
-			this.Fields.Add(field);
-		}
 
 		public static Institute CreateInstance(Guid id, string title, string code, string websiteUrl)
 		{
@@ -61,6 +61,8 @@ namespace Sofa.CourseManagement.Domain.Institutes
 			institute.AssignCode(code);
 			institute.AssignWebsiteUrl(websiteUrl);
 
+			institute.AddDomainEvent(new AddInstituteDomainEvent(institute.Id, institute.Title.Value, institute.WebsiteUrl.Value, institute.Code.Value));
+
 			return institute;
 		}
 
@@ -69,11 +71,41 @@ namespace Sofa.CourseManagement.Domain.Institutes
 			AssignTitle(title);
 			AssignCode(code);
 			AssignWebsiteUrl(websiteUrl);
+			base.MarkAsUpdated();
+
+			AddDomainEvent(new UpdateInstituteDomainEvent(Id, Title.Value, WebsiteUrl.Value, Address?.ToString(), Code.Value));
 		}
 
-		public void Delete(Field field)
+		public void UpdateAddress(Address address)
 		{
-			Fields.Remove(field);
+			AssignAddress(address);
+			base.MarkAsUpdated();
+
+			AddDomainEvent(new UpdateInstituteDomainEvent(Id, Title.Value, WebsiteUrl.Value, Address.ToString(), Code.Value));
+		}
+
+		public void Delete()
+		{
+			base.MarkAsDeleted();
+			AddDomainEvent(new DeleteInstituteDomainEvent(Id));
+		}
+
+		public void AddField(Field field)
+		{
+			this._fields.Add(field);
+		}
+
+		public void DeleteField(Field field)
+		{
+			_fields.Remove(field);
+		}
+		public void AddUser(InstituteUser instituteUser)
+		{
+			_instituteUsers.Add(instituteUser);
+		}
+		public void DeleteUser(InstituteUser instituteUser)
+		{
+			_instituteUsers.Remove(instituteUser);
 		}
 	}
 }

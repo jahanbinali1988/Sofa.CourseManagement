@@ -9,7 +9,8 @@ namespace Sofa.CourseManagement.Infrastructure.Persistence.Extensions
             this IQueryable<TSource> source,
             Func<IQueryable<TSource>, IQueryable<TDestination>> builder)
         {
-            return builder(source);
+
+			return builder(source);
         }
 
     }

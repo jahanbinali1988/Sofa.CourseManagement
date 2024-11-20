@@ -1,10 +1,15 @@
 ﻿using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
+using Sofa.CourseManagement.Domain.Contract.Institutes.Events.Posts;
 using System;
 
 namespace Sofa.CourseManagement.Domain.Institutes.Entities
 {
     public class SoundPost : PostBase
     {
+        public SoundPost() : base()
+        {
+            
+        }
         public static SoundPost CreateInstance(Guid id, string title, short order, string content, Guid LessonPlanId)
         {
             var post = new SoundPost();
@@ -15,7 +20,15 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
             post.AssignContent(content);
             post.AssignLessonPlan(LessonPlanId);
 
-            return post;
+			post.AddDomainEvent(new AddSoundPostDomainEvent(post.Id, post.Title.Value, post.Order, post.Content.Value, post.ContentType.Value, post.LessonPlanId));
+
+			return post;
+		}
+
+		public override void Delete()
+		{
+			MarkAsDeleted();
+			AddDomainEvent(new DeleteSoundPostDomainEvent(Id));
 		}
 
 		public override void Update(string title, string content, ContentTypeEnum contentType, short order)
@@ -24,6 +37,9 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
 			AssignContent(content);
 			AssignContentType(contentType);
 			AssignOrder(order);
+			base.MarkAsUpdated();
+
+			AddDomainEvent(new UpdateSoundPostDomainEvent(Id, Title.Value, Order, Content.Value, ContentType.Value, LessonPlanId));
 		}
 	}
 }

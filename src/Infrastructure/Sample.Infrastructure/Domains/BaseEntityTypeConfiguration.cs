@@ -8,17 +8,13 @@ namespace Sofa.CourseManagement.Infrastructure.Domains
     public abstract class BaseEntityTypeConfiguration<T> : IEntityTypeConfiguration<T> where T : Entity<Guid>
     {
         public virtual void Configure(EntityTypeBuilder<T> builder)
-        {
-            builder.Property(x => x.CreatedAt)
-                .HasDefaultValueSql("SYSDATETIMEOFFSET()");
-
-            builder.Property<bool>("IsDeleted")
-                .HasDefaultValue(false);
-
-            builder.Property<DateTimeOffset?>("DeletedAt")
-                .IsRequired(false);
-
-            builder.HasQueryFilter(p => EF.Property<bool>(p, "IsDeleted") == false);
-        }
+		{
+			//builder.Property(i => i.RowVersion).IsConcurrencyToken();
+			builder.Property(c=> c.Id).ValueGeneratedNever();
+			builder.HasKey(c => c.Id);
+			//builder.Ignore(c => c.DomainEvents);
+			builder.HasQueryFilter(i => !i.IsDeleted);
+			builder.ToTable(typeof(T).Name);
+		}
     }
 }

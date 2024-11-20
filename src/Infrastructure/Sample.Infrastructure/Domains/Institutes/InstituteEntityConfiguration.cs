@@ -2,20 +2,23 @@
 using Microsoft.EntityFrameworkCore;
 using Sofa.CourseManagement.Domain.Institutes.ValueObjects;
 using Sofa.CourseManagement.Domain.Institutes;
-using Sofa.CourseManagement.Domain.Institutes.Constants;
 using Sofa.CourseManagement.Domain.Institutes.Entities;
+using Sofa.CourseManagement.Domain.Shared.Constants;
 
 namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes
 {
-    internal class InstituteEntityConfiguration : BaseEntityTypeConfiguration<Institute>
+	internal class InstituteEntityConfiguration : BaseEntityTypeConfiguration<Institute>
     {
         public override void Configure(EntityTypeBuilder<Institute> builder)
         {
             builder.HasIndex(x => x.Id).IsUnique();
 
 			builder.HasMany<Field>(c=> c.Fields).WithOne().HasForeignKey(x => x.InstituteId).IsRequired().OnDelete(DeleteBehavior.Cascade);
-			builder.HasMany<User>(c => c.Users).WithOne().HasForeignKey(x => x.InstituteId).IsRequired().OnDelete(DeleteBehavior.Cascade);
-
+			builder.Metadata.FindNavigation(nameof(Institute.Fields))?.SetPropertyAccessMode(PropertyAccessMode.Field);
+			
+			builder.HasMany<InstituteUser>(c => c.InstituteUsers).WithOne(c=> c.Institute).HasForeignKey(x => x.InstituteId).IsRequired().OnDelete(DeleteBehavior.NoAction);
+			builder.Metadata.FindNavigation(nameof(Institute.InstituteUsers))?.SetPropertyAccessMode(PropertyAccessMode.Field);
+			
 			builder.OwnsOne(p => p.Title, m =>
 			{
 				m.Property(x => x.Value)
@@ -62,8 +65,6 @@ namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes
 					.HasMaxLength(ConstantValues.MaxStringAddressLength)
 					.IsRequired(true);
 			});
-
-			builder.ToTable(nameof(Institute));
         }
     }
 }

@@ -12,5 +12,5 @@ namespace Sofa.CourseManagement.SharedKernel.EventProcessing.DomainEvent
         }
 
         public DateTimeOffset OccurredOn { get; }
-    }
+	}
 }

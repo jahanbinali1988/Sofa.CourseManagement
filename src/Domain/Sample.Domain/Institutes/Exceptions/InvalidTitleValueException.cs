@@ -1,9 +1,10 @@
-﻿using Sofa.CourseManagement.SharedKernel.Shared;
+﻿using Sofa.CourseManagement.Domain.Shared.Exceptions;
+using Sofa.CourseManagement.SharedKernel.Shared;
 using System;
 
 namespace Sofa.CourseManagement.Domain.Institutes.Exceptions
 {
-	internal class InvalidTitleValueException : BusinessException
+    internal class InvalidTitleValueException : BusinessException
 	{
 		private readonly string _value;
 		public InvalidTitleValueException(string value)

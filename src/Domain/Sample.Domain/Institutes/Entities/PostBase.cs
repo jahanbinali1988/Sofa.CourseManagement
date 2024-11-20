@@ -12,7 +12,7 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
         public Content Content { get; private set; }
         public ContentType ContentType { get; private set; }
         public Guid LessonPlanId { get; private set; }
-        protected PostBase()
+        protected PostBase() : base()
         {
 
         }
@@ -24,5 +24,6 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
         protected void AssignLessonPlan(Guid lessonPlanId) { LessonPlanId = lessonPlanId; }
 
         public abstract void Update(string title, string content, ContentTypeEnum contentType, short order);
+		public abstract void Delete();
 	}
 }

@@ -1,4 +1,4 @@
-﻿using Sofa.CourseManagement.Application.Contract.Institutes.Commands;
+﻿using Sofa.CourseManagement.Application.Contract.Exceptions;
 using Sofa.CourseManagement.Application.Contract.Institutes.Dtos;
 using Sofa.CourseManagement.Application.Contract.Institutes.Queries;
 using Sofa.CourseManagement.Domain.Institutes;
@@ -19,6 +19,8 @@ namespace Sofa.CourseManagement.Application.Institutes.Queries
 		public async Task<InstituteDto> Handle(GetInstituteByIdQuery request, CancellationToken cancellationToken)
 		{
 			var institute = await _instituteRepository.GetAsync(request.Id, cancellationToken);
+			if (institute == null)
+				throw new EntityNotFoundException($"Could not find Institute entity with Id {request.Id}");
 
 			return InstituteDto.CreateDto(institute);
 		}

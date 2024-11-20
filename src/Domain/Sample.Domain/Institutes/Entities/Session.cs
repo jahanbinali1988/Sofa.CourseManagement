@@ -1,4 +1,5 @@
-﻿using Sofa.CourseManagement.Domain.Institutes.ValueObjects;
+﻿using Sofa.CourseManagement.Domain.Contract.Institutes.Events.Sessions;
+using Sofa.CourseManagement.Domain.Institutes.ValueObjects;
 using Sofa.CourseManagement.SharedKernel.SeedWork;
 using System;
 
@@ -13,7 +14,7 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
 
 		public LessonPlan? LessonPlan { get; private set; }
 
-		private Session()
+		private Session() : base()
         {
 
         }
@@ -33,21 +34,28 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
             session.AssignTermId(termId);
             session.AssignOccurredDate(occurredDate);
 
+            session.AddDomainEvent(new AddSessionDomainEvent(session.Id, session.Title.Value, session.OccurredDate.Value, session.TermId));
+
             return session;
         }
-
 		public void Update(string title, DateTimeOffset occurredDate)
 		{
             AssignTitle(title);
-            AssignOccurredDate(occurredDate);
-		}
+			AssignOccurredDate(occurredDate);
+			base.MarkAsUpdated();
 
+			AddDomainEvent(new UpdateSessionDomainEvent(Id, Title.Value, OccurredDate.Value, TermId));
+		}
+		public void Delete()
+		{
+			MarkAsDeleted();
+			AddDomainEvent(new DeleteSessionDomainEvent(Id));
+		}
 		public void AddLessonPlan(LessonPlan lessonplan)
 		{
-            AssignLessonPlanId(lessonplan.Id);
-            AssignLessonPlan(lessonplan);
+			AssignLessonPlanId(lessonplan.Id);
+			AssignLessonPlan(lessonplan);
 		}
-
 		public void DeleteLessonPlan(LessonPlan lessonplan)
 		{
             LessonPlan = null;

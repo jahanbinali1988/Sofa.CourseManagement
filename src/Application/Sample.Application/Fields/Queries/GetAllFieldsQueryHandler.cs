@@ -26,7 +26,7 @@ namespace Sofa.CourseManagement.Application.Fields.Queries
 
 			var fields = institute.Fields.Where(c => c.Title.Value.Contains(request.Keyword));
 			var fieldDtos = fields
-				.Skip(request.Offset * request.Count)
+				.Skip(request.Offset - 1 * request.Count)
 				.Take(request.Count)
 				.Select(s => new FieldDto()
 				{

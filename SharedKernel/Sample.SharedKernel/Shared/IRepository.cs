@@ -17,8 +17,11 @@ namespace Sofa.CourseManagement.SharedKernel.Shared
 
         Task<TEntity> GetAsync(Tkey id, CancellationToken cancellationToken);
 
-		Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate);
+		Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate, int offset, int count);
 
+		Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate);
+
+        Task SaveAsync();
 	}
 
     public interface IRepository<TEntity> : IRepository<TEntity, Guid> where TEntity : Entity<Guid>, IAggregateRoot

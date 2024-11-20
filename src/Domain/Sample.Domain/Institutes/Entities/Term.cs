@@ -1,4 +1,6 @@
-﻿using Sofa.CourseManagement.Domain.Institutes.ValueObjects;
+﻿using Sofa.CourseManagement.Domain.Contract.Institutes.Events.Terms;
+using Sofa.CourseManagement.Domain.Contract.Institutes.Events.UserTerms;
+using Sofa.CourseManagement.Domain.Institutes.ValueObjects;
 using Sofa.CourseManagement.SharedKernel.SeedWork;
 using System;
 using System.Collections.Generic;
@@ -13,7 +15,7 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
 		public ICollection<Session> Sessions { get; private set; }
 		public ICollection<UserTerm> UserTerms { get; private set; }
 
-		private Term()
+		private Term() : base()
 		{
 			Sessions = new List<Session>();
 			UserTerms = new List<UserTerm>();
@@ -30,22 +32,37 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
 			term.AssignTitle(title);
 			term.AssignCourse(courseId);
 
+			term.AddDomainEvent(new AddTermDomainEvent(term.Id, term.Title.Value, term.CourseId));
+
 			return term;
 		}
-
 		public void Update(string title)
 		{
 			AssignTitle(title);
-		}
+			base.MarkAsUpdated();
 
+			AddDomainEvent(new UpdateTermDomainEvent(Id, Title.Value, CourseId));
+		}
+		public void Delete()
+		{
+			MarkAsDeleted();
+			AddDomainEvent(new DeleteTermDomainEvent(Id));
+		}
 		public void AddSession(Session session)
 		{
 			Sessions.Add(session);
 		}
-
 		public void DeleteSession(Session session)
 		{
 			Sessions.Remove(session);
+		}
+		public void AddUser(UserTerm userTerm)
+		{
+			UserTerms.Add(userTerm);
+		}
+		public void DeleteUser(UserTerm userTerm)
+		{
+			UserTerms.Remove(userTerm);
 		}
 	}
 }

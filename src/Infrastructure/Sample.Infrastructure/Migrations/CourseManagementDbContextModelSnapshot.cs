@@ -25,13 +25,10 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
             modelBuilder.Entity("Sofa.CourseManagement.Domain.Institutes.Entities.Course", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTimeOffset>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetimeoffset")
-                        .HasDefaultValueSql("SYSDATETIMEOFFSET()");
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<DateTimeOffset?>("DeletedAt")
                         .HasColumnType("datetimeoffset");
@@ -40,15 +37,10 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
+                        .HasColumnType("bit");
 
                     b.Property<DateTimeOffset?>("ModifiedAt")
                         .HasColumnType("datetimeoffset");
-
-                    b.Property<byte[]>("Version")
-                        .HasColumnType("varbinary(max)");
 
                     b.HasKey("Id");
 
@@ -63,7 +55,41 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
             modelBuilder.Entity("Sofa.CourseManagement.Domain.Institutes.Entities.Field", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("DeletedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid>("InstituteId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("InstituteId1")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("ModifiedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Id")
+                        .IsUnique();
+
+                    b.HasIndex("InstituteId");
+
+                    b.HasIndex("InstituteId1");
+
+                    b.ToTable("Field", (string)null);
+                });
+
+            modelBuilder.Entity("Sofa.CourseManagement.Domain.Institutes.Entities.InstituteUser", b =>
+                {
+                    b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTimeOffset>("CreatedAt")
@@ -85,8 +111,11 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                     b.Property<DateTimeOffset?>("ModifiedAt")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<byte[]>("Version")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("UserId1")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -95,13 +124,16 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
 
                     b.HasIndex("InstituteId");
 
-                    b.ToTable("Field", (string)null);
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("InstituteUser", (string)null);
                 });
 
             modelBuilder.Entity("Sofa.CourseManagement.Domain.Institutes.Entities.LessonPlan", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTimeOffset>("CreatedAt")
@@ -123,9 +155,6 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                     b.Property<Guid>("SessionId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<byte[]>("Version")
-                        .HasColumnType("varbinary(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("Id")
@@ -141,17 +170,13 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTimeOffset>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetimeoffset")
-                        .HasDefaultValueSql("SYSDATETIMEOFFSET()");
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<DateTimeOffset?>("DeletedAt")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
+                        .HasColumnType("bit");
 
                     b.Property<Guid>("LessonPlanId")
                         .HasColumnType("uniqueidentifier");
@@ -161,9 +186,6 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
 
                     b.Property<short>("Order")
                         .HasColumnType("smallint");
-
-                    b.Property<byte[]>("Version")
-                        .HasColumnType("varbinary(max)");
 
                     b.HasKey("Id");
 
@@ -180,21 +202,16 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
             modelBuilder.Entity("Sofa.CourseManagement.Domain.Institutes.Entities.Session", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTimeOffset>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetimeoffset")
-                        .HasDefaultValueSql("SYSDATETIMEOFFSET()");
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<DateTimeOffset?>("DeletedAt")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
+                        .HasColumnType("bit");
 
                     b.Property<Guid?>("LessonPlanId")
                         .HasColumnType("uniqueidentifier");
@@ -207,9 +224,6 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
 
                     b.Property<Guid>("TermId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<byte[]>("Version")
-                        .HasColumnType("varbinary(max)");
 
                     b.HasKey("Id");
 
@@ -226,7 +240,6 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
             modelBuilder.Entity("Sofa.CourseManagement.Domain.Institutes.Entities.Term", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CourseId")
@@ -248,9 +261,6 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                     b.Property<DateTimeOffset?>("ModifiedAt")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<byte[]>("Version")
-                        .HasColumnType("varbinary(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CourseId");
@@ -261,52 +271,9 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                     b.ToTable("Term", (string)null);
                 });
 
-            modelBuilder.Entity("Sofa.CourseManagement.Domain.Institutes.Entities.User", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTimeOffset>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetimeoffset")
-                        .HasDefaultValueSql("SYSDATETIMEOFFSET()");
-
-                    b.Property<DateTimeOffset?>("DeletedAt")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<Guid>("InstituteId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<DateTimeOffset?>("ModifiedAt")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("PasswordHash")
-                        .HasMaxLength(64)
-                        .HasColumnType("nvarchar(64)");
-
-                    b.Property<byte[]>("Version")
-                        .HasColumnType("varbinary(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Id")
-                        .IsUnique();
-
-                    b.HasIndex("InstituteId");
-
-                    b.ToTable("User", (string)null);
-                });
-
             modelBuilder.Entity("Sofa.CourseManagement.Domain.Institutes.Entities.UserTerm", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTimeOffset>("CreatedAt")
@@ -328,11 +295,14 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                     b.Property<Guid>("TermId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("TermId1")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<byte[]>("Version")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<Guid?>("UserId1")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -341,7 +311,11 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
 
                     b.HasIndex("TermId");
 
+                    b.HasIndex("TermId1");
+
                     b.HasIndex("UserId");
+
+                    b.HasIndex("UserId1");
 
                     b.ToTable("UserTerm", (string)null);
                 });
@@ -355,18 +329,54 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<DateTimeOffset?>("ModifiedAt")
+                    b.Property<DateTimeOffset?>("DeletedAt")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<byte[]>("Version")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("ModifiedAt")
+                        .HasColumnType("datetimeoffset");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Id")
                         .IsUnique();
 
-                    b.ToTable("Institute", (string)null);
+                    b.ToTable("Institutes");
+                });
+
+            modelBuilder.Entity("Sofa.CourseManagement.Domain.Users.User", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetimeoffset")
+                        .HasDefaultValueSql("SYSDATETIMEOFFSET()");
+
+                    b.Property<DateTimeOffset?>("DeletedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<DateTimeOffset?>("ModifiedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("PasswordHash")
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Id")
+                        .IsUnique();
+
+                    b.ToTable("User", (string)null);
                 });
 
             modelBuilder.Entity("Sofa.CourseManagement.Domain.Institutes.Entities.ImagePost", b =>
@@ -460,6 +470,10 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Sofa.CourseManagement.Domain.Institutes.Institute", "Institute")
+                        .WithMany()
+                        .HasForeignKey("InstituteId1");
+
                     b.OwnsOne("Sofa.CourseManagement.Domain.Institutes.ValueObjects.Title", "Title", b1 =>
                         {
                             b1.Property<Guid>("FieldId")
@@ -479,7 +493,32 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                                 .HasForeignKey("FieldId");
                         });
 
+                    b.Navigation("Institute");
+
                     b.Navigation("Title");
+                });
+
+            modelBuilder.Entity("Sofa.CourseManagement.Domain.Institutes.Entities.InstituteUser", b =>
+                {
+                    b.HasOne("Sofa.CourseManagement.Domain.Institutes.Institute", "Institute")
+                        .WithMany("InstituteUsers")
+                        .HasForeignKey("InstituteId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Sofa.CourseManagement.Domain.Users.User", null)
+                        .WithMany("InstituteUsers")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Sofa.CourseManagement.Domain.Users.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId1");
+
+                    b.Navigation("Institute");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Sofa.CourseManagement.Domain.Institutes.Entities.LessonPlan", b =>
@@ -694,170 +733,6 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                     b.Navigation("Title");
                 });
 
-            modelBuilder.Entity("Sofa.CourseManagement.Domain.Institutes.Entities.User", b =>
-                {
-                    b.HasOne("Sofa.CourseManagement.Domain.Institutes.Institute", null)
-                        .WithMany("Users")
-                        .HasForeignKey("InstituteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.OwnsOne("Sofa.CourseManagement.Domain.Institutes.ValueObjects.Name", "FirstName", b1 =>
-                        {
-                            b1.Property<Guid>("UserId")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<string>("Value")
-                                .IsRequired()
-                                .HasMaxLength(50)
-                                .HasColumnType("nvarchar(50)")
-                                .HasColumnName("FirstName");
-
-                            b1.HasKey("UserId");
-
-                            b1.ToTable("User");
-
-                            b1.WithOwner()
-                                .HasForeignKey("UserId");
-                        });
-
-                    b.OwnsOne("Sofa.CourseManagement.Domain.Institutes.ValueObjects.Name", "LastName", b1 =>
-                        {
-                            b1.Property<Guid>("UserId")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<string>("Value")
-                                .IsRequired()
-                                .HasMaxLength(50)
-                                .HasColumnType("nvarchar(50)")
-                                .HasColumnName("LastName");
-
-                            b1.HasKey("UserId");
-
-                            b1.ToTable("User");
-
-                            b1.WithOwner()
-                                .HasForeignKey("UserId");
-                        });
-
-                    b.OwnsOne("Sofa.CourseManagement.Domain.Institutes.ValueObjects.Email", "Email", b1 =>
-                        {
-                            b1.Property<Guid>("UserId")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<string>("Value")
-                                .IsRequired()
-                                .HasMaxLength(50)
-                                .HasColumnType("nvarchar(50)")
-                                .HasColumnName("Email");
-
-                            b1.HasKey("UserId");
-
-                            b1.ToTable("User");
-
-                            b1.WithOwner()
-                                .HasForeignKey("UserId");
-                        });
-
-                    b.OwnsOne("Sofa.CourseManagement.Domain.Institutes.ValueObjects.PhoneNumber", "PhoneNumber", b1 =>
-                        {
-                            b1.Property<Guid>("UserId")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<string>("Value")
-                                .IsRequired()
-                                .HasMaxLength(13)
-                                .HasColumnType("nvarchar(13)")
-                                .HasColumnName("PhoneNumber");
-
-                            b1.HasKey("UserId");
-
-                            b1.ToTable("User");
-
-                            b1.WithOwner()
-                                .HasForeignKey("UserId");
-                        });
-
-                    b.OwnsOne("Sofa.CourseManagement.Domain.Institutes.ValueObjects.UserLevel", "Level", b1 =>
-                        {
-                            b1.Property<Guid>("UserId")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<string>("Title")
-                                .IsRequired()
-                                .HasMaxLength(50)
-                                .HasColumnType("nvarchar(50)")
-                                .HasColumnName("LevelTitle");
-
-                            b1.Property<int>("Value")
-                                .HasColumnType("int")
-                                .HasColumnName("Level");
-
-                            b1.HasKey("UserId");
-
-                            b1.ToTable("User");
-
-                            b1.WithOwner()
-                                .HasForeignKey("UserId");
-                        });
-
-                    b.OwnsOne("Sofa.CourseManagement.Domain.Institutes.ValueObjects.UserName", "UserName", b1 =>
-                        {
-                            b1.Property<Guid>("UserId")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<string>("Value")
-                                .IsRequired()
-                                .HasMaxLength(50)
-                                .HasColumnType("nvarchar(50)")
-                                .HasColumnName("UserName");
-
-                            b1.HasKey("UserId");
-
-                            b1.ToTable("User");
-
-                            b1.WithOwner()
-                                .HasForeignKey("UserId");
-                        });
-
-                    b.OwnsOne("Sofa.CourseManagement.Domain.Institutes.ValueObjects.UserRole", "Role", b1 =>
-                        {
-                            b1.Property<Guid>("UserId")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<string>("Title")
-                                .IsRequired()
-                                .HasMaxLength(50)
-                                .HasColumnType("nvarchar(50)")
-                                .HasColumnName("RoleTitle");
-
-                            b1.Property<int>("Value")
-                                .HasColumnType("int")
-                                .HasColumnName("Role");
-
-                            b1.HasKey("UserId");
-
-                            b1.ToTable("User");
-
-                            b1.WithOwner()
-                                .HasForeignKey("UserId");
-                        });
-
-                    b.Navigation("Email");
-
-                    b.Navigation("FirstName");
-
-                    b.Navigation("LastName");
-
-                    b.Navigation("Level");
-
-                    b.Navigation("PhoneNumber");
-
-                    b.Navigation("Role");
-
-                    b.Navigation("UserName");
-                });
-
             modelBuilder.Entity("Sofa.CourseManagement.Domain.Institutes.Entities.UserTerm", b =>
                 {
                     b.HasOne("Sofa.CourseManagement.Domain.Institutes.Entities.Term", null)
@@ -866,11 +741,23 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Sofa.CourseManagement.Domain.Institutes.Entities.User", null)
+                    b.HasOne("Sofa.CourseManagement.Domain.Institutes.Entities.Term", "Term")
+                        .WithMany()
+                        .HasForeignKey("TermId1");
+
+                    b.HasOne("Sofa.CourseManagement.Domain.Users.User", null)
                         .WithMany("UserTerms")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.HasOne("Sofa.CourseManagement.Domain.Users.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId1");
+
+                    b.Navigation("Term");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Sofa.CourseManagement.Domain.Institutes.Institute", b =>
@@ -888,7 +775,7 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
 
                             b1.HasKey("InstituteId");
 
-                            b1.ToTable("Institute");
+                            b1.ToTable("Institutes");
 
                             b1.WithOwner()
                                 .HasForeignKey("InstituteId");
@@ -931,7 +818,7 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
 
                             b1.HasKey("InstituteId");
 
-                            b1.ToTable("Institute");
+                            b1.ToTable("Institutes");
 
                             b1.WithOwner()
                                 .HasForeignKey("InstituteId");
@@ -950,7 +837,7 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
 
                             b1.HasKey("InstituteId");
 
-                            b1.ToTable("Institute");
+                            b1.ToTable("Institutes");
 
                             b1.WithOwner()
                                 .HasForeignKey("InstituteId");
@@ -969,7 +856,7 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
 
                             b1.HasKey("InstituteId");
 
-                            b1.ToTable("Institute");
+                            b1.ToTable("Institutes");
 
                             b1.WithOwner()
                                 .HasForeignKey("InstituteId");
@@ -982,6 +869,164 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                     b.Navigation("Title");
 
                     b.Navigation("WebsiteUrl");
+                });
+
+            modelBuilder.Entity("Sofa.CourseManagement.Domain.Users.User", b =>
+                {
+                    b.OwnsOne("Sofa.CourseManagement.Domain.Users.ValueObjects.Name", "FirstName", b1 =>
+                        {
+                            b1.Property<Guid>("UserId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasMaxLength(50)
+                                .HasColumnType("nvarchar(50)")
+                                .HasColumnName("FirstName");
+
+                            b1.HasKey("UserId");
+
+                            b1.ToTable("User");
+
+                            b1.WithOwner()
+                                .HasForeignKey("UserId");
+                        });
+
+                    b.OwnsOne("Sofa.CourseManagement.Domain.Users.ValueObjects.Name", "LastName", b1 =>
+                        {
+                            b1.Property<Guid>("UserId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasMaxLength(50)
+                                .HasColumnType("nvarchar(50)")
+                                .HasColumnName("LastName");
+
+                            b1.HasKey("UserId");
+
+                            b1.ToTable("User");
+
+                            b1.WithOwner()
+                                .HasForeignKey("UserId");
+                        });
+
+                    b.OwnsOne("Sofa.CourseManagement.Domain.Users.ValueObjects.Email", "Email", b1 =>
+                        {
+                            b1.Property<Guid>("UserId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasMaxLength(50)
+                                .HasColumnType("nvarchar(50)")
+                                .HasColumnName("Email");
+
+                            b1.HasKey("UserId");
+
+                            b1.ToTable("User");
+
+                            b1.WithOwner()
+                                .HasForeignKey("UserId");
+                        });
+
+                    b.OwnsOne("Sofa.CourseManagement.Domain.Users.ValueObjects.PhoneNumber", "PhoneNumber", b1 =>
+                        {
+                            b1.Property<Guid>("UserId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasMaxLength(13)
+                                .HasColumnType("nvarchar(13)")
+                                .HasColumnName("PhoneNumber");
+
+                            b1.HasKey("UserId");
+
+                            b1.ToTable("User");
+
+                            b1.WithOwner()
+                                .HasForeignKey("UserId");
+                        });
+
+                    b.OwnsOne("Sofa.CourseManagement.Domain.Users.ValueObjects.UserLevel", "Level", b1 =>
+                        {
+                            b1.Property<Guid>("UserId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Title")
+                                .IsRequired()
+                                .HasMaxLength(50)
+                                .HasColumnType("nvarchar(50)")
+                                .HasColumnName("LevelTitle");
+
+                            b1.Property<int>("Value")
+                                .HasColumnType("int")
+                                .HasColumnName("Level");
+
+                            b1.HasKey("UserId");
+
+                            b1.ToTable("User");
+
+                            b1.WithOwner()
+                                .HasForeignKey("UserId");
+                        });
+
+                    b.OwnsOne("Sofa.CourseManagement.Domain.Users.ValueObjects.UserName", "UserName", b1 =>
+                        {
+                            b1.Property<Guid>("UserId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasMaxLength(50)
+                                .HasColumnType("nvarchar(50)")
+                                .HasColumnName("UserName");
+
+                            b1.HasKey("UserId");
+
+                            b1.ToTable("User");
+
+                            b1.WithOwner()
+                                .HasForeignKey("UserId");
+                        });
+
+                    b.OwnsOne("Sofa.CourseManagement.Domain.Users.ValueObjects.UserRole", "Role", b1 =>
+                        {
+                            b1.Property<Guid>("UserId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Title")
+                                .IsRequired()
+                                .HasMaxLength(50)
+                                .HasColumnType("nvarchar(50)")
+                                .HasColumnName("RoleTitle");
+
+                            b1.Property<int>("Value")
+                                .HasColumnType("int")
+                                .HasColumnName("Role");
+
+                            b1.HasKey("UserId");
+
+                            b1.ToTable("User");
+
+                            b1.WithOwner()
+                                .HasForeignKey("UserId");
+                        });
+
+                    b.Navigation("Email");
+
+                    b.Navigation("FirstName");
+
+                    b.Navigation("LastName");
+
+                    b.Navigation("Level");
+
+                    b.Navigation("PhoneNumber");
+
+                    b.Navigation("Role");
+
+                    b.Navigation("UserName");
                 });
 
             modelBuilder.Entity("Sofa.CourseManagement.Domain.Institutes.Entities.ImagePost", b =>
@@ -1042,16 +1087,18 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                     b.Navigation("UserTerms");
                 });
 
-            modelBuilder.Entity("Sofa.CourseManagement.Domain.Institutes.Entities.User", b =>
-                {
-                    b.Navigation("UserTerms");
-                });
-
             modelBuilder.Entity("Sofa.CourseManagement.Domain.Institutes.Institute", b =>
                 {
                     b.Navigation("Fields");
 
-                    b.Navigation("Users");
+                    b.Navigation("InstituteUsers");
+                });
+
+            modelBuilder.Entity("Sofa.CourseManagement.Domain.Users.User", b =>
+                {
+                    b.Navigation("InstituteUsers");
+
+                    b.Navigation("UserTerms");
                 });
 #pragma warning restore 612, 618
         }
