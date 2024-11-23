@@ -8,7 +8,7 @@ namespace Sofa.CourseManagement.RestApi.Models.Courses
 		public string Title { get; set; }
 		public AgeRangeEnum AgeRange { get; set; }
 
-		internal AddCourseCommand ToCommand(Guid instituteId, Guid fieldId)
+		internal AddCourseCommand ToCommand(string instituteId, string fieldId)
 		{
 			return new AddCourseCommand()
 			{
@@ -19,7 +19,7 @@ namespace Sofa.CourseManagement.RestApi.Models.Courses
 			};
 		}
 
-		internal UpdateCourseCommand ToCommand(Guid instituteId, Guid fieldId, Guid id)
+		internal UpdateCourseCommand ToCommand(string instituteId, string fieldId, string id)
 		{
 			return new UpdateCourseCommand()
 			{

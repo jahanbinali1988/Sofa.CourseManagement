@@ -17,7 +17,7 @@ namespace Sofa.CourseManagement.RestApi.Models.Institutes
 				Code = this.Code
 			};
 		}
-		internal UpdateInstituteCommand ToCommand(Guid id)
+		internal UpdateInstituteCommand ToCommand(string id)
 		{
 			return new UpdateInstituteCommand()
 			{

@@ -6,7 +6,7 @@ namespace Sofa.CourseManagement.RestApi.Models.Users
 	{
         public string NewPassword { get; set; }
 
-        public ChangePasswordCommand ToCommand(Guid userId)
+        public ChangePasswordCommand ToCommand(string userId)
 		{
 			return new ChangePasswordCommand(userId, NewPassword);
 		} 

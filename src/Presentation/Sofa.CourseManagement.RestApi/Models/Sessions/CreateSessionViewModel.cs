@@ -7,7 +7,7 @@ namespace Sofa.CourseManagement.RestApi.Models.Sessions
 		public string Title { get; set; }
 		public DateTimeOffset OccurredDate { get; set; }
 
-		internal AddSessionCommand ToCommand(Guid instituteId, Guid fieldId, Guid courseId, Guid termId)
+		internal AddSessionCommand ToCommand(string instituteId, string fieldId, string courseId, string termId)
 		{
 			return new AddSessionCommand()
 			{
@@ -20,7 +20,7 @@ namespace Sofa.CourseManagement.RestApi.Models.Sessions
 			};
 		}
 
-		internal UpdateSessionCommand ToCommand(Guid instituteId, Guid fieldId, Guid courseId, Guid termId, Guid id)
+		internal UpdateSessionCommand ToCommand(string instituteId, string fieldId, string courseId, string termId, string id)
 		{
 			return new UpdateSessionCommand()
 			{

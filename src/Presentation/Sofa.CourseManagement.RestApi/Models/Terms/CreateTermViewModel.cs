@@ -6,7 +6,7 @@ namespace Sofa.CourseManagement.RestApi.Models.Terms
 	{
 		public string Title { get; set; }
 
-		internal AddTermCommand ToCommand(Guid instituteId, Guid fieldId, Guid courseId)
+		internal AddTermCommand ToCommand(string instituteId, string fieldId, string courseId)
 		{
 			return new AddTermCommand 
 			{
@@ -17,7 +17,7 @@ namespace Sofa.CourseManagement.RestApi.Models.Terms
 			};
 		}
 
-		internal UpdateTermCommand ToCommand(Guid instituteId, Guid fieldId, Guid courseId, Guid id)
+		internal UpdateTermCommand ToCommand(string instituteId, string fieldId, string courseId, string id)
 		{
 			return new UpdateTermCommand()
 			{

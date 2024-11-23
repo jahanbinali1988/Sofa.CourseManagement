@@ -1,21 +1,18 @@
 ﻿using Sofa.CourseManagement.Application.Contract.LessonPlans.Commands;
-using Sofa.CourseManagement.Domain.Institutes.Entities;
-using Sofa.CourseManagement.Domain.Institutes;
-using Sentry;
 using Sofa.CourseManagement.Domain.Contract.Users.Enums;
 
 namespace Sofa.CourseManagement.RestApi.Models.LessonPlans
 {
     public class CreateLessonPlanViewModel : ViewModelBase
 	{
-		public Guid InstituteId { get; }
-		public Guid FieldId { get; }
-		public Guid CourseId { get; }
-		public Guid TermId { get; }
-		public Guid SessionId { get; }
+		public string InstituteId { get; }
+		public string FieldId { get; }
+		public string CourseId { get; }
+		public string TermId { get; }
+		public string SessionId { get; }
 		public string Title { get; set; }
 		public LevelEnum Level { get; set; }
-		internal AddLessonPlanCommand ToCommand(Guid instituteId, Guid fieldId, Guid courseId, Guid termId, Guid sessionId)
+		internal AddLessonPlanCommand ToCommand(string instituteId, string fieldId, string courseId, string termId, string sessionId)
 		{
 			return new AddLessonPlanCommand()
 			{
@@ -29,7 +26,7 @@ namespace Sofa.CourseManagement.RestApi.Models.LessonPlans
 			};
 		}
 
-		internal UpdateLessonPlanCommand ToCommand(Guid instituteId, Guid fieldId, Guid courseId, Guid termId, Guid sessionId, Guid lessonplanId)
+		internal UpdateLessonPlanCommand ToCommand(string instituteId, string fieldId, string courseId, string termId, string sessionId, string lessonplanId)
 		{
 			return new UpdateLessonPlanCommand()
 			{

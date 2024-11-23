@@ -5,12 +5,12 @@ namespace Sofa.CourseManagement.Application.Contract.Users.Commands
 {
 	public class ChangePasswordCommand : CommandBase
 	{
-		public ChangePasswordCommand(Guid userId, string newPassword)
+		public ChangePasswordCommand(string userId, string newPassword)
 		{
 			UserId = userId;
 			NewPassword = newPassword;
 		}
-		public Guid UserId { get; set; }
+		public Id UserId { get; set; }
         public string NewPassword { get; set; }
     }
 }

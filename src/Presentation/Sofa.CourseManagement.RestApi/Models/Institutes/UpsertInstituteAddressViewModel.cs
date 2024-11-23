@@ -9,12 +9,13 @@ namespace Sofa.CourseManagement.RestApi.Models.Institutes
 		public String State { get; set; }
 		public String Country { get; set; }
 		public String ZipCode { get; set; }
+        public Id UserId { get; set; }
 
-		internal UpdateInstituteAddressCommand ToCommand(Guid id)
+        internal UpdateInstituteAddressCommand ToCommand(string id)
 		{
 			return new UpdateInstituteAddressCommand()
 			{
-				Id = id,
+				UserId = id,
 				City = City,
 				Country	= Country,
 				ZipCode = ZipCode,

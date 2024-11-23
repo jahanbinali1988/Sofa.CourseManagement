@@ -7,7 +7,7 @@ namespace Sofa.CourseManagement.Application.Contract.Users.Queries
 {
 	public class GetUserByIdQuery : GetByIdQueryBase, IQuery<UserDto>
 	{
-        public GetUserByIdQuery(Guid userId) : base(userId)
+        public GetUserByIdQuery(string userId) : base(userId)
 		{
 		}
 	}

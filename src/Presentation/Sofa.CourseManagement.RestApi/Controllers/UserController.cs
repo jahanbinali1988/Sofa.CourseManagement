@@ -54,7 +54,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
 		[HttpGet("/user/{userId:required}")]
-		public async Task<ActionResult<UserViewModel>> GetUserByIdAsync([FromQuery] Guid userId)
+		public async Task<ActionResult<UserViewModel>> GetUserByIdAsync([FromQuery] string userId)
 		{
 			var query = new GetUserByIdQuery(userId);
 
@@ -88,7 +88,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpPut("/user/{userId:required}")]
-		public async Task<ActionResult<UserViewModel>> UpdateUserAsync([FromQuery] Guid userId, [FromBody] CreateUserViewModel request)
+		public async Task<ActionResult<UserViewModel>> UpdateUserAsync([FromQuery] string userId, [FromBody] CreateUserViewModel request)
 		{
 			var command = request.ToCommand(userId);
 
@@ -105,7 +105,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpPut("/user/{userId:required}/password")]
-		public async Task<ActionResult> ChangeUserPasswordAsync([FromQuery] Guid userId, [FromBody] ChangeUserPasswordViewModel request)
+		public async Task<ActionResult> ChangeUserPasswordAsync([FromQuery] string userId, [FromBody] ChangeUserPasswordViewModel request)
 		{
 			var command = request.ToCommand(userId);
 
@@ -121,7 +121,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpDelete("/user/{userId:required}")]
-		public async Task<ActionResult> DeleteUserAsync([FromQuery] Guid userId)
+		public async Task<ActionResult> DeleteUserAsync([FromQuery] string userId)
 		{
 			var command = new DeleteUserCommand(userId);
 
@@ -138,7 +138,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
 		[HttpGet("/user/{userId:required}/term")]
-		public async Task<ActionResult<IEnumerable<UserTermViewModel>>> GetUserTermListAsync([FromQuery] Guid userId, [FromQuery] GetListRequest request)
+		public async Task<ActionResult<IEnumerable<UserTermViewModel>>> GetUserTermListAsync([FromQuery] string userId, [FromQuery] GetListRequest request)
 		{
 			var query = new GetAllUserTermsQuery(request.Offset, request.Count, request.Keyword, userId);
 
@@ -155,7 +155,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpPut("/user/{userId:required}/term")]
-		public async Task<ActionResult<UserTermViewModel>> AddTermToUserAsync([FromQuery] Guid userId, [FromBody] Guid termId)
+		public async Task<ActionResult<UserTermViewModel>> AddTermToUserAsync([FromQuery] string userId, [FromBody] string termId)
 		{
 			var command = new AddUserTermCommand(termId, userId);
 
@@ -172,7 +172,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpDelete("/user/{userId:required}/term/{termId:required}/")]
-		public async Task<ActionResult> RemoveTermFromUserAsync([FromQuery] Guid userId, [FromQuery] Guid termId)
+		public async Task<ActionResult> RemoveTermFromUserAsync([FromQuery] string userId, [FromQuery] string termId)
 		{
 			var command = new DeleteUserTermCommand(termId, userId);
 
@@ -189,7 +189,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
 		[HttpGet("/user/{userId:required}/institute")]
-		public async Task<ActionResult<IEnumerable<InstituteUserViewModel>>> GetInstituteUsersListAsync([FromQuery] Guid userId, [FromQuery] GetListRequest request)
+		public async Task<ActionResult<IEnumerable<InstituteUserViewModel>>> GetInstituteUsersListAsync([FromQuery] string userId, [FromQuery] GetListRequest request)
 		{
 			var query = new GetAllInstituteUsersQuery(request.Offset, request.Count, request.Keyword, userId, null);
 
@@ -206,7 +206,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpPut("/user/{userId:required}/institute")]
-		public async Task<ActionResult<InstituteUserViewModel>> AddInstituteToUserAsync([FromQuery] Guid userId, [FromBody] Guid instituteId)
+		public async Task<ActionResult<InstituteUserViewModel>> AddInstituteToUserAsync([FromQuery] string userId, [FromBody] string instituteId)
 		{
 			var command = new AddInstituteUserCommand(instituteId, userId);
 
@@ -223,7 +223,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpDelete("/user/{userId:required}/institute/{instituteId:required}/")]
-		public async Task<ActionResult> RemoveInstituteFromUserAsync([FromQuery] Guid userId, [FromQuery] Guid instituteId)
+		public async Task<ActionResult> RemoveInstituteFromUserAsync([FromQuery] string userId, [FromQuery] string instituteId)
 		{
 			var command = new DeleteInstituteUserCommand(userId, instituteId);
 

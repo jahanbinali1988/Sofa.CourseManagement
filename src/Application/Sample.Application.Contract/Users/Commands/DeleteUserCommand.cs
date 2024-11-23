@@ -5,10 +5,10 @@ namespace Sofa.CourseManagement.Application.Contract.Users.Commands
 {
 	public class DeleteUserCommand : CommandBase
 	{
-		public DeleteUserCommand(Guid id)
+		public DeleteUserCommand(string id)
 		{
 			Id = id;
 		}
-        public Guid Id { get; set; }
+        public Id Id { get; set; }
     }
 }

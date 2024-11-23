@@ -5,11 +5,11 @@ namespace Sofa.CourseManagement.Application.Contract.Courses.Commands
 {
     public class DeleteCourseCommand : CommandBase
 	{
-		public Guid FieldId { get; set; }
-		public Guid InstituteId { get; set; }
-		public Guid Id { get; set; }
+		public Id FieldId { get; set; }
+		public Id InstituteId { get; set; }
+		public Id Id { get; set; }
 
-		public DeleteCourseCommand(Guid instituteId, Guid fieldId, Guid id)
+		public DeleteCourseCommand(string instituteId, string fieldId, string id)
 		{
 			InstituteId = instituteId;
 			FieldId = fieldId;

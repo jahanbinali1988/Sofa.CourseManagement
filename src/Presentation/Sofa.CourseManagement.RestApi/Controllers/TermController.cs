@@ -21,7 +21,8 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpPost("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/term")]
-		public async Task<ActionResult<TermViewModel>> CreateTermAsync([FromQuery] Guid instituteId, [FromQuery] Guid fieldId, [FromQuery] Guid courseId, [FromBody] CreateTermViewModel request)
+		public async Task<ActionResult<TermViewModel>> CreateTermAsync([FromQuery] string instituteId, [FromQuery] string fieldId, 
+			[FromQuery] string courseId, [FromBody] CreateTermViewModel request)
 		{
 			var command = request.ToCommand(instituteId, fieldId, courseId);
 
@@ -38,7 +39,8 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
 		[HttpGet("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/term/{id:required}")]
-		public async Task<ActionResult<TermViewModel>> GetTermByIdAsync([FromQuery] Guid instituteId, [FromQuery] Guid fieldId, [FromQuery] Guid courseId, [FromQuery] Guid termId)
+		public async Task<ActionResult<TermViewModel>> GetTermByIdAsync([FromQuery] string instituteId, [FromQuery] string fieldId, 
+			[FromQuery] string courseId, [FromQuery] string termId)
 		{
 			var query = new GetTermByIdQuery(instituteId, fieldId, courseId, termId);
 
@@ -55,7 +57,8 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
 		[HttpGet("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/term")]
-		public async Task<ActionResult<IEnumerable<TermViewModel>>> GetTermListAsync([FromQuery] Guid instituteId, [FromQuery] Guid fieldId, [FromQuery] Guid courseId, [FromQuery] GetListRequest request)
+		public async Task<ActionResult<IEnumerable<TermViewModel>>> GetTermListAsync([FromQuery] string instituteId, 
+			[FromQuery] string fieldId, [FromQuery] string courseId, [FromQuery] GetListRequest request)
 		{
 			var query = new GetAllTermsQuery(instituteId, fieldId, courseId, request.Offset, request.Count, request.Keyword);
 
@@ -72,7 +75,8 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpPut("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/term/{termId:required}")]
-		public async Task<ActionResult<TermViewModel>> UpdateTermAsync([FromQuery] Guid instituteId, [FromQuery] Guid fieldId, [FromQuery] Guid courseId, [FromQuery] Guid termId, [FromBody] CreateTermViewModel request)
+		public async Task<ActionResult<TermViewModel>> UpdateTermAsync([FromQuery] string instituteId, [FromQuery] string fieldId, 
+			[FromQuery] string courseId, [FromQuery] string termId, [FromBody] CreateTermViewModel request)
 		{
 			var command = request.ToCommand(instituteId, fieldId, courseId, termId);
 
@@ -88,7 +92,8 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpDelete("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/term/{termId:required}")]
-		public async Task<ActionResult> DeleteTermAsync([FromQuery] Guid instituteId, [FromQuery] Guid fieldId, [FromQuery] Guid courseId, [FromQuery] Guid termId)
+		public async Task<ActionResult> DeleteTermAsync([FromQuery] string instituteId, [FromQuery] string fieldId, 
+			[FromQuery] string courseId, [FromQuery] string termId)
 		{
 			var command = new DeleteTermCommand(instituteId, fieldId, courseId, termId);
 			
@@ -105,8 +110,8 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
 		[HttpGet("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/term/{termId:required}/user")]
-		public async Task<ActionResult<IEnumerable<UserTermViewModel>>> GetUserTermListAsync([FromQuery] Guid instituteId, [FromQuery] Guid fieldId,
-			[FromQuery] Guid courseId, [FromQuery] Guid termId, [FromQuery] GetListRequest request)
+		public async Task<ActionResult<IEnumerable<UserTermViewModel>>> GetUserTermListAsync([FromQuery] string instituteId, 
+			[FromQuery] string fieldId, [FromQuery] string courseId, [FromQuery] string termId, [FromQuery] GetListRequest request)
 		{
 			var query = new GetAllUserTermsQuery(request.Offset, request.Count, request.Keyword, instituteId, fieldId, courseId, termId);
 
@@ -123,8 +128,8 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpPut("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/term/{termId:required}/user")]
-		public async Task<ActionResult<UserTermViewModel>> AddUserToTermAsync([FromQuery] Guid instituteId, [FromQuery] Guid fieldId, 
-			[FromQuery] Guid courseId, [FromQuery] Guid termId, [FromBody] Guid userId)
+		public async Task<ActionResult<UserTermViewModel>> AddUserToTermAsync([FromQuery] string instituteId, [FromQuery] string fieldId, 
+			[FromQuery] string courseId, [FromQuery] string termId, [FromBody] string userId)
 		{
 			var command = new AddUserTermCommand(instituteId, fieldId, courseId, termId, userId);
 
@@ -141,8 +146,8 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpDelete("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/term/{termId:required}/user/{userId:required}")]
-		public async Task<ActionResult> RemoveUserFromTermAsync([FromQuery] Guid instituteId, [FromQuery] Guid fieldId, [FromQuery] Guid courseId, 
-			[FromQuery] Guid termId, [FromQuery] Guid userId)
+		public async Task<ActionResult> RemoveUserFromTermAsync([FromQuery] string instituteId, [FromQuery] string fieldId, 
+			[FromQuery] string courseId, [FromQuery] string termId, [FromQuery] string userId)
 		{
 			var command = new DeleteUserTermCommand(instituteId, fieldId, courseId, termId, userId);
 

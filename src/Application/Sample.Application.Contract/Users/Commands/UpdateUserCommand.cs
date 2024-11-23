@@ -6,7 +6,7 @@ namespace Sofa.CourseManagement.Application.Contract.Users.Commands
 {
     public class UpdateUserCommand : CommandBase
 	{
-        public Guid Id { get; set; }
+        public Id Id { get; set; }
         public string UserName { get; set; }
 		public string FirstName { get; set; }
 		public string LastName { get; set; }

@@ -1,6 +1,5 @@
 ﻿using Sofa.CourseManagement.Application.Contract.Fields.Dtos;
 using Sofa.CourseManagement.Application.Contract.Fields.Queries;
-using Sofa.CourseManagement.Application.Contract.Institutes.Dtos;
 using Sofa.CourseManagement.Domain.Institutes;
 using Sofa.CourseManagement.SharedKernel.Application;
 using System;
@@ -24,7 +23,7 @@ namespace Sofa.CourseManagement.Application.Fields.Queries
 			if (institute == null)
 				return null;
 
-			var fields = institute.Fields.Where(c => c.Title.Value.Contains(request.Keyword));
+			var fields = institute.Fields.Where(c => string.IsNullOrEmpty(request.Keyword) || c.Title.Value.ToLower().Contains(request.Keyword.ToLower()));
 			var fieldDtos = fields
 				.Skip(request.Offset - 1 * request.Count)
 				.Take(request.Count)

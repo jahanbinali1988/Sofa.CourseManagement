@@ -29,7 +29,7 @@ namespace Sofa.CourseManagement.RestApi.Models.Users
 			};
 		}
 
-		internal UpdateUserCommand ToCommand(Guid id)
+		internal UpdateUserCommand ToCommand(string id)
 		{
 			return new UpdateUserCommand()
 			{

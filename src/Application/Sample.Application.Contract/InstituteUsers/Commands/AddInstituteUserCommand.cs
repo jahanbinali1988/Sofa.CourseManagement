@@ -1,17 +1,16 @@
 ﻿using Sofa.CourseManagement.Application.Contract.InstituteUsers.Dtos;
 using Sofa.CourseManagement.SharedKernel.Application;
-using System;
 
 namespace Sofa.CourseManagement.Application.Contract.InstituteUsers.Commands
 {
 	public class AddInstituteUserCommand : CommandBase<InstituteUserDto>
 	{
-		public AddInstituteUserCommand(Guid instituteId, Guid userId)
+		public AddInstituteUserCommand(string instituteId, string userId)
 		{
 			InstituteId = instituteId;
 			UserId = userId;
 		}
-		public Guid InstituteId { get; set; }
-		public Guid UserId { get; set; }
+		public Id InstituteId { get; set; }
+		public Id UserId { get; set; }
 	}
 }

@@ -7,12 +7,12 @@ namespace Sofa.CourseManagement.Application.Contract.LessonPlans.Queries
 {
 	public class GetLessonPlanByIdQuery : GetByIdQueryBase, IQuery<LessonPlanDto>
 	{
-		public Guid InstituteId { get; }
-		public Guid FieldId { get; }
-		public Guid CourseId { get; }
-		public Guid TermId { get; }
-		public Guid SessionId { get; }
-        public GetLessonPlanByIdQuery(Guid instituteId, Guid fieldId, Guid courseId, Guid termId, Guid sessionId, Guid lessonplanId) : base(lessonplanId)
+		public Id InstituteId { get; }
+		public Id FieldId { get; }
+		public Id CourseId { get; }
+		public Id TermId { get; }
+		public Id SessionId { get; }
+        public GetLessonPlanByIdQuery(string instituteId, string fieldId, string courseId, string termId, string sessionId, string lessonplanId) : base(lessonplanId)
 		{
 			InstituteId = instituteId;
 			FieldId = fieldId;

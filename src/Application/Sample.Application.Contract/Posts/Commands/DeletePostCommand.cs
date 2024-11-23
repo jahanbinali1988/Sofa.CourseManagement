@@ -6,15 +6,15 @@ namespace Sofa.CourseManagement.Application.Contract.Posts.Commands
 {
     public class DeletePostCommand : CommandBase
 	{
-		public Guid InstituteId { get; }
-		public Guid FieldId { get; }
-		public Guid CourseId { get; }
-		public Guid TermId { get; }
-		public Guid SessionId { get; }
-		public Guid LessonPlanId { get; }
-		public Guid PostId { get; }
+		public Id InstituteId { get; }
+		public Id FieldId { get; }
+		public Id CourseId { get; }
+		public Id TermId { get; }
+		public Id SessionId { get; }
+		public Id LessonPlanId { get; }
+		public Id PostId { get; }
 
-		public DeletePostCommand(Guid instituteId, Guid fieldId, Guid courseId, Guid termId, Guid sessionId, Guid lessonPlanId, Guid postId)
+		public DeletePostCommand(string instituteId, string fieldId, string courseId, string termId, string sessionId, string lessonPlanId, string postId)
 		{
 			InstituteId = instituteId;
 			FieldId = fieldId;

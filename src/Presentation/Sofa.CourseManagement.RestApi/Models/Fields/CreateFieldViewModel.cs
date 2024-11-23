@@ -6,7 +6,7 @@ namespace Sofa.CourseManagement.RestApi.Models.Fields
 	{
 		public string Title { get; set; }
 
-		internal AddFieldCommand ToCommand(Guid instituteId)
+		internal AddFieldCommand ToCommand(string instituteId)
 		{
 			return new AddFieldCommand()
 			{
@@ -15,7 +15,7 @@ namespace Sofa.CourseManagement.RestApi.Models.Fields
 			};
 		}
 
-		internal UpdateFieldCommand ToCommand(Guid instituteId, Guid id)
+		internal UpdateFieldCommand ToCommand(string instituteId, string id)
 		{
 			return new UpdateFieldCommand()
 			{

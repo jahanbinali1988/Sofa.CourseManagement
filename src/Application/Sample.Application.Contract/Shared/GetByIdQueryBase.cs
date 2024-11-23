@@ -8,6 +8,10 @@ namespace Sofa.CourseManagement.Application.Contract.Shared
 		{
 			Id = id;
 		}
-		public Guid Id { get; set; }
+		protected GetByIdQueryBase(string id)
+		{
+			Id = id;
+		}
+		public Id Id { get; set; }
 	}
 }

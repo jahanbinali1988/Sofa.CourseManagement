@@ -7,13 +7,13 @@ namespace Sofa.CourseManagement.Application.Contract.Posts.Queries
 {
 	public class GetPostByIdQuery : GetByIdQueryBase, IQuery<PostBaseDto>
 	{
-		public Guid InstituteId { get; }
-		public Guid FieldId { get; }
-		public Guid CourseId { get; }
-		public Guid TermId { get; }
-		public Guid SessionId { get; }
-		public Guid LessonPlanId { get; }
-		public GetPostByIdQuery(Guid instituteId, Guid fieldId, Guid courseId, Guid termId, Guid sessionId, Guid lessonPlanId, Guid postId) : base(postId)
+		public Id InstituteId { get; }
+		public Id FieldId { get; }
+		public Id CourseId { get; }
+		public Id TermId { get; }
+		public Id SessionId { get; }
+		public Id LessonPlanId { get; }
+		public GetPostByIdQuery(string instituteId, string fieldId, string courseId, string termId, string sessionId, string lessonPlanId, string postId) : base(postId)
 		{
 			InstituteId = instituteId;
 			FieldId = fieldId;

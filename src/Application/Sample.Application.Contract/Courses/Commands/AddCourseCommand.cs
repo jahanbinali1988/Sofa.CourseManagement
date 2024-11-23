@@ -1,7 +1,6 @@
 ﻿using Sofa.CourseManagement.Application.Contract.Courses.Dtos;
 using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
 using Sofa.CourseManagement.SharedKernel.Application;
-using System;
 
 namespace Sofa.CourseManagement.Application.Contract.Courses.Commands
 {
@@ -9,7 +8,7 @@ namespace Sofa.CourseManagement.Application.Contract.Courses.Commands
 	{
 		public string Title { get; set; }
 		public AgeRangeEnum AgeRange { get; set; }
-		public Guid FieldId { get; set; }
-		public Guid InstituteId { get; set; }
+		public Id FieldId { get; set; }
+		public Id InstituteId { get; set; }
 	}
 }

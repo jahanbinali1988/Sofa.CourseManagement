@@ -9,8 +9,8 @@ namespace Sofa.CourseManagement.RestApi.Models.Posts
 		public ContentTypeEnum ContentType { get; set; }
 		public dynamic Post { get; set; }
 
-		internal AddPostCommand ToCommand(Guid instituteId, Guid fieldId, Guid courseId, Guid termId, Guid sessionId, 
-			Guid lessonplanId)
+		internal AddPostCommand ToCommand(string instituteId, string fieldId, string courseId, string termId, string sessionId, 
+			string lessonplanId)
 		{
 			return new AddPostCommand()
 			{
@@ -25,8 +25,8 @@ namespace Sofa.CourseManagement.RestApi.Models.Posts
 			};
 		}
 
-		internal UpdatePostCommand ToCommand(Guid instituteId, Guid fieldId, Guid courseId, Guid termId, Guid sessionId, 
-			Guid lessonplanId, Guid postId)
+		internal UpdatePostCommand ToCommand(string instituteId, string fieldId, string courseId, string termId, string sessionId, 
+			string lessonplanId, string postId)
 		{
 			return new UpdatePostCommand()
 			{

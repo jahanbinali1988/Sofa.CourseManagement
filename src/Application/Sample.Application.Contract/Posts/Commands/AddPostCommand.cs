@@ -9,11 +9,11 @@ namespace Sofa.CourseManagement.Application.Contract.Posts.Commands
 	{
 		public ContentTypeEnum ContentType { get; set; }
 		public dynamic Post { get; set; }
-		public Guid LessonPlanId { get; set; }
-		public Guid SessionId { get; set; }
-		public Guid InstituteId { get; set; }
-		public Guid FieldId { get; set; }
-		public Guid CourseId { get; set; }
-		public Guid TermId { get; set; }
+		public Id LessonPlanId { get; set; }
+		public Id SessionId { get; set; }
+		public Id InstituteId { get; set; }
+		public Id FieldId { get; set; }
+		public Id CourseId { get; set; }
+		public Id TermId { get; set; }
 	}
 }

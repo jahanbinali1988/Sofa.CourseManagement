@@ -5,13 +5,13 @@ namespace Sofa.CourseManagement.Application.Contract.Sessions.Commands
 {
     public class DeleteSessionCommand : CommandBase
 	{
-		public Guid InstituteId { get; set; }
-		public Guid FieldId { get; set; }
-		public Guid CourseId { get; set; }
-		public Guid TermId { get; set; }
-		public Guid Id { get; set; }
+		public Id InstituteId { get; set; }
+		public Id FieldId { get; set; }
+		public Id CourseId { get; set; }
+		public Id TermId { get; set; }
+		public Id Id { get; set; }
 
-		public DeleteSessionCommand(Guid instituteId, Guid fieldId, Guid courseId, Guid termId, Guid id)
+		public DeleteSessionCommand(string instituteId, string fieldId, string courseId, string termId, string id)
 		{
 			InstituteId = instituteId;
 			FieldId = fieldId;

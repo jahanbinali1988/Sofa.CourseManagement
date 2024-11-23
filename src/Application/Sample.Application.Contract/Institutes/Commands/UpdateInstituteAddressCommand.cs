@@ -5,7 +5,7 @@ namespace Sofa.CourseManagement.Application.Contract.Institutes.Commands
 {
 	public class UpdateInstituteAddressCommand : CommandBase
 	{
-        public Guid Id { get; set; }
+        public Id UserId { get; set; }
         public String Street { get; set; }
 		public String City { get; set; }
 		public String State { get; set; }

@@ -19,9 +19,9 @@ namespace Sofa.CourseManagement.Application.Institutes.Commands
 
 		public async Task<Unit> Handle(UpdateInstituteAddressCommand request, CancellationToken cancellationToken)
 		{
-			var institute = await _unitOfWork.InstituteRepository.GetAsync(request.Id, cancellationToken);
+			var institute = await _unitOfWork.InstituteRepository.GetAsync(request.UserId, cancellationToken);
 			if (institute == null)
-				throw new EntityNotFoundException($"Could not find Institute entity with Id {request.Id}");
+				throw new EntityNotFoundException($"Could not find Institute entity with Id {request.UserId}");
 
 			var address = Address.CreateInstance(request.Street, request.City, request.State, request.Country, request.ZipCode);
 			institute.UpdateAddress(address);

@@ -7,6 +7,6 @@ namespace Sofa.CourseManagement.Application.Contract.Fields.Commands
     public class AddFieldCommand : CommandBase<FieldDto>
 	{
 		public string Title { get; set; }
-		public Guid InstituteId { get; set; }
+		public Id InstituteId { get; set; }
 	}
 }

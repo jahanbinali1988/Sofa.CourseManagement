@@ -1,23 +1,21 @@
-﻿using Sofa.CourseManagement.Application.Contract.Fields.Queries;
-using Sofa.CourseManagement.SharedKernel.Application;
-using System;
+﻿using Sofa.CourseManagement.SharedKernel.Application;
 
 namespace Sofa.CourseManagement.Application.Contract.UserTerms.Commands
 {
 	public class DeleteUserTermCommand : CommandBase
 	{
-		public Guid? UserId { get; }
-		public Guid? InstituteId { get; }
-		public Guid? FieldId { get; }
-		public Guid? CourseId { get; }
-		public Guid? TermId { get; }
+		public Id? UserId { get; }
+		public Id? InstituteId { get; }
+		public Id? FieldId { get; }
+		public Id? CourseId { get; }
+		public Id? TermId { get; }
 
-		public DeleteUserTermCommand(Guid termId, Guid userId)
+		public DeleteUserTermCommand(string termId, string userId)
 		{
 			TermId = termId;
 			UserId = userId;
 		}
-		public DeleteUserTermCommand(Guid instituteId, Guid fieldId, Guid courseId, Guid termId, Guid userId)
+		public DeleteUserTermCommand(string instituteId, string fieldId, string courseId, string termId, string userId)
 		{
 			InstituteId = instituteId;
 			FieldId = fieldId;

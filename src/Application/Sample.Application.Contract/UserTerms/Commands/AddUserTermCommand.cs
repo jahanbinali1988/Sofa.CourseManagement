@@ -6,13 +6,13 @@ namespace Sofa.CourseManagement.Application.Contract.UserTerms.Commands
 {
 	public class AddUserTermCommand : CommandBase<UserTermDto>
 	{
-		public AddUserTermCommand(Guid termId, Guid userId)
+		public AddUserTermCommand(string termId, string userId)
 		{
 			TermId = termId;
 			UserId = userId;
 		}
 
-		public AddUserTermCommand(Guid instituteId, Guid fieldId, Guid courseId, Guid termId, Guid userId)
+		public AddUserTermCommand(string instituteId, string fieldId, string courseId, string termId, string userId)
 		{
 			InstituteId = instituteId;
 			FieldId = fieldId;
@@ -21,10 +21,10 @@ namespace Sofa.CourseManagement.Application.Contract.UserTerms.Commands
 			UserId = userId;
 		}
 
-		public Guid? InstituteId { get; }
-		public Guid? FieldId { get; }
-		public Guid? CourseId { get; }
-		public Guid? TermId { get; }
-		public Guid? UserId { get; }
+		public Id? InstituteId { get; }
+		public Id? FieldId { get; }
+		public Id? CourseId { get; }
+		public Id? TermId { get; }
+		public Id? UserId { get; }
 	}
 }

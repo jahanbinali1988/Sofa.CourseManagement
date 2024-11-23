@@ -7,7 +7,7 @@ namespace Sofa.CourseManagement.Application.Contract.Institutes.Queries
 {
 	public class GetInstituteByIdQuery : GetByIdQueryBase, IQuery<InstituteDto>
 	{
-		public GetInstituteByIdQuery(Guid id) : base(id)
+		public GetInstituteByIdQuery(string id) : base(id)
 		{
 		}
 	}

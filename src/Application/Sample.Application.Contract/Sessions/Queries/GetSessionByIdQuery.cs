@@ -7,11 +7,11 @@ namespace Sofa.CourseManagement.Application.Contract.Sessions.Queries
 {
 	public class GetSessionByIdQuery : GetByIdQueryBase, IQuery<SessionDto>
 	{
-		public Guid InstituteId { get; set; }
-		public Guid FieldId { get; set; }
-		public Guid CourseId { get; set; }
-		public Guid TermId { get; set; }
-		public GetSessionByIdQuery(Guid instituteId, Guid fieldId, Guid courseId, Guid termId, Guid id) : base(id)
+		public Id InstituteId { get; set; }
+		public Id FieldId { get; set; }
+		public Id CourseId { get; set; }
+		public Id TermId { get; set; }
+		public GetSessionByIdQuery(string instituteId, string fieldId, string courseId, string termId, string id) : base(id)
 		{
 			InstituteId = instituteId;
 			FieldId = fieldId;
