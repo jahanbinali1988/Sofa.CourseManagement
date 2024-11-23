@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Sofa.CourseManagement.Domain.Contract.Institutes.Events.Institutes;
 using Sofa.CourseManagement.SharedKernel.EventProcessing.DomainEvent;
+using Sofa.CourseManagement.SharedKernel.ServiceBus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,13 +13,15 @@ namespace Sofa.CourseManagement.Application.Institutes.DomainEventConsumers
 {
 	public class AddInstituteDomainEventConsumer : DomainEventHandler<AddInstituteDomainEvent>
 	{
-		public AddInstituteDomainEventConsumer(ILogger<AddInstituteDomainEventConsumer> logger) : base(logger)
+		private readonly IRabbitMQPublisher<AddInstituteDomainEvent> _publisher;
+		public AddInstituteDomainEventConsumer(ILogger<AddInstituteDomainEventConsumer> logger, IRabbitMQPublisher<AddInstituteDomainEvent> publisher) : base(logger)
 		{
+			_publisher = publisher;
 		}
 
-		protected override Task HandleEvent(AddInstituteDomainEvent notification, CancellationToken cancellationToken)
+		protected override async Task HandleEvent(AddInstituteDomainEvent notification, CancellationToken cancellationToken)
 		{
-			throw new NotImplementedException();
+			await _publisher.PublishMessageAsync(notification, "");
 		}
 	}
 }

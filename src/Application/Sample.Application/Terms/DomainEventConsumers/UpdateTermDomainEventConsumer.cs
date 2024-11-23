@@ -1,10 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Sofa.CourseManagement.Domain.Contract.Institutes.Events.Terms;
 using Sofa.CourseManagement.SharedKernel.EventProcessing.DomainEvent;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Sofa.CourseManagement.SharedKernel.ServiceBus;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,13 +9,15 @@ namespace Sofa.CourseManagement.Application.Terms.DomainEventConsumers
 {
 	public class UpdateTermDomainEventConsumer : DomainEventHandler<UpdateTermDomainEvent>
 	{
-		public UpdateTermDomainEventConsumer(ILogger<UpdateTermDomainEventConsumer> logger) : base(logger)
+		private readonly IRabbitMQPublisher<UpdateTermDomainEvent> _publisher;
+		public UpdateTermDomainEventConsumer(ILogger<UpdateTermDomainEventConsumer> logger, IRabbitMQPublisher<UpdateTermDomainEvent> publisher) : base(logger)
 		{
+			_publisher = publisher;
 		}
 
-		protected override Task HandleEvent(UpdateTermDomainEvent notification, CancellationToken cancellationToken)
+		protected override async Task HandleEvent(UpdateTermDomainEvent notification, CancellationToken cancellationToken)
 		{
-			throw new NotImplementedException();
+			await _publisher.PublishMessageAsync(notification, "");
 		}
 	}
 }

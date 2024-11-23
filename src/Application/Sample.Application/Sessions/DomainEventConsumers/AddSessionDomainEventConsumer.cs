@@ -1,10 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Sofa.CourseManagement.Domain.Contract.Institutes.Events.Sessions;
 using Sofa.CourseManagement.SharedKernel.EventProcessing.DomainEvent;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Sofa.CourseManagement.SharedKernel.ServiceBus;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,13 +9,15 @@ namespace Sofa.CourseManagement.Application.Sessions.DomainEventConsumers
 {
 	public class AddSessionDomainEventConsumer : DomainEventHandler<AddSessionDomainEvent>
 	{
-		public AddSessionDomainEventConsumer(ILogger<AddSessionDomainEventConsumer> logger) : base(logger)
+		private readonly IRabbitMQPublisher<AddSessionDomainEvent> _publisher;
+		public AddSessionDomainEventConsumer(ILogger<AddSessionDomainEventConsumer> logger, IRabbitMQPublisher<AddSessionDomainEvent> publisher) : base(logger)
 		{
+			_publisher = publisher;
 		}
 
-		protected override Task HandleEvent(AddSessionDomainEvent notification, CancellationToken cancellationToken)
+		protected override async Task HandleEvent(AddSessionDomainEvent notification, CancellationToken cancellationToken)
 		{
-			throw new NotImplementedException();
+			await _publisher.PublishMessageAsync(notification, "");
 		}
 	}
 }

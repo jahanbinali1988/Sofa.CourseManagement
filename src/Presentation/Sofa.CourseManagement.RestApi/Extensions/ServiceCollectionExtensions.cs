@@ -15,7 +15,7 @@ namespace Sofa.CourseManagement.RestApi.Extensions
 			services.AddScoped<IIdGenerator, IdGenerator>();
 			//Infrastructure
 			services.AddConnection(configuration);
-
+			
 			//services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(AssembelyRecognizer).GetTypeInfo().Assembly));
 
 			services.AddMediatR(typeof(Bootstraper).Assembly, typeof(AssembelyRecognizer).Assembly);

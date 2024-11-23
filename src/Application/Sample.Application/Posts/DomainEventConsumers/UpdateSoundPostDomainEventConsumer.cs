@@ -1,10 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Sofa.CourseManagement.Domain.Contract.Institutes.Events.Posts;
 using Sofa.CourseManagement.SharedKernel.EventProcessing.DomainEvent;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Sofa.CourseManagement.SharedKernel.ServiceBus;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,13 +9,15 @@ namespace Sofa.CourseManagement.Application.Posts.DomainEventConsumers
 {
 	public class UpdateSoundPostDomainEventConsumer : DomainEventHandler<UpdateSoundPostDomainEvent>
 	{
-		public UpdateSoundPostDomainEventConsumer(ILogger<UpdateSoundPostDomainEventConsumer> logger) : base(logger)
+		private readonly IRabbitMQPublisher<UpdateSoundPostDomainEvent> _publisher;
+		public UpdateSoundPostDomainEventConsumer(ILogger<UpdateSoundPostDomainEventConsumer> logger, IRabbitMQPublisher<UpdateSoundPostDomainEvent> publisher) : base(logger)
 		{
+			_publisher = publisher;
 		}
 
-		protected override Task HandleEvent(UpdateSoundPostDomainEvent notification, CancellationToken cancellationToken)
+		protected override async Task HandleEvent(UpdateSoundPostDomainEvent notification, CancellationToken cancellationToken)
 		{
-			throw new NotImplementedException();
+			await _publisher.PublishMessageAsync(notification, "");
 		}
 	}
 }

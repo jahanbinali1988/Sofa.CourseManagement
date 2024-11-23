@@ -1,10 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Sofa.CourseManagement.Domain.Contract.Institutes.Events.Fields;
 using Sofa.CourseManagement.SharedKernel.EventProcessing.DomainEvent;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Sofa.CourseManagement.SharedKernel.ServiceBus;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,13 +9,15 @@ namespace Sofa.CourseManagement.Application.Fields.DomainEventConsumers
 {
 	public class UpdateFieldDomainEventConsumer : DomainEventHandler<UpdateFieldDomainEvent>
 	{
-		public UpdateFieldDomainEventConsumer(ILogger<UpdateFieldDomainEventConsumer> logger) : base(logger)
+		private readonly IRabbitMQPublisher<UpdateFieldDomainEvent> _publisher;
+		public UpdateFieldDomainEventConsumer(ILogger<UpdateFieldDomainEventConsumer> logger, IRabbitMQPublisher<UpdateFieldDomainEvent> publisher) : base(logger)
 		{
+			_publisher = publisher;
 		}
 
-		protected override Task HandleEvent(UpdateFieldDomainEvent notification, CancellationToken cancellationToken)
+		protected override async Task HandleEvent(UpdateFieldDomainEvent notification, CancellationToken cancellationToken)
 		{
-			throw new NotImplementedException();
+			await _publisher.PublishMessageAsync(notification, "");
 		}
 	}
 }

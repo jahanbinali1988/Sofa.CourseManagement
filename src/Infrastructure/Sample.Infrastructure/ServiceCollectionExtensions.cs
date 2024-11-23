@@ -10,6 +10,8 @@ using Sofa.CourseManagement.Infrastructure.Domains.Users;
 using Sofa.CourseManagement.Domain.Users;
 using Sofa.CourseManagement.SharedKernel.SeedWork;
 using Sofa.CourseManagement.Domain.Shared;
+using Sofa.CourseManagement.SharedKernel.ServiceBus;
+using Microsoft.Identity.Client;
 
 namespace Sofa.CourseManagement.Infrastructure
 {
@@ -34,11 +36,32 @@ namespace Sofa.CourseManagement.Infrastructure
 			return services;
         }
 
+        public static IServiceCollection AddRabbitMq(this IServiceCollection serviceCollection, IConfiguration configuration)
+        {
+			RabbitMQSetting rabbitSetting = new RabbitMQSetting();
+			configuration.GetSection("RabbitMQ").Bind(rabbitSetting);
+			
+			// then apply a configuration function
+			serviceCollection.Configure<RabbitMQSetting>(options =>
+			{
+				// overwrite previous values
+				options.UserName = rabbitSetting.UserName;
+				options.Password = rabbitSetting.Password;
+				options.HostName = rabbitSetting.HostName;
+                options.Port = rabbitSetting.Port;
+			});
+
+			serviceCollection.AddScoped(typeof(IRabbitMQPublisher<>), typeof(RabbitMQPublisher<>));
+
+            return serviceCollection;
+        }
+
         public static IServiceCollection AddConnection(this IServiceCollection services, IConfiguration configuration)
         {
             var sqlConnection = configuration.GetValue<string>("ConnectionStrings:DefaultConnection");
 
             services.AddRepository(sqlConnection);
+            services.AddRabbitMq(configuration);
 
             return services;
         }

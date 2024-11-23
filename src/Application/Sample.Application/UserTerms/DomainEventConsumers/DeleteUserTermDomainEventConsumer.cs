@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Sofa.CourseManagement.Domain.Contract.Institutes.Events.UserTerms;
 using Sofa.CourseManagement.SharedKernel.EventProcessing.DomainEvent;
-using System;
+using Sofa.CourseManagement.SharedKernel.ServiceBus;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,13 +9,15 @@ namespace Sofa.CourseManagement.Application.UserTerms.DomainEventConsumers
 {
 	public class DeleteUserTermDomainEventConsumer : DomainEventHandler<DeleteUserTermDomainEvent>
 	{
-		public DeleteUserTermDomainEventConsumer(ILogger<DeleteUserTermDomainEventConsumer> logger) : base(logger)
+		private readonly IRabbitMQPublisher<DeleteUserTermDomainEvent> _publisher;
+		public DeleteUserTermDomainEventConsumer(ILogger<DeleteUserTermDomainEventConsumer> logger, IRabbitMQPublisher<DeleteUserTermDomainEvent> publisher) : base(logger)
 		{
+			_publisher = publisher;
 		}
 
-		protected override Task HandleEvent(DeleteUserTermDomainEvent notification, CancellationToken cancellationToken)
+		protected override async Task HandleEvent(DeleteUserTermDomainEvent notification, CancellationToken cancellationToken)
 		{
-			throw new NotImplementedException();
+			await _publisher.PublishMessageAsync(notification, "");
 		}
 	}
 }
