@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using System;
-using Sofa.CourseManagement.Domain.Institutes.Entities;
 using Sofa.CourseManagement.Domain.Shared.Constants;
+using Sofa.CourseManagement.Domain.Institutes.Entities.Courses;
+using Sofa.CourseManagement.Domain.Institutes.Entities.Sessions;
 
 namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes.Entieis
 {
@@ -13,7 +13,10 @@ namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes.Entieis
 			base.Configure(builder);
 			builder.HasIndex(x => x.Id).IsUnique();
 
-			builder.HasMany<Term>(c => c.Terms).WithOne().HasForeignKey(x => x.CourseId).IsRequired().OnDelete(DeleteBehavior.Cascade);
+			builder.HasMany<Session>(c => c.Sessions).WithOne().HasForeignKey(x => x.CourseId).IsRequired().OnDelete(DeleteBehavior.Cascade);
+			builder.HasMany<CoursePlacement>(c => c.Placements).WithOne().HasForeignKey(x => x.CourseId).IsRequired().OnDelete(DeleteBehavior.Cascade);
+			builder.HasMany<CourseUser>(c => c.CourseUsers).WithOne().HasForeignKey(x => x.CourseId).IsRequired().OnDelete(DeleteBehavior.Cascade);
+			builder.HasMany<CourseLanguage>(c => c.CourseLanguages).WithOne().HasForeignKey(x => x.CourseId).IsRequired().OnDelete(DeleteBehavior.Cascade);
 
 			builder.OwnsOne(p => p.Title, m =>
 			{

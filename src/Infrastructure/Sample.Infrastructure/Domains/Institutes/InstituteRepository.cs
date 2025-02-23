@@ -10,16 +10,18 @@ namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes
         public InstituteRepository(CourseManagementDbContext dbContext) : base(dbContext)
 		{
 		}
-
+		
 		protected override IQueryable<Institute> ConfigureInclude(IQueryable<Institute> query)
 		{
 			return query.AsQueryable()
-				.Include(x=> x.Fields)
-				.ThenInclude(x=> x.Courses)
-				.ThenInclude(x=> x.Terms)
-				.ThenInclude(x=> x.Sessions)
-				.ThenInclude(x=> x.LessonPlan)
-				.ThenInclude(x=> x.Posts);
+				.Include(x=> x.Fields).ThenInclude(x => x.Questions).ThenInclude(x => x.QuestionChoices)
+				.Include(x => x.Fields).ThenInclude(x => x.Questions)
+				.Include(x => x.Fields).ThenInclude(x=> x.Courses).ThenInclude(x=> x.CourseUsers)
+				.Include(x => x.Fields).ThenInclude(x => x.Courses).ThenInclude(x => x.Placements)
+				.Include(x => x.Fields).ThenInclude(x => x.Courses).ThenInclude(x => x.CourseLanguages)
+				.Include(x => x.Fields).ThenInclude(x => x.Courses).ThenInclude(x=> x.Sessions)
+				.Include(x => x.Fields).ThenInclude(x => x.Courses).ThenInclude(x=> x.Sessions).ThenInclude(x=> x.LessonPlans)
+				.Include(x => x.Fields).ThenInclude(x => x.Courses).ThenInclude(x => x.Sessions).ThenInclude(x => x.LessonPlans).ThenInclude(x=> x.Posts).ThenInclude(x=> x.Question);
 		}
 	}
 }

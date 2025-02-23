@@ -3,7 +3,7 @@ using Sofa.CourseManagement.SharedKernel.SeedWork;
 
 namespace Sofa.CourseManagement.Domain.Institutes.ValueObjects
 {
-    public class ContentType : BusinessTypeValueObject<ContentTypeEnum>
+	public class ContentType : BusinessTypeValueObject<ContentTypeEnum>
     {
         public static implicit operator ContentType(ContentTypeEnum value)
         {
@@ -18,5 +18,5 @@ namespace Sofa.CourseManagement.Domain.Institutes.ValueObjects
             (ContentTypeEnum contentType) : base(value: contentType)
         {
         }
-    }
+	}	
 }

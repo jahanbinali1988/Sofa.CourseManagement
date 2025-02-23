@@ -25,7 +25,7 @@ namespace Sofa.CourseManagement.Infrastructure.Domains.Users
 
             builder.HasQueryFilter(p => EF.Property<bool>(p, "IsDeleted") == false);
 
-            builder.HasMany(c => c.UserTerms).WithOne().HasForeignKey(x => x.UserId).IsRequired().OnDelete(DeleteBehavior.NoAction);
+            builder.HasMany(c => c.CourseUsers).WithOne().HasForeignKey(x => x.UserId).IsRequired().OnDelete(DeleteBehavior.NoAction);
             builder.HasMany(c => c.InstituteUsers).WithOne().HasForeignKey(x => x.UserId).IsRequired().OnDelete(DeleteBehavior.NoAction);
 
             builder.Property(x => x.PasswordHash).HasMaxLength(64);

@@ -2,7 +2,7 @@
 using Sofa.CourseManagement.Application.Contract.LessonPlans.Dtos;
 using Sofa.CourseManagement.Application.Contract.LessonPlans.Queries;
 using Sofa.CourseManagement.Domain.Institutes;
-using Sofa.CourseManagement.Domain.Institutes.Entities;
+using Sofa.CourseManagement.Domain.Institutes.Entities.LessonPlans;
 using Sofa.CourseManagement.SharedKernel.Application;
 using Sofa.CourseManagement.SharedKernel.SeedWork;
 using System.Linq;
@@ -35,15 +35,11 @@ namespace Sofa.CourseManagement.Application.LessonPlans.Queries
 			if (course == null)
 				throw new EntityNotFoundException($"Could not find Course entity with Id {request.CourseId}");
 
-			var term = course.Terms.SingleOrDefault(c => c.Id == request.TermId);
-			if (term == null)
-				throw new EntityNotFoundException($"Could not find Term entity with Id {request.TermId}");
-
-			var session = term.Sessions.SingleOrDefault(c => c.Id == request.SessionId);
+			var session = course.Sessions.SingleOrDefault(c => c.Id == request.SessionId);
 			if (session == null)
 				throw new EntityNotFoundException($"Could not find Session entity with Id {request.SessionId}");
 
-			LessonPlan? lessonplan = session.LessonPlan.Id == request.Id ? session.LessonPlan : null;
+			LessonPlan? lessonplan = session.LessonPlans.SingleOrDefault(c=> c.Id == request.Id);
 			if (lessonplan == null)
 				throw new EntityNotFoundException($"Could not find LessonPlan entity with Id {request.Id}");
 
@@ -51,15 +47,12 @@ namespace Sofa.CourseManagement.Application.LessonPlans.Queries
 			{
 				Id = lessonplan.Id,
 				Title = lessonplan.Title.Value,
-				Level = lessonplan.Level.Value,
 				InstituteId = institute.Id,
 				InstituteTitle = institute.Title.Value,
 				FieldId = field.Id,
 				FieldTitle = field.Title.Value,
 				CourseId = course.Id,
 				CourseTitle = course.Title.Value,
-				TermId = term.Id,
-				TermTitle = term.Title.Value,
 				SessionId = session.Id,
 				SessionTitle = session.Title.Value
 			};

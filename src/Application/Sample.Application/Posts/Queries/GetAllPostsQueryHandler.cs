@@ -34,15 +34,11 @@ namespace Sofa.CourseManagement.Application.Posts.Queries
 			if (course == null)
 				return null;
 
-			var term = course.Terms.SingleOrDefault(c => c.Id == request.TermId);
-			if (term == null)
-				return null;
-
-			var session = term.Sessions.SingleOrDefault(c => c.Id == request.SessionId);
+			var session = course.Sessions.SingleOrDefault(c => c.Id == request.SessionId);
 			if (session == null)
 				return null;
 
-			var lessonplan = session.LessonPlan;
+			var lessonplan = session.LessonPlans.SingleOrDefault(c=> c.Id == request.LessonPlanId);
 			if (lessonplan == null)
 				return null;
 
@@ -60,13 +56,11 @@ namespace Sofa.CourseManagement.Application.Posts.Queries
 					FieldTitle = field.Title.Value,
 					CourseId = course.Id,
 					CourseTitle = course.Title.Value,
-					TermId = term.Id,
-					TermTitle = term.Title.Value,
 					LessonPlanId = lessonplan.Id,
 					lessonPlanTitle = lessonplan.Title.Value,
 					Content = s.Content.Value,
 					ContentType = s.ContentType.Value,
-					Order = s.Order
+					Order = s.Order.Value
 				});
 
 			return new Pagination<PostBaseDto>()

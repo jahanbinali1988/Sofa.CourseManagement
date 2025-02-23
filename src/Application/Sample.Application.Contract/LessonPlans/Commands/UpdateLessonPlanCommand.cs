@@ -8,11 +8,9 @@ namespace Sofa.CourseManagement.Application.Contract.LessonPlans.Commands
 	{
         public Id LessonplanId { get; set; }
 		public string Title { get; set; }
-		public LevelEnum Level { get; set; }
 		public Id SessionId { get; set; }
 		public Id InstituteId { get; set; }
 		public Id FieldId { get; set; }
 		public Id CourseId { get; set; }
-		public Id TermId { get; set; }
 	}
 }

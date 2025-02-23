@@ -1,6 +1,7 @@
 ﻿using Sofa.CourseManagement.Domain.Contract.Users.Enums;
 using Sofa.CourseManagement.Domain.Contract.Users.Events;
-using Sofa.CourseManagement.Domain.Institutes.Entities;
+using Sofa.CourseManagement.Domain.Institutes.Entities.Courses;
+using Sofa.CourseManagement.Domain.Institutes.Entities.Users;
 using Sofa.CourseManagement.Domain.Users.ValueObjects;
 using Sofa.CourseManagement.SharedKernel.Generators;
 using Sofa.CourseManagement.SharedKernel.SeedWork;
@@ -9,7 +10,7 @@ using System.Collections.Generic;
 
 namespace Sofa.CourseManagement.Domain.Users
 {
-    public class User : Entity<Guid>, IAggregateRoot
+	public class User : Entity<Guid>, IAggregateRoot
     {
         public UserName UserName { get; private set; }
         public Name FirstName { get; private set; }
@@ -20,13 +21,15 @@ namespace Sofa.CourseManagement.Domain.Users
         public UserRole Role { get; private set; }
         public UserLevel Level { get; private set; }
 
-        public ICollection<UserTerm> UserTerms { get; private set; }
-        public ICollection<InstituteUser> InstituteUsers { get; private set; }
+        public IReadOnlyCollection<CourseUser> CourseUsers => _courseUsers.AsReadOnly();
+        private readonly List<CourseUser> _courseUsers;
+        public IReadOnlyCollection<InstituteUser> InstituteUsers => _instituteUsers.AsReadOnly();
+        private readonly List<InstituteUser> _instituteUsers;
 
-        private User() : base()
+		private User() : base()
         {
-            UserTerms = new List<UserTerm>();
-            InstituteUsers = new List<InstituteUser>();
+			_courseUsers = new List<CourseUser>();
+			_instituteUsers = new List<InstituteUser>();
         }
 
         private void AssignUserName(string userName) { UserName = userName; }
@@ -89,21 +92,21 @@ namespace Sofa.CourseManagement.Domain.Users
 
             AddDomainEvent(new DeleteUserDomainEvent(Id));
         }
-        public void AddTerm(UserTerm userTerm)
+        public void AddCourse(CourseUser courseUser)
         {
-            UserTerms.Add(userTerm);
+            _courseUsers.Add(courseUser);
         }
-        public void DeleteTerm(UserTerm userTerm)
+        public void DeleteCourse(CourseUser courseUser)
         {
-            UserTerms.Remove(userTerm);
+			_courseUsers.Remove(courseUser);
         }
         public void AddInstitute(InstituteUser instituteUser)
         {
-            InstituteUsers.Add(instituteUser);
+            _instituteUsers.Add(instituteUser);
         }
         public void DeleteInstitute(InstituteUser instituteUser)
         {
-            InstituteUsers.Remove(instituteUser);
+            _instituteUsers.Remove(instituteUser);
         }
     }
 }

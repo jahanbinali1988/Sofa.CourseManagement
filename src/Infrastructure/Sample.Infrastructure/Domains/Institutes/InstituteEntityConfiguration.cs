@@ -4,6 +4,7 @@ using Sofa.CourseManagement.Domain.Institutes.ValueObjects;
 using Sofa.CourseManagement.Domain.Institutes;
 using Sofa.CourseManagement.Domain.Institutes.Entities;
 using Sofa.CourseManagement.Domain.Shared.Constants;
+using Sofa.CourseManagement.Domain.Institutes.Entities.Users;
 
 namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes
 {

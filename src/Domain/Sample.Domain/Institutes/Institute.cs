@@ -1,5 +1,6 @@
 ﻿using Sofa.CourseManagement.Domain.Contract.Institutes.Events.Institutes;
 using Sofa.CourseManagement.Domain.Institutes.Entities;
+using Sofa.CourseManagement.Domain.Institutes.Entities.Users;
 using Sofa.CourseManagement.Domain.Institutes.ValueObjects;
 using Sofa.CourseManagement.SharedKernel.SeedWork;
 using System;
@@ -7,7 +8,7 @@ using System.Collections.Generic;
 
 namespace Sofa.CourseManagement.Domain.Institutes
 {
-    public class Institute : Entity<Guid>, IAggregateRoot
+	public class Institute : Entity<Guid>, IAggregateRoot
 	{
 		public Title Title { get; private set; }
 		public WebsiteUrl WebsiteUrl { get; private set; }
@@ -65,7 +66,6 @@ namespace Sofa.CourseManagement.Domain.Institutes
 
 			return institute;
 		}
-
 		public void Update(string title, string code, string websiteUrl)
 		{
 			AssignTitle(title);
@@ -75,7 +75,6 @@ namespace Sofa.CourseManagement.Domain.Institutes
 
 			AddDomainEvent(new UpdateInstituteDomainEvent(Id, Title.Value, WebsiteUrl.Value, Address?.ToString(), Code.Value));
 		}
-
 		public void UpdateAddress(Address address)
 		{
 			AssignAddress(address);
@@ -83,18 +82,15 @@ namespace Sofa.CourseManagement.Domain.Institutes
 
 			AddDomainEvent(new UpdateInstituteDomainEvent(Id, Title.Value, WebsiteUrl.Value, Address.ToString(), Code.Value));
 		}
-
 		public void Delete()
 		{
 			base.MarkAsDeleted();
 			AddDomainEvent(new DeleteInstituteDomainEvent(Id));
 		}
-
 		public void AddField(Field field)
 		{
 			this._fields.Add(field);
 		}
-
 		public void DeleteField(Field field)
 		{
 			_fields.Remove(field);

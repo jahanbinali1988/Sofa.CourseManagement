@@ -140,11 +140,11 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		[HttpGet("/user/{userId:required}/term")]
 		public async Task<ActionResult<IEnumerable<UserTermViewModel>>> GetUserTermListAsync([FromQuery] string userId, [FromQuery] GetListRequest request)
 		{
-			var query = new GetAllUserTermsQuery(request.Offset, request.Count, request.Keyword, userId);
+			var query = new GetAllCourseUsersQuery(request.Offset, request.Count, request.Keyword, userId);
 
 			var users = await _mediator.Send(query, HttpContext.RequestAborted);
 
-			return List<UserTermDto, UserTermViewModel>(users);
+			return List<CourseUserDto, UserTermViewModel>(users);
 		}
 
 		/// <summary>
@@ -157,7 +157,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		[HttpPut("/user/{userId:required}/term")]
 		public async Task<ActionResult<UserTermViewModel>> AddTermToUserAsync([FromQuery] string userId, [FromBody] string termId)
 		{
-			var command = new AddUserTermCommand(termId, userId);
+			var command = new AddCourseUserCommand(termId, userId);
 
 			await _mediator.Send(command);
 
@@ -174,7 +174,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		[HttpDelete("/user/{userId:required}/term/{termId:required}/")]
 		public async Task<ActionResult> RemoveTermFromUserAsync([FromQuery] string userId, [FromQuery] string termId)
 		{
-			var command = new DeleteUserTermCommand(termId, userId);
+			var command = new DeleteCourseUserCommand(termId, userId);
 
 			await _mediator.Send(command);
 

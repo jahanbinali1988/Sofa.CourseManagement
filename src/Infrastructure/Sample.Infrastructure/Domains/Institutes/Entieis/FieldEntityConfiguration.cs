@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Sofa.CourseManagement.Domain.Institutes.Entities;
 using Sofa.CourseManagement.Domain.Shared.Constants;
+using Sofa.CourseManagement.Domain.Institutes.Entities.Courses;
 
 namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes.Entieis
 {
@@ -14,6 +15,7 @@ namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes.Entieis
 				.IsUnique();
 
 			builder.HasMany<Course>(c => c.Courses).WithOne().HasForeignKey(x => x.FieldId).IsRequired().OnDelete(DeleteBehavior.Cascade);
+			builder.HasMany<FieldQuestion>(c => c.Questions).WithOne().HasForeignKey(x => x.FieldId).IsRequired().OnDelete(DeleteBehavior.Cascade);
 
 			builder.OwnsOne(p => p.Title, m =>
 			{

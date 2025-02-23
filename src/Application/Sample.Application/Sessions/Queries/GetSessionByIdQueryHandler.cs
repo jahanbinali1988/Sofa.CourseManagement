@@ -32,11 +32,7 @@ namespace Sofa.CourseManagement.Application.Sessions.Queries
 			if (course == null)
 				throw new EntityNotFoundException($"Could not find Course entity with Id {request.CourseId}");
 
-			var term = course.Terms.SingleOrDefault(c => c.Id == request.TermId);
-			if (term == null)
-				throw new EntityNotFoundException($"Could not find Term entity with Id {request.TermId}");
-
-			var session = term.Sessions.SingleOrDefault(c => c.Id == request.Id);
+			var session = course.Sessions.SingleOrDefault(c => c.Id == request.Id);
 			if (session == null)
 				throw new EntityNotFoundException($"Could not find Session entity with Id {request.Id}");
 
@@ -51,8 +47,6 @@ namespace Sofa.CourseManagement.Application.Sessions.Queries
 				FieldTitle = field.Title.Value,
 				CourseId = course.Id,
 				CourseTitle = course.Title.Value,
-				TermId = term.Id,
-				TermTitle = term.Title.Value,
 			};
 		}
 	}

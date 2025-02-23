@@ -8,16 +8,16 @@ namespace Sofa.CourseManagement.Domain.Contract.Institutes.Events.Sessions
         {
             
         }
-        public AddSessionDomainEvent(Guid id, string title, DateTimeOffset? occurredDate, Guid termId) : this()
+        public AddSessionDomainEvent(Guid id, string title, DateTimeOffset? occurredDate, Guid courseId) : this()
 		{
 			Id = id;
 			Title = title;
 			OccurredDate = occurredDate;
-			TermId = termId;
+			CourseId = courseId;
 		}
 		public Guid Id { get; set; }
         public string Title { get; set; }
 		public DateTimeOffset? OccurredDate { get; set; }
-		public Guid TermId { get; set; }
+		public Guid CourseId { get; set; }
 	}
 }

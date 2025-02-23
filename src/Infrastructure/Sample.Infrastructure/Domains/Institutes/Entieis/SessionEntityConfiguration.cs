@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using System;
-using Sofa.CourseManagement.Domain.Institutes.Entities;
 using Sofa.CourseManagement.Domain.Shared.Constants;
+using Sofa.CourseManagement.Domain.Institutes.Entities.Sessions;
+using Sofa.CourseManagement.Domain.Institutes.Entities.LessonPlans;
 
 namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes.Entieis
 {
@@ -10,9 +10,10 @@ namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes.Entieis
 	{
 		public override void Configure(EntityTypeBuilder<Session> builder)
 		{
-
 			builder.HasIndex(x => x.Id)
 				.IsUnique();
+
+			builder.HasMany<LessonPlan>(c => c.LessonPlans).WithOne().HasForeignKey(x => x.SessionId).IsRequired().OnDelete(DeleteBehavior.Cascade);
 
 			builder.OwnsOne(p => p.Title, m =>
 			{
@@ -21,7 +22,6 @@ namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes.Entieis
 					.HasMaxLength(ConstantValues.MaxStringTitleLength)
 					.IsRequired(true);
 			});
-
 			builder.OwnsOne(p => p.OccurredDate, m =>
 			{
 				m.Property(x => x.Value)

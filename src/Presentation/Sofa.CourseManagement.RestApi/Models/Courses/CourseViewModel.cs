@@ -7,7 +7,7 @@ namespace Sofa.CourseManagement.RestApi.Models.Courses
 	{
 		public string Title { get; set; }
 		public AgeRangeEnum AgeRange { get; set; }
-		public Guid FieldId { get; set; }
+		public string FieldId { get; set; }
 
 		internal static CourseViewModel Create(CourseDto course)
 		{

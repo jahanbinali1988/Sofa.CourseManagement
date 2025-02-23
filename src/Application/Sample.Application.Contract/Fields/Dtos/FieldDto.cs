@@ -6,7 +6,7 @@ namespace Sofa.CourseManagement.Application.Contract.Fields.Dtos
 	public class FieldDto : EntityBaseDto
 	{
 		public string Title { get; set; }
-		public Guid InstituteId { get; set; }
+		public Id InstituteId { get; set; }
 		public string InstituteTitle { get; set; }
 	}
 }

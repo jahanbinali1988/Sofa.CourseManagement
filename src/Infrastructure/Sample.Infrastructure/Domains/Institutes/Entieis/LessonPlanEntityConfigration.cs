@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using System;
-using Sofa.CourseManagement.Domain.Institutes.Entities;
 using Sofa.CourseManagement.Domain.Shared.Constants;
+using Sofa.CourseManagement.Domain.Institutes.Entities.LessonPlans;
+using Sofa.CourseManagement.Domain.Institutes.Entities.Courses;
 
 namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes.Entieis
 {
@@ -27,24 +28,13 @@ namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes.Entieis
             builder.HasQueryFilter(p => EF.Property<bool>(p, "IsDeleted") == false);
 
             builder.HasMany(c => c.Posts).WithOne().HasForeignKey(x => x.LessonPlanId).IsRequired().OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne<CourseLanguage>(c => c.CourseLanguage).WithMany().OnDelete(DeleteBehavior.NoAction); ;
 
-            builder.OwnsOne(p => p.Title, m =>
+			builder.OwnsOne(p => p.Title, m =>
             {
                 m.Property(x => x.Value)
                     .HasColumnName(nameof(LessonPlan.Title))
                     .HasMaxLength(ConstantValues.MaxStringTitleLength)
-                    .IsRequired(true);
-            });
-
-            builder.OwnsOne(p => p.Level, m =>
-            {
-                m.Property(x => x.Title)
-                    .HasColumnName(nameof(LessonPlan.Level) + "Title")
-                    .HasMaxLength(ConstantValues.MaxStringEnumLength)
-                    .IsRequired(true);
-
-                m.Property(x => x.Value)
-                    .HasColumnName(nameof(LessonPlan.Level))
                     .IsRequired(true);
             });
 

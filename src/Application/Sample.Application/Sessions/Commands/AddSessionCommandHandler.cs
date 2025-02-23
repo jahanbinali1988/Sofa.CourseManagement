@@ -1,7 +1,7 @@
 ﻿using Sofa.CourseManagement.Application.Contract.Exceptions;
 using Sofa.CourseManagement.Application.Contract.Sessions.Commands;
 using Sofa.CourseManagement.Application.Contract.Sessions.Dtos;
-using Sofa.CourseManagement.Domain.Institutes.Entities;
+using Sofa.CourseManagement.Domain.Institutes.Entities.Sessions;
 using Sofa.CourseManagement.Domain.Shared;
 using Sofa.CourseManagement.SharedKernel.Application;
 using Sofa.CourseManagement.SharedKernel.Generators;
@@ -35,13 +35,9 @@ namespace Sofa.CourseManagement.Application.Sessions.Commands
 			if (course == null)
 				throw new EntityNotFoundException($"Could not find Course entity with Id {request.CourseId}");
 
-			var term = course.Terms.SingleOrDefault(c => c.Id == request.TermId);
-			if (term == null)
-				throw new EntityNotFoundException($"Could not find Term entity with Id {request.TermId}");
+			var session = Session.CreateInstance(_idGenerator.GetNewId(), request.Title, request.CourseId, request.OccurredDate);
 
-			var session = Session.CreateInstance(_idGenerator.GetNewId(), request.Title, request.TermId, request.OccurredDate);
-
-			term.AddSession(session);
+			course.AddSession(session);
 
 			await _unitOfWork.CommitAsync(cancellationToken);
 
@@ -55,8 +51,6 @@ namespace Sofa.CourseManagement.Application.Sessions.Commands
 				FieldTitle = field.Title.Value,
 				CourseId = course.Id,
 				CourseTitle = course.Title.Value,
-				TermId = term.Id,
-				TermTitle = term.Title.Value,
 			};
 		}
 	}

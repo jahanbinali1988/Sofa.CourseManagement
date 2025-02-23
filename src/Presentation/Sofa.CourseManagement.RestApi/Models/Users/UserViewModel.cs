@@ -12,7 +12,7 @@ namespace Sofa.CourseManagement.RestApi.Models.Users
 		public string Email { get; set; }
 		public UserRoleEnum Role { get; set; }
 		public LevelEnum Level { get; set; }
-		public Guid InstituteId { get; set; }
+		public string InstituteId { get; set; }
 
 		internal static UserViewModel Create(UserDto user)
 		{

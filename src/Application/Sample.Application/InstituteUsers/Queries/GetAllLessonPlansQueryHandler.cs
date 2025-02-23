@@ -1,19 +1,15 @@
 ﻿using Sofa.CourseManagement.Application.Contract.LessonPlans.Dtos;
 using Sofa.CourseManagement.Application.Contract.LessonPlans.Queries;
-using Sofa.CourseManagement.Application.Contract.Sessions.Dtos;
-using Sofa.CourseManagement.Application.Contract.Sessions.Queries;
 using Sofa.CourseManagement.Domain.Institutes;
 using Sofa.CourseManagement.SharedKernel.Application;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Sofa.CourseManagement.Application.InstituteUsers.Queries
 {
-	internal class GetAllLessonPlansQueryHandler : IQueryHandler<GetAllLessonPlansQuery, LessonPlanDto>
+	internal class GetAllLessonPlansQueryHandler : IQueryHandler<GetAllLessonPlansQuery, Pagination<LessonPlanDto>>
 	{
 		private readonly IInstituteRepository _instituteRepository;
 		public GetAllLessonPlansQueryHandler(IInstituteRepository instituteRepository)
@@ -21,7 +17,7 @@ namespace Sofa.CourseManagement.Application.InstituteUsers.Queries
 			_instituteRepository = instituteRepository;
 		}
 
-		public async Task<LessonPlanDto> Handle(GetAllLessonPlansQuery request, CancellationToken cancellationToken)
+		public async Task<Pagination<LessonPlanDto>> Handle(GetAllLessonPlansQuery request, CancellationToken cancellationToken)
 		{
 
 			var institute = await _instituteRepository.GetAsync(request.InstituteId, cancellationToken);
@@ -36,16 +32,14 @@ namespace Sofa.CourseManagement.Application.InstituteUsers.Queries
 			if (course == null)
 				return null;
 
-			var term = course.Terms.SingleOrDefault(c => c.Id == request.TermId);
-			if (term == null)
+			var session = course.Sessions.SingleOrDefault(c => c.Id == request.SessionId);
+			if (session == null)
 				return null;
 
-			var session = term.Sessions.SingleOrDefault(c => c.Id == request.SessionId);
-			if (term == null)
-				return null;
-
-			var lessonPlan = session.LessonPlan;
-			var lessonPlanDto = new LessonPlanDto()
+			var lessonPlans = session.LessonPlans
+				.Skip(request.Offset - 1 * request.Count)
+				.Take(request.Count)
+				.Select(s=> new LessonPlanDto()
 			{
 				Id = s.Id,
 				Title = s.Title.Value,
@@ -55,12 +49,14 @@ namespace Sofa.CourseManagement.Application.InstituteUsers.Queries
 				FieldTitle = field.Title.Value,
 				CourseId = course.Id,
 				CourseTitle = course.Title.Value,
-				TermId = term.Id,
-				TermTitle = term.Title.Value,
-				OccurredDate = s.OccurredDate.Value,
-			};
+				OccurredDate = session.OccurredDate.Value,
+			});
 
-			return lessonPlan;
+			return new Pagination<LessonPlanDto>()
+			{
+				Items = lessonPlans,
+				TotalItems = session.LessonPlans.Count()
+			};
 		}
 	}
 }

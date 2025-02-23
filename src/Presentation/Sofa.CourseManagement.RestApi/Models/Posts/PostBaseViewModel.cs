@@ -9,7 +9,7 @@ namespace Sofa.CourseManagement.RestApi.Models.Posts
 		public short Order { get; set; }
 		public string Content { get; set; }
 		public ContentTypeEnum ContentType { get; set; }
-		public Guid LessonPlanId { get; set; }
+		public string LessonPlanId { get; set; }
 
 		internal static PostBaseViewModel Create(PostBaseDto post)
 		{

@@ -1,7 +1,7 @@
 ﻿using Sofa.CourseManagement.Application.Contract.Courses.Commands;
 using Sofa.CourseManagement.Application.Contract.Courses.Dtos;
 using Sofa.CourseManagement.Application.Contract.Exceptions;
-using Sofa.CourseManagement.Domain.Institutes.Entities;
+using Sofa.CourseManagement.Domain.Institutes.Entities.Courses;
 using Sofa.CourseManagement.Domain.Shared;
 using Sofa.CourseManagement.SharedKernel.Application;
 using Sofa.CourseManagement.SharedKernel.Generators;

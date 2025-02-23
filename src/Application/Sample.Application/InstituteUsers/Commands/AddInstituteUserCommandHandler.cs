@@ -1,10 +1,8 @@
 ﻿using Sofa.CourseManagement.Application.Contract.Exceptions;
 using Sofa.CourseManagement.Application.Contract.InstituteUsers.Commands;
 using Sofa.CourseManagement.Application.Contract.InstituteUsers.Dtos;
-using Sofa.CourseManagement.Domain.Institutes;
-using Sofa.CourseManagement.Domain.Institutes.Entities;
+using Sofa.CourseManagement.Domain.Institutes.Entities.Users;
 using Sofa.CourseManagement.Domain.Shared;
-using Sofa.CourseManagement.Domain.Users;
 using Sofa.CourseManagement.SharedKernel.Application;
 using Sofa.CourseManagement.SharedKernel.Generators;
 using System.Threading;

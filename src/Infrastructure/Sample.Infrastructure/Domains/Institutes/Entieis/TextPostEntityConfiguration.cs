@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Sofa.CourseManagement.Domain.Institutes.Entities;
 using System;
 using Sofa.CourseManagement.Domain.Shared.Constants;
+using Sofa.CourseManagement.Domain.Institutes.Entities.Posts;
 
 namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes.Entieis
 {
@@ -38,10 +38,15 @@ namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes.Entieis
                     .HasColumnName(nameof(TextPost.Title))
                     .HasMaxLength(ConstantValues.MaxStringTitleLength)
                     .IsRequired(true);
-            });
-            builder.Property(p => p.Order).IsRequired(true);
+            }); 
+            builder.OwnsOne(p => p.Order, m =>
+			{
+				m.Property(x => x.Value)
+					.HasColumnName(nameof(PostBase.Order))
+					.IsRequired(true);
+			});
 
-            builder.ToTable(nameof(TextPost));
+			builder.ToTable(nameof(TextPost));
         }
     }
 }

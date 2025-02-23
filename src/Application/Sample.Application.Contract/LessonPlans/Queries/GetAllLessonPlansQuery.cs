@@ -1,10 +1,11 @@
-﻿using Sofa.CourseManagement.Application.Contract.LessonPlans.Dtos;
+﻿using Sofa.CourseManagement.Application.Contract.Fields.Dtos;
+using Sofa.CourseManagement.Application.Contract.LessonPlans.Dtos;
 using Sofa.CourseManagement.Application.Contract.Shared;
 using Sofa.CourseManagement.SharedKernel.Application;
 
 namespace Sofa.CourseManagement.Application.Contract.LessonPlans.Queries
 {
-	public class GetAllLessonPlansQuery : GetListQueryBase, IQuery<LessonPlanDto>
+	public class GetAllLessonPlansQuery : GetListQueryBase, IQuery<Pagination<LessonPlanDto>>
 	{
 		public Id InstituteId { get; set; }
 		public Id FieldId { get; set; }

@@ -7,16 +7,14 @@ namespace Sofa.CourseManagement.Application.Contract.LessonPlans.Dtos
     public class LessonPlanDto : EntityBaseDto
 	{
 		public string Title { get; set; }
-		public LevelEnum Level { get; set; }
-		public Guid SessionId { get; set; }
+		public Id SessionId { get; set; }
 		public string SessionTitle { get; set; }
-		public Guid InstituteId { get; set; }
+		public Id InstituteId { get; set; }
 		public string InstituteTitle { get; set; }
-		public Guid FieldId { get; set; }
+		public Id FieldId { get; set; }
 		public string FieldTitle { get; set; }
-		public Guid CourseId { get; set; }
+		public Id CourseId { get; set; }
 		public string CourseTitle { get; set; }
-		public Guid TermId { get; set; }
-		public string TermTitle { get; set; }
+		public DateTimeOffset? OccurredDate { get; set; }
 	}
 }

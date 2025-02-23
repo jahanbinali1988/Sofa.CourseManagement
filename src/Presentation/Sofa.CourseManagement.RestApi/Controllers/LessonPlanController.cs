@@ -7,6 +7,8 @@ using Sofa.CourseManagement.Application.Contract.Sessions.Queries;
 using Sofa.CourseManagement.RestApi.Models.Sessions;
 using Sofa.CourseManagement.RestApi.Models;
 using Sofa.CourseManagement.Application.Contract.LessonPlans.Dtos;
+using Sofa.CourseManagement.Application.Contract.Courses.Dtos;
+using Sofa.CourseManagement.RestApi.Models.Courses;
 
 namespace Sofa.CourseManagement.RestApi.Controllers
 {
@@ -56,14 +58,14 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
 		[HttpGet("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/term/{termId:required}/session/{sessionId:required}/lessonplan/")]
-		public async Task<ActionResult<LessonPlanViewModel>> GetSessionListAsync([FromQuery] string instituteId, [FromQuery] string fieldId,
+		public async Task<ActionResult<IEnumerable<LessonPlanViewModel>>> GetSessionListAsync([FromQuery] string instituteId, [FromQuery] string fieldId,
 			[FromQuery] string courseId, [FromQuery] string termId, [FromQuery] string sessionId, [FromQuery] GetListRequest request)
 		{
 			var query = new GetAllLessonPlansQuery(instituteId, fieldId, courseId, termId, sessionId, request.Offset, request.Count, request.Keyword);
 
-			var lessonPlan = await _mediator.Send(query, HttpContext.RequestAborted);
+			var lessonPlans = await _mediator.Send(query, HttpContext.RequestAborted);
 
-			return Get<LessonPlanViewModel>(LessonPlanViewModel.Create(lessonPlan));
+			return List<LessonPlanDto, LessonPlanViewModel>(lessonPlans);
 		}
 
 

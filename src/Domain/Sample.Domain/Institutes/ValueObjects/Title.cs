@@ -35,5 +35,5 @@ namespace Sofa.CourseManagement.Domain.Institutes.ValueObjects
         {
             yield return Value!;
         }
-    }
+	}
 }

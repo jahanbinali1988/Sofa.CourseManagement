@@ -31,11 +31,7 @@ namespace Sofa.CourseManagement.Application.Sessions.Queries
 			if (course == null)
 				return null;
 
-			var term = course.Terms.SingleOrDefault(c => c.Id == request.TermId);
-			if (term == null)
-				return null;
-
-			var sessions = term.Sessions.Where(c => c.Title.Value.ToLower().Contains(request.Keyword));
+			var sessions = course.Sessions.Where(c => c.Title.Value.ToLower().Contains(request.Keyword));
 			var sessionsDtos = sessions
 				.Skip(request.Offset - 1 * request.Count)
 				.Take(request.Count)
@@ -49,8 +45,6 @@ namespace Sofa.CourseManagement.Application.Sessions.Queries
 					FieldTitle = field.Title.Value,
 					CourseId = course.Id,
 					CourseTitle = course.Title.Value,
-					TermId = term.Id,
-					TermTitle = term.Title.Value,
 					OccurredDate = s.OccurredDate.Value,
 				});
 

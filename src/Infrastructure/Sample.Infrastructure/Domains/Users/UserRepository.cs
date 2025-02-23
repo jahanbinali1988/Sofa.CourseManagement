@@ -14,7 +14,7 @@ namespace Sofa.CourseManagement.Infrastructure.Domains.Users
 		protected override IQueryable<User> ConfigureInclude(IQueryable<User> query)
 		{
 			return query.AsQueryable()
-				.Include(x => x.UserTerms)
+				.Include(x => x.CourseUsers)
 				.Include(x => x.InstituteUsers);
 		}
 	}

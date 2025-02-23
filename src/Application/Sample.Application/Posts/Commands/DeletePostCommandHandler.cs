@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Sofa.CourseManagement.Application.Contract.Exceptions;
 using Sofa.CourseManagement.Application.Contract.Posts.Commands;
-using Sofa.CourseManagement.Domain.Institutes.Entities;
+using Sofa.CourseManagement.Domain.Institutes.Entities.LessonPlans;
 using Sofa.CourseManagement.Domain.Shared;
 using Sofa.CourseManagement.SharedKernel.Application;
 using System.Linq;
@@ -32,15 +32,11 @@ namespace Sofa.CourseManagement.Application.Posts.Commands
 			if (course == null)
 				throw new EntityNotFoundException($"Could not find Course entity with Id {request.CourseId}");
 
-			var term = course.Terms.SingleOrDefault(c => c.Id == request.TermId);
-			if (term == null)
-				throw new EntityNotFoundException($"Could not find Term entity with Id {request.TermId}");
-
-			var session = term.Sessions.SingleOrDefault(c => c.Id == request.SessionId);
+			var session = course.Sessions.SingleOrDefault(c => c.Id == request.SessionId);
 			if (session == null)
 				throw new EntityNotFoundException($"Could not find Session entity with Id {request.SessionId}");
 
-			LessonPlan? lessonplan = session.LessonPlan.Id == request.LessonPlanId ? session.LessonPlan : null;
+			LessonPlan? lessonplan = session.LessonPlans.SingleOrDefault(c=> c.Id == request.LessonPlanId);
 			if (lessonplan == null)
 				throw new EntityNotFoundException($"Could not find LessonPlan entity with Id {request.LessonPlanId}");
 

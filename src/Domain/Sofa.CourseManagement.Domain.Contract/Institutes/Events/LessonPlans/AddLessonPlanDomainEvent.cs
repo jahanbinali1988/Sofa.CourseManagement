@@ -9,16 +9,16 @@ namespace Sofa.CourseManagement.Domain.Contract.Institutes.Events.LessonPlans
 		{
 
 		}
-		public AddLessonPlanDomainEvent(Guid id, string title, LevelEnum level, Guid sessionId) : this()
+		public AddLessonPlanDomainEvent(Guid id, string title, Guid sessionId, Guid courseLanguageId) : this()
 		{
 			Id = id;
 			Title = title;
-			Level = level;
 			SessionId = sessionId;
+			CourseLanguageId = courseLanguageId;
 		}
 		public Guid Id { get; set; }
         public string Title { get; set; }
-		public LevelEnum Level { get; set; }
 		public Guid SessionId { get; set; }
+		public Guid CourseLanguageId { get; }
 	}
 }
