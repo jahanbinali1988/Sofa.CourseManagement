@@ -1,18 +1,16 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Sofa.CourseManagement.Application.Contract.InstituteUsers.Commands;
-using Sofa.CourseManagement.Application.Contract.InstituteUsers.Dtos;
 using Sofa.CourseManagement.Application.Contract.InstituteUsers.Queries;
 using Sofa.CourseManagement.Application.Contract.Users.Commands;
-using Sofa.CourseManagement.Application.Contract.Users.Dtos;
 using Sofa.CourseManagement.Application.Contract.Users.Queries;
 using Sofa.CourseManagement.Application.Contract.UserTerms.Commands;
-using Sofa.CourseManagement.Application.Contract.UserTerms.Dtos;
 using Sofa.CourseManagement.Application.Contract.UserTerms.Queries;
 using Sofa.CourseManagement.RestApi.Models;
 using Sofa.CourseManagement.RestApi.Models.InstituteUsers;
 using Sofa.CourseManagement.RestApi.Models.Users;
 using Sofa.CourseManagement.RestApi.Models.UserTerms;
+using Sofa.CourseManagement.SharedKernel.Application;
 
 namespace Sofa.CourseManagement.RestApi.Controllers
 {
@@ -43,7 +41,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 
 			var user = await _mediator.Send(command);
 
-			return Created(UserViewModel.Create(user));
+			return UserViewModel.Create(user);
 		}
 
 		/// <summary>
@@ -54,13 +52,13 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
 		[HttpGet("/user/{userId:required}")]
-		public async Task<ActionResult<UserViewModel>> GetUserByIdAsync([FromQuery] string userId)
+		public async Task<ActionResult<UserViewModel>> GetUserByIdAsync(string userId)
 		{
 			var query = new GetUserByIdQuery(userId);
 
 			var user = await _mediator.Send(query, HttpContext.RequestAborted);
-
-			return Get<UserViewModel>(UserViewModel.Create(user));
+			
+			return UserViewModel.Create(user);
 		}
 
 		/// <summary>
@@ -71,13 +69,13 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
 		[HttpGet("/user")]
-		public async Task<ActionResult<IEnumerable<UserViewModel>>> GetUserListAsync([FromQuery] GetListRequest request)
+		public async Task<ActionResult<Pagination<UserViewModel>>> GetUserListAsync([FromQuery] GetListRequest request)
 		{
 			var query = new GetAllUsersQuery(request.Offset, request.Count, request.Keyword);
 
 			var users = await _mediator.Send(query, HttpContext.RequestAborted);
 
-			return List<UserDto, UserViewModel>(users);
+			return users.Map();
 		}
 
 		/// <summary>
@@ -121,7 +119,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpDelete("/user/{userId:required}")]
-		public async Task<ActionResult> DeleteUserAsync([FromQuery] string userId)
+		public async Task<ActionResult> DeleteUserAsync(string userId)
 		{
 			var command = new DeleteUserCommand(userId);
 
@@ -137,14 +135,14 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="200">Successfully get entities</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
-		[HttpGet("/user/{userId:required}/term")]
-		public async Task<ActionResult<IEnumerable<UserTermViewModel>>> GetUserTermListAsync([FromQuery] string userId, [FromQuery] GetListRequest request)
+		[HttpGet("/user/{userId:required}/course")]
+		public async Task<ActionResult<Pagination<UserCourseViewModel>>> GetUserTermListAsync([FromQuery] string userId, [FromQuery] GetListRequest request)
 		{
 			var query = new GetAllCourseUsersQuery(request.Offset, request.Count, request.Keyword, userId);
 
-			var users = await _mediator.Send(query, HttpContext.RequestAborted);
+			var userCourses = await _mediator.Send(query, HttpContext.RequestAborted);
 
-			return List<CourseUserDto, UserTermViewModel>(users);
+			return userCourses.Map();
 		}
 
 		/// <summary>
@@ -154,8 +152,8 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <param name="request"></param>
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
-		[HttpPut("/user/{userId:required}/term")]
-		public async Task<ActionResult<UserTermViewModel>> AddTermToUserAsync([FromQuery] string userId, [FromBody] string termId)
+		[HttpPut("/user/{userId:required}/course")]
+		public async Task<ActionResult<UserCourseViewModel>> AddCourseToUserAsync([FromQuery] string userId, [FromBody] string termId)
 		{
 			var command = new AddCourseUserCommand(termId, userId);
 
@@ -189,13 +187,13 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
 		[HttpGet("/user/{userId:required}/institute")]
-		public async Task<ActionResult<IEnumerable<InstituteUserViewModel>>> GetInstituteUsersListAsync([FromQuery] string userId, [FromQuery] GetListRequest request)
+		public async Task<ActionResult<Pagination<InstituteUserViewModel>>> GetInstituteUsersListAsync([FromQuery] string userId, [FromQuery] GetListRequest request)
 		{
 			var query = new GetAllInstituteUsersQuery(request.Offset, request.Count, request.Keyword, userId, null);
 
 			var users = await _mediator.Send(query, HttpContext.RequestAborted);
 
-			return List<InstituteUserDto, InstituteUserViewModel>(users);
+			return users.Map();
 		}
 
 		/// <summary>

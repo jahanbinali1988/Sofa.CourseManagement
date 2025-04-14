@@ -4,6 +4,7 @@ using Sofa.CourseManagement.RestApi.Models.Fields;
 using Sofa.CourseManagement.Application.Contract.Fields.Commands;
 using Sofa.CourseManagement.Application.Contract.Fields.Dtos;
 using Sofa.CourseManagement.Application.Contract.Fields.Queries;
+using Sofa.CourseManagement.SharedKernel.Application;
 
 namespace Sofa.CourseManagement.RestApi.Controllers
 {
@@ -22,7 +23,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 
 			var field = await _mediator.Send(command);
 			
-			return Created(FieldViewModel.Create(field));
+			return FieldViewModel.Create(field);
 		}
 
 		/// <summary>
@@ -39,7 +40,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 
 			var field = await _mediator.Send(query, HttpContext.RequestAborted);
 
-			return Get<FieldViewModel>(FieldViewModel.Create(field));
+			return FieldViewModel.Create(field);
 		}
 
 		/// <summary>
@@ -50,13 +51,13 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
 		[HttpGet("/institute/{instituteId:required}/field")]
-		public async Task<ActionResult<IEnumerable<FieldViewModel>>> GetFieldListAsync([FromQuery] string instituteId, [FromQuery] GetListRequest request)
+		public async Task<ActionResult<Pagination<FieldViewModel>>> GetFieldListAsync([FromQuery] string instituteId, [FromQuery] GetListRequest request)
 		{
 			var query = new GetAllFieldsQuery(instituteId, request.Offset, request.Count, request.Keyword);
 
 			var fields = await _mediator.Send(query, HttpContext.RequestAborted);
 
-			return List<FieldDto, FieldViewModel>(fields);
+			return fields.Map();
 		}
 
 		/// <summary>

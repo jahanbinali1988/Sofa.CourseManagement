@@ -4,6 +4,7 @@ using Sofa.CourseManagement.RestApi.Models.Sessions;
 using Sofa.CourseManagement.Application.Contract.Sessions.Commands;
 using Sofa.CourseManagement.Application.Contract.Sessions.Dtos;
 using Sofa.CourseManagement.Application.Contract.Sessions.Queries;
+using Sofa.CourseManagement.SharedKernel.Application;
 
 namespace Sofa.CourseManagement.RestApi.Controllers
 {
@@ -24,7 +25,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 
 			var session = await _mediator.Send(command);
 
-			return Created(SessionViewModel.Create(session));
+			return SessionViewModel.Create(session);
 		}
 
 		/// <summary>
@@ -42,7 +43,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 
 			var session = await _mediator.Send(query, HttpContext.RequestAborted);
 
-			return Get<SessionViewModel>(SessionViewModel.Create(session));
+			return SessionViewModel.Create(session);
 		}
 
 		/// <summary>
@@ -53,14 +54,14 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
 		[HttpGet("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/term/{termId:required}/session")]
-		public async Task<ActionResult<IEnumerable<SessionViewModel>>> GetSessionListAsync([FromQuery] string instituteId, [FromQuery] string fieldId,
+		public async Task<ActionResult<Pagination<SessionViewModel>>> GetSessionListAsync([FromQuery] string instituteId, [FromQuery] string fieldId,
 			[FromQuery] string courseId, [FromQuery] string termId, [FromQuery] GetListRequest request)
 		{
 			var query = new GetAllSessionsQuery(instituteId, fieldId, courseId, termId, request.Offset, request.Count, request.Keyword);
 
 			var sessions = await _mediator.Send(query, HttpContext.RequestAborted);
 
-			return List<SessionDto, SessionViewModel>(sessions);
+			return sessions.Map();
 		}
 
 		/// <summary>

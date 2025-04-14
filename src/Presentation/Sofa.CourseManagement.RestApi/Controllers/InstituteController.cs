@@ -10,6 +10,7 @@ using Sofa.CourseManagement.Application.Contract.InstituteUsers.Commands;
 using Sofa.CourseManagement.Application.Contract.InstituteUsers.Dtos;
 using Sofa.CourseManagement.Application.Contract.InstituteUsers.Queries;
 using Sofa.CourseManagement.RestApi.Models.InstituteUsers;
+using Sofa.CourseManagement.SharedKernel.Application;
 
 namespace Sofa.CourseManagement.RestApi.Controllers
 {
@@ -40,7 +41,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 
             var institute = await _mediator.Send(command);
 
-            return Created(InstituteViewModel.Create(institute));
+            return InstituteViewModel.Create(institute);
         }
 
 		/// <summary>
@@ -57,7 +58,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 
 			var institute = await _mediator.Send(query, HttpContext.RequestAborted);
 
-			return Get<InstituteViewModel>(InstituteViewModel.Create(institute));
+			return InstituteViewModel.Create(institute);
 		}
 
 		/// <summary>
@@ -68,13 +69,13 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
 		[HttpGet]
-        public async Task<ActionResult<IEnumerable<InstituteViewModel>>> GetInstituteListAsync([FromQuery] GetListRequest request)
+        public async Task<ActionResult<Pagination<InstituteViewModel>>> GetInstituteListAsync([FromQuery] GetListRequest request)
         {
             var query = new GetAllInstitutesQuery(request.Keyword, request.Offset, request.Count);
 
             var institutes = await _mediator.Send(query, HttpContext.RequestAborted);
 
-            return List<InstituteDto, InstituteViewModel>(institutes);
+            return institutes.Map();
         }
 
 		/// <summary>
@@ -135,13 +136,13 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
 		[HttpGet("{id:required}/user")]
-		public async Task<ActionResult<IEnumerable<InstituteUserViewModel>>> GetInstituteUsersListAsync([FromQuery] string instituteId, [FromQuery] GetListRequest request)
+		public async Task<ActionResult<Pagination<InstituteUserViewModel>>> GetInstituteUsersListAsync([FromQuery] string instituteId, [FromQuery] GetListRequest request)
 		{
 			var query = new GetAllInstituteUsersQuery(request.Offset, request.Count, request.Keyword, null, instituteId);
 
 			var users = await _mediator.Send(query, HttpContext.RequestAborted);
 
-			return List<InstituteUserDto, InstituteUserViewModel>(users);
+			return users.Map();
 		}
 
 		/// <summary>

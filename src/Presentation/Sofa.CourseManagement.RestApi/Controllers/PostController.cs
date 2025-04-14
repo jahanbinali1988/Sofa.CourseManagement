@@ -1,10 +1,9 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Sofa.CourseManagement.RestApi.Models;
 using Sofa.CourseManagement.RestApi.Models.Posts;
 using Sofa.CourseManagement.Application.Contract.Posts.Commands;
-using Sofa.CourseManagement.Application.Contract.Posts.Dtos;
 using Sofa.CourseManagement.Application.Contract.Posts.Queries;
+using Sofa.CourseManagement.SharedKernel.Application;
 
 namespace Sofa.CourseManagement.RestApi.Controllers
 {
@@ -24,7 +23,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 
 			var post = await _mediator.Send(command);
 
-			return Created(PostBaseViewModel.Create(post));
+			return PostBaseViewModel.Create(post);
 		}
 
 		/// <summary>
@@ -42,7 +41,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 
 			var post = await _mediator.Send(query, HttpContext.RequestAborted);
 
-			return Get<PostBaseViewModel>(PostBaseViewModel.Create(post));
+			return PostBaseViewModel.Create(post);
 		}
 
 		/// <summary>
@@ -53,14 +52,14 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
 		[HttpGet("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/term/{termId:required}/session/{sessionId:required}/lessonplan/{lessonplanId:required}/post/")]
-		public async Task<ActionResult<IEnumerable<PostBaseViewModel>>> GetPostListAsync([FromQuery] string instituteId, [FromQuery] string fieldId,
+		public async Task<ActionResult<Pagination<PostBaseViewModel>>> GetPostListAsync([FromQuery] string instituteId, [FromQuery] string fieldId,
 			[FromQuery] string courseId, [FromQuery] string termId, [FromQuery] string sessionId, [FromQuery] string lessonplanId, [FromQuery] GetListRequest request)
 		{
 			var query = new GetAllPostsQuery(instituteId, fieldId, courseId, termId, sessionId, lessonplanId, request.Offset, request.Count, request.Keyword);
 
 			var posts = await _mediator.Send(query, HttpContext.RequestAborted);
 			
-			return List<PostBaseDto, PostBaseViewModel>(posts);
+			return posts.Map();
 		}
 
 		/// <summary>

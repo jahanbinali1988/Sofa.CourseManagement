@@ -1,5 +1,6 @@
 ﻿using Sofa.CourseManagement.Application.Contract.Courses.Dtos;
 using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
+using Sofa.CourseManagement.SharedKernel.Application;
 
 namespace Sofa.CourseManagement.RestApi.Models.Courses
 {
@@ -17,6 +18,17 @@ namespace Sofa.CourseManagement.RestApi.Models.Courses
 				Id = course.Id,
 				AgeRange = course.AgeRange,
 				FieldId = course.FieldId
+			};
+		}
+	}
+	public static class CourseMapper
+	{
+		public static Pagination<CourseViewModel> Map(this Pagination<CourseDto> dto)
+		{
+			return new Pagination<CourseViewModel>
+			{
+				TotalItems = dto.TotalItems,
+				Items = dto.Items.Select(s=> CourseViewModel.Create(s))
 			};
 		}
 	}

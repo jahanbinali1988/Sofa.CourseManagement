@@ -1,5 +1,6 @@
 ﻿using Sofa.CourseManagement.Application.Contract.Posts.Dtos;
 using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
+using Sofa.CourseManagement.SharedKernel.Application;
 
 namespace Sofa.CourseManagement.RestApi.Models.Posts
 {
@@ -25,6 +26,17 @@ namespace Sofa.CourseManagement.RestApi.Models.Posts
 					return new VideoPostViewModel(post);
 			}
 			throw new NotImplementedException();
+		}
+	}
+	public static class PostBaseMapper
+	{
+		public static Pagination<PostBaseViewModel> Map(this Pagination<PostBaseDto> dto)
+		{
+			return new Pagination<PostBaseViewModel>
+			{
+				TotalItems = dto.TotalItems,
+				Items = dto.Items.Select(s => PostBaseViewModel.Create(s))
+			};
 		}
 	}
 }

@@ -1,4 +1,7 @@
-﻿using Sofa.CourseManagement.Application.Contract.Sessions.Dtos;
+﻿using Sofa.CourseManagement.Application.Contract.LessonPlans.Dtos;
+using Sofa.CourseManagement.Application.Contract.Sessions.Dtos;
+using Sofa.CourseManagement.RestApi.Models.LessonPlans;
+using Sofa.CourseManagement.SharedKernel.Application;
 
 namespace Sofa.CourseManagement.RestApi.Models.Sessions
 {
@@ -24,6 +27,17 @@ namespace Sofa.CourseManagement.RestApi.Models.Sessions
 				FieldTitle = session.FieldTitle,
 				InstituteId = session.InstituteId,
 				InstituteTitle = session.InstituteTitle,
+			};
+		}
+	}
+	public static class SessionMapper
+	{
+		public static Pagination<SessionViewModel> Map(this Pagination<SessionDto> dto)
+		{
+			return new Pagination<SessionViewModel>
+			{
+				TotalItems = dto.TotalItems,
+				Items = dto.Items.Select(s => SessionViewModel.Create(s))
 			};
 		}
 	}

@@ -1,5 +1,6 @@
 ﻿using Sofa.CourseManagement.Application.Contract.Institutes.Dtos;
 using Sofa.CourseManagement.Domain.Institutes.ValueObjects;
+using Sofa.CourseManagement.SharedKernel.Application;
 
 namespace Sofa.CourseManagement.RestApi.Models.Institutes
 {
@@ -20,6 +21,17 @@ namespace Sofa.CourseManagement.RestApi.Models.Institutes
 				WebsiteUrl = institute.WebsiteUrl
 			};
 			return vm; 
+		}
+	}
+	public static class InstituteMapper
+	{
+		public static Pagination<InstituteViewModel> Map(this Pagination<InstituteDto> dto)
+		{
+			return new Pagination<InstituteViewModel>
+			{
+				TotalItems = dto.TotalItems,
+				Items = dto.Items.Select(s => InstituteViewModel.Create(s))
+			};
 		}
 	}
 }
