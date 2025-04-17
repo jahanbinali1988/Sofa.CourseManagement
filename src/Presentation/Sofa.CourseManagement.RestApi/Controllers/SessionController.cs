@@ -2,7 +2,6 @@
 using Sofa.CourseManagement.RestApi.Models;
 using Sofa.CourseManagement.RestApi.Models.Sessions;
 using Sofa.CourseManagement.Application.Contract.Sessions.Commands;
-using Sofa.CourseManagement.Application.Contract.Sessions.Dtos;
 using Sofa.CourseManagement.Application.Contract.Sessions.Queries;
 using Sofa.CourseManagement.SharedKernel.Application;
 
@@ -17,11 +16,11 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <param name="request"></param>
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
-		[HttpPost("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/term/{termId:required}/session")]
+		[HttpPost("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/session")]
 		public async Task<ActionResult<SessionViewModel>> CreateSessionAsync([FromQuery] string instituteId, [FromQuery] string fieldId,
-			[FromQuery] string courseId, [FromQuery] string termId, [FromBody] CreateSessionViewModel request)
+			[FromQuery] string courseId, [FromBody] CreateSessionViewModel request)
 		{
-			var command = request.ToCommand(instituteId, fieldId, courseId, termId);
+			var command = request.ToCommand(instituteId, fieldId, courseId);
 
 			var session = await _mediator.Send(command);
 
@@ -35,11 +34,11 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="200">Successfully get entity</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
-		[HttpGet("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/term/{termId:required}/session/{sessionId:required}")]
+		[HttpGet("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/session/{sessionId:required}")]
 		public async Task<ActionResult<SessionViewModel>> GetSessionByIdAsync([FromQuery] string instituteId, [FromQuery] string fieldId,
-			[FromQuery] string courseId, [FromQuery] string termId, [FromQuery] string sessionId)
+			[FromQuery] string courseId, [FromQuery] string sessionId)
 		{
-			var query = new GetSessionByIdQuery(instituteId, fieldId, courseId, termId, sessionId);
+			var query = new GetSessionByIdQuery(instituteId, fieldId, courseId, sessionId);
 
 			var session = await _mediator.Send(query, HttpContext.RequestAborted);
 
@@ -53,11 +52,11 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="200">Successfully get entities</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
-		[HttpGet("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/term/{termId:required}/session")]
+		[HttpGet("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/session")]
 		public async Task<ActionResult<Pagination<SessionViewModel>>> GetSessionListAsync([FromQuery] string instituteId, [FromQuery] string fieldId,
-			[FromQuery] string courseId, [FromQuery] string termId, [FromQuery] GetListRequest request)
+			[FromQuery] string courseId, [FromQuery] GetListRequest request)
 		{
-			var query = new GetAllSessionsQuery(instituteId, fieldId, courseId, termId, request.Offset, request.Count, request.Keyword);
+			var query = new GetAllSessionsQuery(instituteId, fieldId, courseId, request.Offset, request.Count, request.Keyword);
 
 			var sessions = await _mediator.Send(query, HttpContext.RequestAborted);
 
@@ -71,11 +70,11 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <param name="request"></param>
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
-		[HttpPut("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/term/{termId:required}/session/{sessionId:required}")]
+		[HttpPut("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/session/{sessionId:required}")]
 		public async Task<ActionResult<SessionViewModel>> UpdateSessionAsync([FromQuery] string instituteId, [FromQuery] string fieldId,
-			[FromQuery] string courseId, [FromQuery] string termId, [FromQuery] string sessionId, [FromBody] CreateSessionViewModel request)
+			[FromQuery] string courseId, [FromQuery] string sessionId, [FromBody] CreateSessionViewModel request)
 		{
-			var command = request.ToCommand(instituteId, fieldId, courseId, termId, sessionId);
+			var command = request.ToCommand(instituteId, fieldId, courseId, sessionId);
 
 			await _mediator.Send(command);
 
@@ -88,11 +87,11 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <param name="id"></param>
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
-		[HttpDelete("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/term/{termId:required}/session/{sessionId:required}")]
+		[HttpDelete("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/session/{sessionId:required}")]
 		public async Task<ActionResult> DeleteSessionAsync([FromQuery] string instituteId, [FromQuery] string fieldId, 
-			[FromQuery] string courseId, [FromQuery] string termId, [FromQuery] string sessionId)
+			[FromQuery] string courseId, [FromQuery] string sessionId)
 		{
-			var command = new DeleteSessionCommand(instituteId, fieldId, courseId, termId, sessionId);
+			var command = new DeleteSessionCommand(instituteId, fieldId, courseId, sessionId);
 			
 			await _mediator.Send(command);
 

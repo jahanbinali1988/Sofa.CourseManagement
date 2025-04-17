@@ -1,4 +1,5 @@
 ﻿using Sofa.CourseManagement.Application.Contract.Institutes.Commands;
+using Sofa.CourseManagement.Application.Contract.Shared;
 
 namespace Sofa.CourseManagement.RestApi.Models.Institutes
 {

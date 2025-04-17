@@ -5,7 +5,7 @@ using Sofa.CourseManagement.SharedKernel.ServiceBus;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Sofa.CourseManagement.Application.UserTerms.DomainEventConsumers
+namespace Sofa.CourseManagement.Application.CourseUsers.DomainEventConsumers
 {
 	public class DeleteCourseUserDomainEventConsumer : DomainEventHandler<DeleteUserTermDomainEvent>
 	{

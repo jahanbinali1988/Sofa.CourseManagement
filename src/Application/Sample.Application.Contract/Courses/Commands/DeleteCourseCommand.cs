@@ -1,9 +1,10 @@
-﻿using Sofa.CourseManagement.SharedKernel.Application;
+﻿using Sofa.CourseManagement.Application.Contract.Shared;
+using Sofa.CourseManagement.SharedKernel.Application;
 using System;
 
 namespace Sofa.CourseManagement.Application.Contract.Courses.Commands
 {
-    public class DeleteCourseCommand : CommandBase
+	public class DeleteCourseCommand : CommandBase
 	{
 		public Id FieldId { get; set; }
 		public Id InstituteId { get; set; }

@@ -1,9 +1,6 @@
-﻿using Sofa.CourseManagement.Application.Contract.Exceptions;
-using Sofa.CourseManagement.Application.Contract.UserTerms.Commands;
-using Sofa.CourseManagement.Application.Contract.UserTerms.Dtos;
-using Sofa.CourseManagement.Domain.Institutes;
-using Sofa.CourseManagement.Domain.Institutes.Entities;
-using Sofa.CourseManagement.Domain.Institutes.Entities.Courses;
+﻿using Sofa.CourseManagement.Application.Contract.CourseUsers.Commands;
+using Sofa.CourseManagement.Application.Contract.CourseUsers.Dtos;
+using Sofa.CourseManagement.Application.Contract.Exceptions;
 using Sofa.CourseManagement.Domain.Shared;
 using Sofa.CourseManagement.SharedKernel.Application;
 using Sofa.CourseManagement.SharedKernel.Generators;
@@ -11,8 +8,9 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Sofa.CourseManagement.Domain.Institutes.Entities.Courses;
 
-namespace Sofa.CourseManagement.Application.UserTerms.Commands
+namespace Sofa.CourseManagement.Application.CourseUsers.Commands
 {
 	internal class AddCourseUserCommandHandler : ICommandHandler<AddCourseUserCommand, CourseUserDto>
 	{
@@ -50,7 +48,7 @@ namespace Sofa.CourseManagement.Application.UserTerms.Commands
 			if (user == null)
 				throw new EntityNotFoundException($"Could not find User entity with Id {userId}");
 
-			var courseUser = CourseUser.CreateInstance(_idGenerator.GetNewId(), courseId, userId);
+			var courseUser = Domain.Institutes.Entities.Courses.CourseUser.CreateInstance(_idGenerator.GetNewId(), courseId, userId);
 			course.AddUser(courseUser);
 
 			await _unitOfWork.CommitAsync(cancellationToken);

@@ -1,4 +1,5 @@
 ﻿using Sofa.CourseManagement.Application.Contract.InstituteUsers.Dtos;
+using Sofa.CourseManagement.Application.Contract.Shared;
 using Sofa.CourseManagement.SharedKernel.Application;
 
 namespace Sofa.CourseManagement.Application.Contract.InstituteUsers.Commands

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace Sofa.CourseManagement;
+namespace Sofa.CourseManagement.Application.Contract.Shared;
 
 public struct Id
 {
@@ -46,12 +46,12 @@ public struct Id
 
 		foreach (byte b in data)
 		{
-			bitBuffer = (bitBuffer << 8) | b;
+			bitBuffer = bitBuffer << 8 | b;
 			bitBufferLength += 8;
 
 			while (bitBufferLength >= 5)
 			{
-				int index = (bitBuffer >> (bitBufferLength - 5)) & 0b11111;
+				int index = bitBuffer >> bitBufferLength - 5 & 0b11111;
 				result.Append(alphabet[index]);
 				bitBufferLength -= 5;
 			}
@@ -59,7 +59,7 @@ public struct Id
 
 		if (bitBufferLength > 0)
 		{
-			int index = (bitBuffer << (5 - bitBufferLength)) & 0b11111;
+			int index = bitBuffer << 5 - bitBufferLength & 0b11111;
 			result.Append(alphabet[index]);
 		}
 
@@ -81,12 +81,12 @@ public struct Id
 			int charIndex = alphabet.IndexOf(c);
 			if (charIndex < 0) throw new FormatException("Invalid Base32 character.");
 
-			bitBuffer = (bitBuffer << 5) | charIndex;
+			bitBuffer = bitBuffer << 5 | charIndex;
 			bitBufferLength += 5;
 
 			if (bitBufferLength >= 8)
 			{
-				result[byteIndex++] = (byte)((bitBuffer >> (bitBufferLength - 8)) & 0xFF);
+				result[byteIndex++] = (byte)(bitBuffer >> bitBufferLength - 8 & 0xFF);
 				bitBufferLength -= 8;
 			}
 		}

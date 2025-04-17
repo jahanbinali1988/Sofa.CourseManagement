@@ -10,15 +10,13 @@ namespace Sofa.CourseManagement.Application.Contract.LessonPlans.Queries
 		public Id InstituteId { get; set; }
 		public Id FieldId { get; set; }
 		public Id CourseId { get; set; }
-		public Id TermId { get; set; }
         public Id SessionId { get; set; }
-        public GetAllLessonPlansQuery(string instituteId, string fieldId, string courseId, string termId, string sessionId, 
+        public GetAllLessonPlansQuery(string instituteId, string fieldId, string courseId, string sessionId, 
 			int offset, int count, string keyword) : base(offset, count, keyword)
 		{
 			InstituteId = instituteId;
 			FieldId = fieldId;
 			CourseId = courseId;
-			TermId = termId;
 			SessionId = sessionId;
 		}
 	}

@@ -1,13 +1,14 @@
-﻿using Sofa.CourseManagement.Application.Contract.UserTerms.Dtos;
+﻿using Sofa.CourseManagement.Application.Contract.CourseUsers.Dtos;
+using Sofa.CourseManagement.Application.Contract.Shared;
 using Sofa.CourseManagement.SharedKernel.Application;
 
-namespace Sofa.CourseManagement.Application.Contract.UserTerms.Commands
+namespace Sofa.CourseManagement.Application.Contract.CourseUsers.Commands
 {
 	public class AddCourseUserCommand : CommandBase<CourseUserDto>
 	{
-		public AddCourseUserCommand(string termId, string userId)
+		public AddCourseUserCommand(string courseId, string userId)
 		{
-			CourseId = termId;
+			CourseId = courseId;
 			UserId = userId;
 		}
 

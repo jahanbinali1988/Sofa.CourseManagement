@@ -7,7 +7,7 @@ namespace Sofa.CourseManagement.RestApi.Models.Sessions
 		public string Title { get; set; }
 		public DateTimeOffset OccurredDate { get; set; }
 
-		internal AddSessionCommand ToCommand(string instituteId, string fieldId, string courseId, string termId)
+		internal AddSessionCommand ToCommand(string instituteId, string fieldId, string courseId)
 		{
 			return new AddSessionCommand()
 			{
@@ -15,12 +15,11 @@ namespace Sofa.CourseManagement.RestApi.Models.Sessions
 				InstituteId = instituteId,
 				FieldId = fieldId,
 				CourseId = courseId,
-				TermId = termId,
 				OccurredDate = OccurredDate
 			};
 		}
 
-		internal UpdateSessionCommand ToCommand(string instituteId, string fieldId, string courseId, string termId, string id)
+		internal UpdateSessionCommand ToCommand(string instituteId, string fieldId, string courseId, string id)
 		{
 			return new UpdateSessionCommand()
 			{
@@ -28,7 +27,6 @@ namespace Sofa.CourseManagement.RestApi.Models.Sessions
 				InstituteId = instituteId,
 				FieldId = fieldId,
 				CourseId = courseId,
-				TermId = termId,
 				Id = id,
 				OccurredDate = OccurredDate
 			};

@@ -1,11 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Sofa.CourseManagement.Application.Contract.CourseUsers.Commands;
+using Sofa.CourseManagement.Application.Contract.CourseUsers.Queries;
 using Sofa.CourseManagement.Application.Contract.InstituteUsers.Commands;
 using Sofa.CourseManagement.Application.Contract.InstituteUsers.Queries;
 using Sofa.CourseManagement.Application.Contract.Users.Commands;
 using Sofa.CourseManagement.Application.Contract.Users.Queries;
-using Sofa.CourseManagement.Application.Contract.UserTerms.Commands;
-using Sofa.CourseManagement.Application.Contract.UserTerms.Queries;
 using Sofa.CourseManagement.RestApi.Models;
 using Sofa.CourseManagement.RestApi.Models.InstituteUsers;
 using Sofa.CourseManagement.RestApi.Models.Users;
@@ -129,14 +129,14 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		}
 
 		/// <summary>
-		/// Get User Terms list
+		/// Get User Courses list
 		/// </summary>
 		/// <param name="request"></param>
 		/// <response code="200">Successfully get entities</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
 		[HttpGet("/user/{userId:required}/course")]
-		public async Task<ActionResult<Pagination<UserCourseViewModel>>> GetUserTermListAsync([FromQuery] string userId, [FromQuery] GetListRequest request)
+		public async Task<ActionResult<Pagination<UserCourseViewModel>>> GetUserCourseistAsync([FromQuery] string userId, [FromQuery] GetListRequest request)
 		{
 			var query = new GetAllCourseUsersQuery(request.Offset, request.Count, request.Keyword, userId);
 
@@ -146,7 +146,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		}
 
 		/// <summary>
-		/// Add Term to User entity
+		/// Add Course to User entity
 		/// </summary>
 		/// <param name="id"></param>
 		/// <param name="request"></param>
@@ -163,14 +163,14 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		}
 
 		/// <summary>
-		/// Remove Term from User entity
+		/// Remove Course from User entity
 		/// </summary>
 		/// <param name="id"></param>
 		/// <param name="request"></param>
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpDelete("/user/{userId:required}/term/{termId:required}/")]
-		public async Task<ActionResult> RemoveTermFromUserAsync([FromQuery] string userId, [FromQuery] string termId)
+		public async Task<ActionResult> RemoveCourseFromUserAsync([FromQuery] string userId, [FromQuery] string termId)
 		{
 			var command = new DeleteCourseUserCommand(termId, userId);
 

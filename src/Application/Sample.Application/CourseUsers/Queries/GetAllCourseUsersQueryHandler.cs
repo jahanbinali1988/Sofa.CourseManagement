@@ -1,6 +1,6 @@
-﻿using Sofa.CourseManagement.Application.Contract.Exceptions;
-using Sofa.CourseManagement.Application.Contract.UserTerms.Dtos;
-using Sofa.CourseManagement.Application.Contract.UserTerms.Queries;
+﻿using Sofa.CourseManagement.Application.Contract.CourseUsers.Dtos;
+using Sofa.CourseManagement.Application.Contract.CourseUsers.Queries;
+using Sofa.CourseManagement.Application.Contract.Exceptions;
 using Sofa.CourseManagement.Domain.Institutes;
 using Sofa.CourseManagement.Domain.Users;
 using Sofa.CourseManagement.SharedKernel.Application;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Sofa.CourseManagement.Application.UserTerms.Queries
+namespace Sofa.CourseManagement.Application.CourseUsers.Queries
 {
 	internal class GetAllCourseUsersQueryHandler : IQueryHandler<GetAllCourseUsersQuery, Pagination<CourseUserDto>>
 	{
@@ -51,7 +51,7 @@ namespace Sofa.CourseManagement.Application.UserTerms.Queries
 			if (course == null)
 				throw new EntityNotFoundException($"Could not find Course entity with Id {courseId}");
 
-			return course.CourseUsers.Select(s=> new CourseUserDto()
+			return course.CourseUsers.Select(s => new CourseUserDto()
 			{
 				FirstName = s.User.FirstName.Value,
 				LastName = s.User.LastName.Value,
@@ -79,7 +79,7 @@ namespace Sofa.CourseManagement.Application.UserTerms.Queries
 				throw new EntityNotFoundException($"Could not find Course entity with Id {courseId}");
 
 			var user = await _userRepository.GetAsync(userId, cancellationToken);
-			if(user == null)
+			if (user == null)
 				throw new EntityNotFoundException($"Unable to find user with Id {userId}");
 
 			return user.CourseUsers.Select(s => new CourseUserDto()

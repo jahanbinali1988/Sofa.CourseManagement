@@ -1,6 +1,5 @@
 ﻿using Sofa.CourseManagement.Application.Contract.Posts.Commands;
 using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
-using Sofa.CourseManagement.Domain.Institutes.Entities;
 
 namespace Sofa.CourseManagement.RestApi.Models.Posts
 {
@@ -9,7 +8,7 @@ namespace Sofa.CourseManagement.RestApi.Models.Posts
 		public ContentTypeEnum ContentType { get; set; }
 		public dynamic Post { get; set; }
 
-		internal AddPostCommand ToCommand(string instituteId, string fieldId, string courseId, string termId, string sessionId, 
+		internal AddPostCommand ToCommand(string instituteId, string fieldId, string courseId, string sessionId, 
 			string lessonplanId)
 		{
 			return new AddPostCommand()
@@ -17,7 +16,6 @@ namespace Sofa.CourseManagement.RestApi.Models.Posts
 				InstituteId = instituteId,
 				FieldId = fieldId,
 				CourseId = courseId,
-				TermId = termId,
 				LessonPlanId = lessonplanId,
 				Post = Post,
 				ContentType = ContentType,
@@ -25,7 +23,7 @@ namespace Sofa.CourseManagement.RestApi.Models.Posts
 			};
 		}
 
-		internal UpdatePostCommand ToCommand(string instituteId, string fieldId, string courseId, string termId, string sessionId, 
+		internal UpdatePostCommand ToCommand(string instituteId, string fieldId, string courseId, string sessionId, 
 			string lessonplanId, string postId)
 		{
 			return new UpdatePostCommand()
@@ -33,7 +31,6 @@ namespace Sofa.CourseManagement.RestApi.Models.Posts
 				InstituteId = instituteId,
 				FieldId = fieldId,
 				CourseId = courseId,
-				TermId = termId,
 				SessionId = sessionId,
 				LessonPlanId = lessonplanId,
 				Id = postId,

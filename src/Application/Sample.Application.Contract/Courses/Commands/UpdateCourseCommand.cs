@@ -1,9 +1,10 @@
-﻿using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
+﻿using Sofa.CourseManagement.Application.Contract.Shared;
+using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
 using Sofa.CourseManagement.SharedKernel.Application;
 
 namespace Sofa.CourseManagement.Application.Contract.Courses.Commands
 {
-    public class UpdateCourseCommand : CommandBase
+	public class UpdateCourseCommand : CommandBase
 	{
         public Id Id { get; set; }
         public string Title { get; set; }

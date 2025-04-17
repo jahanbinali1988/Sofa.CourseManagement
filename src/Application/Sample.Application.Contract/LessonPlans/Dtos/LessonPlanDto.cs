@@ -4,7 +4,7 @@ using System;
 
 namespace Sofa.CourseManagement.Application.Contract.LessonPlans.Dtos
 {
-    public class LessonPlanDto : EntityBaseDto
+	public class LessonPlanDto : EntityBaseDto
 	{
 		public string Title { get; set; }
 		public Id SessionId { get; set; }

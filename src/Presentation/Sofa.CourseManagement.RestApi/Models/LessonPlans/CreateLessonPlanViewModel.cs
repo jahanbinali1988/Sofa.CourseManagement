@@ -1,17 +1,12 @@
 ﻿using Sofa.CourseManagement.Application.Contract.LessonPlans.Commands;
-using Sofa.CourseManagement.Domain.Contract.Users.Enums;
 
 namespace Sofa.CourseManagement.RestApi.Models.LessonPlans
 {
     public class CreateLessonPlanViewModel : ViewModelBase
 	{
-		public string InstituteId { get; }
-		public string FieldId { get; }
-		public string CourseId { get; }
-		public string TermId { get; }
-		public string SessionId { get; }
+
 		public string Title { get; set; }
-		internal AddLessonPlanCommand ToCommand(string instituteId, string fieldId, string courseId, string termId, string sessionId)
+		internal AddLessonPlanCommand ToCommand(string instituteId, string fieldId, string courseId, string sessionId)
 		{
 			return new AddLessonPlanCommand()
 			{
@@ -23,7 +18,7 @@ namespace Sofa.CourseManagement.RestApi.Models.LessonPlans
 			};
 		}
 
-		internal UpdateLessonPlanCommand ToCommand(string instituteId, string fieldId, string courseId, string termId, string sessionId, string lessonplanId)
+		internal UpdateLessonPlanCommand ToCommand(string instituteId, string fieldId, string courseId, string sessionId, string lessonplanId)
 		{
 			return new UpdateLessonPlanCommand()
 			{

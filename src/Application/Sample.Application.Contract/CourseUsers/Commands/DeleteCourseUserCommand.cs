@@ -1,6 +1,7 @@
-﻿using Sofa.CourseManagement.SharedKernel.Application;
+﻿using Sofa.CourseManagement.Application.Contract.Shared;
+using Sofa.CourseManagement.SharedKernel.Application;
 
-namespace Sofa.CourseManagement.Application.Contract.UserTerms.Commands
+namespace Sofa.CourseManagement.Application.Contract.CourseUsers.Commands
 {
 	public class DeleteCourseUserCommand : CommandBase
 	{

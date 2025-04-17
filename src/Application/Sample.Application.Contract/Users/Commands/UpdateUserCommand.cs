@@ -1,10 +1,11 @@
-﻿using Sofa.CourseManagement.Domain.Contract.Users.Enums;
+﻿using Sofa.CourseManagement.Application.Contract.Shared;
+using Sofa.CourseManagement.Domain.Contract.Users.Enums;
 using Sofa.CourseManagement.SharedKernel.Application;
 using System;
 
 namespace Sofa.CourseManagement.Application.Contract.Users.Commands
 {
-    public class UpdateUserCommand : CommandBase
+	public class UpdateUserCommand : CommandBase
 	{
         public Id Id { get; set; }
         public string UserName { get; set; }
