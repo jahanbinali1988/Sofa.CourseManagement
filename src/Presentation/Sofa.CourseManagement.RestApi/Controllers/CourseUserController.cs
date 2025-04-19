@@ -16,7 +16,8 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpPost("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/user")]
-		public async Task<ActionResult<CourseUserViewModel>> CreateCourseUserAsync([FromQuery] string instituteId, [FromQuery] string fieldId, [FromQuery] string courseId, [FromBody] CreateCourseUserViewModel request)
+		public async Task<ActionResult<CourseUserViewModel>> CreateCourseUserAsync([FromRoute] string instituteId, [FromRoute] string fieldId, 
+			[FromRoute] string courseId, [FromBody] CreateCourseUserViewModel request)
 		{
 			var command = request.ToCommand(instituteId, fieldId, courseId);
 
@@ -32,7 +33,8 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
 		[HttpGet("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/user")]
-		public async Task<ActionResult<Pagination<CourseUserViewModel>>> GetCourseUserListAsync([FromQuery] string instituteId, [FromQuery] string fieldId, [FromQuery] string courseId, [FromQuery] GetListRequest request)
+		public async Task<ActionResult<Pagination<CourseUserViewModel>>> GetCourseUserListAsync([FromRoute] string instituteId, [FromRoute] string fieldId,
+			[FromRoute] string courseId, [FromQuery] GetListRequest request)
 		{
 			var query = new GetAllCourseUsersQuery(request.Offset, request.Count, request.Keyword, instituteId, fieldId, courseId);
 
@@ -47,7 +49,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpDelete("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/user/{courseUserId:required}")]
-		public async Task<ActionResult> DeleteCourseUserAsync([FromQuery] string instituteId, [FromQuery] string fieldId, [FromQuery] string courseId, [FromQuery] string courseUserId)
+		public async Task<ActionResult> DeleteCourseUserAsync([FromRoute] string instituteId, [FromRoute] string fieldId, [FromRoute] string courseId, [FromRoute] string courseUserId)
 		{
 			var command = new DeleteCourseCommand(instituteId, fieldId, courseId);
 

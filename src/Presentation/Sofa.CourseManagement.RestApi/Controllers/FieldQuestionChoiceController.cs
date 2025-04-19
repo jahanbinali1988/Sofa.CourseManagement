@@ -16,7 +16,8 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpPost("/institute/{instituteId:required}/field/{fieldId:required}/question/{questionId:required}/choice")]
-		public async Task<ActionResult<FieldQuestionChoiceViewModel>> CreateFieldQuestionChoiceAsync([FromQuery] string instituteId, [FromQuery] string fieldId, [FromQuery] string questionId, [FromBody] CreateFieldQuestionChoiceViewModel request)
+		public async Task<ActionResult<FieldQuestionChoiceViewModel>> CreateFieldQuestionChoiceAsync([FromRoute] string instituteId, [FromRoute] string fieldId,
+			[FromRoute] string questionId, [FromBody] CreateFieldQuestionChoiceViewModel request)
 		{
 			var command = request.ToCommand(instituteId, fieldId, questionId);
 
@@ -33,7 +34,8 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
 		[HttpGet("/institute/{instituteId:required}/field/{fieldId:required}/question/{questionId:required}/choice/{choiceId:required}")]
-		public async Task<ActionResult<FieldQuestionChoiceViewModel>> GetFieldQuestionChoiceByIdAsync([FromQuery] string instituteId, [FromQuery] string fieldId, [FromQuery] string questionId, [FromQuery] string choiceId)
+		public async Task<ActionResult<FieldQuestionChoiceViewModel>> GetFieldQuestionChoiceByIdAsync([FromRoute] string instituteId, [FromRoute] string fieldId, 
+			[FromRoute] string questionId, [FromRoute] string choiceId)
 		{
 			var query = new GetFieldQuestionChoiceByIdQuery(instituteId, fieldId, questionId, choiceId);
 
@@ -50,7 +52,8 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
 		[HttpGet("/institute/{instituteId:required}/field/{fieldId:required}/question/{questionId:required}/choice")]
-		public async Task<ActionResult<Pagination<FieldQuestionChoiceViewModel>>> GetFieldQuestionChoiceListAsync([FromQuery] string instituteId, [FromQuery] string fieldId, [FromQuery] string questionId, [FromQuery] GetListRequest request)
+		public async Task<ActionResult<Pagination<FieldQuestionChoiceViewModel>>> GetFieldQuestionChoiceListAsync([FromRoute] string instituteId, [FromRoute] string fieldId,
+			[FromRoute] string questionId, [FromQuery] GetListRequest request)
 		{
 			var query = new GetAllFieldQuestionChoicesQuery(instituteId, fieldId, questionId, request.Offset, request.Count, request.Keyword);
 
@@ -60,14 +63,15 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		}
 
 		/// <summary>
-		/// Create Field Question Choice entity
+		/// Update Field Question Choice entity
 		/// </summary>
 		/// <param name="id"></param>
 		/// <param name="request"></param>
-		/// <response code="201" >Entity created</response>
+		/// <response code="201" >Entity updated</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpPut("/institute/{instituteId:required}/field/{fieldId:required}/question/{questionId:required}/choice/{choiceId:required}")]
-		public async Task<ActionResult<FieldQuestionChoiceViewModel>> UpdateFieldQuestionChoiceAsync([FromQuery] string instituteId, [FromQuery] string fieldId, [FromQuery] string questionId, [FromQuery] string choiceId, [FromBody] CreateFieldQuestionChoiceViewModel request)
+		public async Task<ActionResult<FieldQuestionChoiceViewModel>> UpdateFieldQuestionChoiceAsync([FromRoute] string instituteId, [FromRoute] string fieldId, [FromRoute] string questionId,
+			[FromRoute] string choiceId, [FromBody] CreateFieldQuestionChoiceViewModel request)
 		{
 			var command = request.ToCommand(instituteId, fieldId, questionId, choiceId);
 
@@ -77,13 +81,13 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		}
 
 		/// <summary>
-		/// Create Field Question Choice entity
+		/// Delete Field Question Choice entity
 		/// </summary>
 		/// <param name="id"></param>
-		/// <response code="201" >Entity created</response>
+		/// <response code="201" >Entity deleted</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpDelete("/institute/{instituteId:required}/field/{fieldId:required}/question/{questionId:required}/choice/{choiceId:required}")]
-		public async Task<ActionResult> DeleteFieldQuestionChoiceAsync([FromQuery] string instituteId, [FromQuery] string fieldId, [FromQuery] string questionId, [FromQuery] string choiceId)
+		public async Task<ActionResult> DeleteFieldQuestionChoiceAsync([FromRoute] string instituteId, [FromRoute] string fieldId, [FromRoute] string questionId, [FromRoute] string choiceId)
 		{
 			var command = new DeleteFieldQuestionChoiceCommand(instituteId, fieldId, questionId, choiceId);
 

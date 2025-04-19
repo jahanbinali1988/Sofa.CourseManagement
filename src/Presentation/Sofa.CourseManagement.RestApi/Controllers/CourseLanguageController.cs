@@ -16,7 +16,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpPost("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/language")]
-		public async Task<ActionResult<CourseLanguageViewModel>> CreateCourseLanguageAsync([FromQuery] string instituteId, [FromQuery] string fieldId, [FromQuery] string courseId, [FromBody] CreateCourseLanguageViewModel request)
+		public async Task<ActionResult<CourseLanguageViewModel>> CreateCourseLanguageAsync([FromRoute] string instituteId, [FromRoute] string fieldId, [FromRoute] string courseId, [FromBody] CreateCourseLanguageViewModel request)
 		{
 			var command = request.ToCommand(instituteId, fieldId, courseId);
 
@@ -32,7 +32,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
 		[HttpGet("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/language")]
-		public async Task<ActionResult<Pagination<CourseLanguageViewModel>>> GetCourseLanguageListAsync([FromQuery] string instituteId, [FromQuery] string fieldId, [FromQuery] string courseId, [FromQuery] GetListRequest request)
+		public async Task<ActionResult<Pagination<CourseLanguageViewModel>>> GetCourseLanguageListAsync([FromRoute] string instituteId, [FromRoute] string fieldId, [FromRoute] string courseId, [FromQuery] GetListRequest request)
 		{
 			var query = new GetAllCourseLanguagesQuery(instituteId, fieldId, courseId, request.Offset, request.Count, request.Keyword);
 
@@ -48,7 +48,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpDelete("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/language/{courseLanguageId:required}")]
-		public async Task<ActionResult> DeleteCourseLanguageAsync([FromQuery] string instituteId, [FromQuery] string fieldId, [FromQuery] string courseId, [FromQuery] string courseLanguageId)
+		public async Task<ActionResult> DeleteCourseLanguageAsync([FromRoute] string instituteId, [FromRoute] string fieldId, [FromRoute] string courseId, [FromRoute] string courseLanguageId)
 		{
 			var command = new DeleteCourseLanguageCommand(instituteId, fieldId, courseId, courseLanguageId);
 

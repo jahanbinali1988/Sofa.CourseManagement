@@ -16,7 +16,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpPost("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/placement")]
-		public async Task<ActionResult<CoursePlacementViewModel>> CreateCoursePlacementAsync([FromQuery] string instituteId, [FromQuery] string fieldId, [FromQuery] string courseId, [FromBody] CreateCoursePlacementViewModel request)
+		public async Task<ActionResult<CoursePlacementViewModel>> CreateCoursePlacementAsync([FromRoute] string instituteId, [FromRoute] string fieldId, [FromRoute] string courseId, [FromBody] CreateCoursePlacementViewModel request)
 		{
 			var command = request.ToCommand(instituteId, fieldId, courseId);
 
@@ -33,8 +33,8 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
 		[HttpGet("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/placement/{placementId:required}")]
-		public async Task<ActionResult<CoursePlacementViewModel>> GetCoursePlacementByIdAsync([FromQuery] string instituteId, [FromQuery] string fieldId,
-			[FromQuery] string courseId, [FromQuery] string placementId)
+		public async Task<ActionResult<CoursePlacementViewModel>> GetCoursePlacementByIdAsync([FromRoute] string instituteId, [FromRoute] string fieldId,
+			[FromRoute] string courseId, [FromRoute] string placementId)
 		{
 			var query = new GetCoursePlacementByIdQuery(instituteId, fieldId, courseId, placementId);
 
@@ -51,7 +51,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
 		[HttpGet("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/placement")]
-		public async Task<ActionResult<Pagination<CoursePlacementViewModel>>> GetCoursePlacementListAsync([FromQuery] string instituteId, [FromQuery] string fieldId, [FromQuery] string courseId, [FromQuery] GetListRequest request)
+		public async Task<ActionResult<Pagination<CoursePlacementViewModel>>> GetCoursePlacementListAsync([FromRoute] string instituteId, [FromRoute] string fieldId, [FromRoute] string courseId, [FromQuery] GetListRequest request)
 		{
 			var query = new GetAllCoursePlacementsQuery(instituteId, fieldId, courseId, request.Offset, request.Count, request.Keyword);
 
@@ -68,7 +68,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpPut("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/placement/{placementId:required}")]
-		public async Task<ActionResult> UpdateCoursePlacementAsync([FromQuery] string instituteId, [FromQuery] string fieldId, [FromQuery] string courseId, [FromQuery] string placementId, [FromBody] CreateCoursePlacementViewModel request)
+		public async Task<ActionResult> UpdateCoursePlacementAsync([FromRoute] string instituteId, [FromRoute] string fieldId, [FromRoute] string courseId, [FromRoute] string placementId, [FromBody] CreateCoursePlacementViewModel request)
 		{
 			var command = request.ToCommand(instituteId, fieldId, courseId, placementId);
 
@@ -84,7 +84,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpDelete("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/placement/{placementId:required}")]
-		public async Task<ActionResult> DeleteCoursePlacementAsync([FromQuery] string instituteId, [FromQuery] string fieldId, [FromQuery] string courseId, [FromQuery] string placementId)
+		public async Task<ActionResult> DeleteCoursePlacementAsync([FromRoute] string instituteId, [FromRoute] string fieldId, [FromRoute] string courseId, [FromRoute] string placementId)
 		{
 			var command = new DeleteCoursePlacementCommand(instituteId, fieldId, courseId, placementId);
 

@@ -17,8 +17,8 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpPost("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/session")]
-		public async Task<ActionResult<SessionViewModel>> CreateSessionAsync([FromQuery] string instituteId, [FromQuery] string fieldId,
-			[FromQuery] string courseId, [FromBody] CreateSessionViewModel request)
+		public async Task<ActionResult<SessionViewModel>> CreateSessionAsync([FromRoute] string instituteId, [FromRoute] string fieldId,
+			[FromRoute] string courseId, [FromBody] CreateSessionViewModel request)
 		{
 			var command = request.ToCommand(instituteId, fieldId, courseId);
 
@@ -35,8 +35,8 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
 		[HttpGet("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/session/{sessionId:required}")]
-		public async Task<ActionResult<SessionViewModel>> GetSessionByIdAsync([FromQuery] string instituteId, [FromQuery] string fieldId,
-			[FromQuery] string courseId, [FromQuery] string sessionId)
+		public async Task<ActionResult<SessionViewModel>> GetSessionByIdAsync([FromRoute] string instituteId, [FromRoute] string fieldId,
+			[FromRoute] string courseId, [FromRoute] string sessionId)
 		{
 			var query = new GetSessionByIdQuery(instituteId, fieldId, courseId, sessionId);
 
@@ -53,8 +53,8 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
 		[HttpGet("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/session")]
-		public async Task<ActionResult<Pagination<SessionViewModel>>> GetSessionListAsync([FromQuery] string instituteId, [FromQuery] string fieldId,
-			[FromQuery] string courseId, [FromQuery] GetListRequest request)
+		public async Task<ActionResult<Pagination<SessionViewModel>>> GetSessionListAsync([FromRoute] string instituteId, [FromRoute] string fieldId,
+			[FromRoute] string courseId, [FromQuery] GetListRequest request)
 		{
 			var query = new GetAllSessionsQuery(instituteId, fieldId, courseId, request.Offset, request.Count, request.Keyword);
 
@@ -71,8 +71,8 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpPut("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/session/{sessionId:required}")]
-		public async Task<ActionResult<SessionViewModel>> UpdateSessionAsync([FromQuery] string instituteId, [FromQuery] string fieldId,
-			[FromQuery] string courseId, [FromQuery] string sessionId, [FromBody] CreateSessionViewModel request)
+		public async Task<ActionResult<SessionViewModel>> UpdateSessionAsync([FromRoute] string instituteId, [FromRoute] string fieldId,
+			[FromRoute] string courseId, [FromRoute] string sessionId, [FromBody] CreateSessionViewModel request)
 		{
 			var command = request.ToCommand(instituteId, fieldId, courseId, sessionId);
 
@@ -88,8 +88,8 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpDelete("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/session/{sessionId:required}")]
-		public async Task<ActionResult> DeleteSessionAsync([FromQuery] string instituteId, [FromQuery] string fieldId, 
-			[FromQuery] string courseId, [FromQuery] string sessionId)
+		public async Task<ActionResult> DeleteSessionAsync([FromRoute] string instituteId, [FromRoute] string fieldId, 
+			[FromRoute] string courseId, [FromRoute] string sessionId)
 		{
 			var command = new DeleteSessionCommand(instituteId, fieldId, courseId, sessionId);
 			

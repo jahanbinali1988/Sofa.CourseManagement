@@ -14,8 +14,8 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpPost("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/session/{sessionId:required}/lessonplan/{lessonplanId:required}/post/{postId:required}/question")]
-		public async Task<ActionResult<PostQuestionViewModel>> CreatePostQuestionAsync([FromQuery] string instituteId, [FromQuery] string fieldId,
-			[FromQuery] string courseId, [FromQuery] string sessionId, [FromQuery] string lessonplanId, [FromQuery] string postId, [FromBody] CreatePostQuestionViewModel request)
+		public async Task<ActionResult<PostQuestionViewModel>> CreatePostQuestionAsync([FromRoute] string instituteId, [FromRoute] string fieldId,
+			[FromRoute] string courseId, [FromRoute] string sessionId, [FromRoute] string lessonplanId, [FromRoute] string postId, [FromBody] CreatePostQuestionViewModel request)
 		{
 			var command = request.ToCommand(instituteId, fieldId, courseId, sessionId, lessonplanId, postId);
 
@@ -32,8 +32,8 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
 		[HttpGet("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/session/{sessionId:required}/lessonplan/{lessonplanId:required}/post/{postId:required}/question/{questionId:required}")]
-		public async Task<ActionResult<PostQuestionViewModel>> GetPostQuestionByIdAsync([FromQuery] string instituteId, [FromQuery] string fieldId,
-			[FromQuery] string courseId, [FromQuery] string sessionId, [FromQuery] string lessonplanId, [FromQuery] string postId, [FromQuery] string questionId)
+		public async Task<ActionResult<PostQuestionViewModel>> GetPostQuestionByIdAsync([FromRoute] string instituteId, [FromRoute] string fieldId,
+			[FromRoute] string courseId, [FromRoute] string sessionId, [FromRoute] string lessonplanId, [FromRoute] string postId, [FromRoute] string questionId)
 		{
 			var query = new GetPostQuestionByIdQuery(instituteId, fieldId, courseId, sessionId, lessonplanId, postId, questionId);
 
@@ -49,8 +49,8 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpDelete("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/session/{sessionId:required}/lessonplan/{lessonplanId:required}/post/{postId:required}/question/{questionId:required}")]
-		public async Task<ActionResult> DeleteAsync([FromQuery] string instituteId, [FromQuery] string fieldId,
-			[FromQuery] string courseId, [FromQuery] string sessionId, [FromQuery] string lessonplanId, [FromQuery] string postId, [FromQuery] string questionId)
+		public async Task<ActionResult> DeleteAsync([FromRoute] string instituteId, [FromRoute] string fieldId,
+			[FromRoute] string courseId, [FromRoute] string sessionId, [FromRoute] string lessonplanId, [FromRoute] string postId, [FromRoute] string questionId)
 		{
 			var command = new DeletePostQuestionCommand(instituteId, fieldId, courseId, sessionId, lessonplanId, postId, questionId);
 			

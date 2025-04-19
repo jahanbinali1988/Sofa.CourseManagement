@@ -16,7 +16,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpPost("/institute/{instituteId:required}/field/{fieldId:required}/course")]
-		public async Task<ActionResult<CourseViewModel>> CreateCourseAsync([FromQuery] string instituteId, [FromQuery] string fieldId, [FromBody] CreateCourseViewModel request)
+		public async Task<ActionResult<CourseViewModel>> CreateCourseAsync([FromRoute] string instituteId, [FromRoute] string fieldId, [FromBody] CreateCourseViewModel request)
 		{
 			var command = request.ToCommand(instituteId, fieldId);
 
@@ -33,8 +33,8 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
 		[HttpGet("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}")]
-		public async Task<ActionResult<CourseViewModel>> GetCourseByIdAsync([FromQuery] string instituteId, [FromQuery] string fieldId, 
-			[FromQuery] string courseId)
+		public async Task<ActionResult<CourseViewModel>> GetCourseByIdAsync([FromRoute] string instituteId, [FromRoute] string fieldId, 
+			[FromRoute] string courseId)
 		{
 			var query = new GetCourseByIdQuery(instituteId, fieldId, courseId);
 
@@ -51,7 +51,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
 		[HttpGet("/institute/{instituteId:required}/field/{fieldId:required}/course")]
-		public async Task<ActionResult<Pagination<CourseViewModel>>> GetCourseListAsync([FromQuery] string instituteId, [FromQuery] string fieldId, [FromQuery] GetListRequest request)
+		public async Task<ActionResult<Pagination<CourseViewModel>>> GetCourseListAsync([FromRoute] string instituteId, [FromRoute] string fieldId, [FromQuery] GetListRequest request)
 		{
 			var query = new GetAllCoursesQuery(instituteId, fieldId, request.Offset, request.Count, request.Keyword);
 
@@ -68,7 +68,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpPut("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}")]
-		public async Task<ActionResult> UpdateCourseAsync([FromQuery] string instituteId, [FromQuery] string fieldId, [FromQuery] string courseId, [FromBody] CreateCourseViewModel request)
+		public async Task<ActionResult> UpdateCourseAsync([FromRoute] string instituteId, [FromRoute] string fieldId, [FromRoute] string courseId, [FromBody] CreateCourseViewModel request)
 		{
 			var command = request.ToCommand(instituteId, fieldId, courseId);
 
@@ -84,7 +84,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpDelete("/institute/{instituteId:required}/field/{fieldId:required}/course/{id:required}")]
-		public async Task<ActionResult> DeleteCourseAsync([FromQuery] string instituteId, [FromQuery] string fieldId, [FromQuery] string courseId)
+		public async Task<ActionResult> DeleteCourseAsync([FromRoute] string instituteId, [FromRoute] string fieldId, [FromRoute] string courseId)
 		{
 			var command = new DeleteCourseCommand(instituteId, fieldId, courseId);
 

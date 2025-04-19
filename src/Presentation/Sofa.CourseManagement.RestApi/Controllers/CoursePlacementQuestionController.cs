@@ -16,7 +16,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpPost("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/placement/{placementId:required}/question")]
-		public async Task<ActionResult<CoursePlacementQuestionViewModel>> CreateCoursePlacementQuestionAsync([FromQuery] string instituteId, [FromQuery] string fieldId, [FromQuery] string courseId, [FromQuery] string placementId, [FromBody] CreateCoursePlacementQuestionViewModel request)
+		public async Task<ActionResult<CoursePlacementQuestionViewModel>> CreateCoursePlacementQuestionAsync([FromRoute] string instituteId, [FromRoute] string fieldId, [FromRoute] string courseId, [FromRoute] string placementId, [FromBody] CreateCoursePlacementQuestionViewModel request)
 		{
 			var command = request.ToCommand(instituteId, fieldId, courseId, placementId);
 
@@ -32,7 +32,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
 		[HttpGet("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/placement/{placementId:required}/question")]
-		public async Task<ActionResult<Pagination<CoursePlacementQuestionViewModel>>> GetCourseUserListAsync([FromQuery] string instituteId, [FromQuery] string fieldId, [FromQuery] string courseId, [FromQuery] string placementId, [FromQuery] GetListRequest request)
+		public async Task<ActionResult<Pagination<CoursePlacementQuestionViewModel>>> GetCourseUserListAsync([FromRoute] string instituteId, [FromRoute] string fieldId, [FromRoute] string courseId, [FromRoute] string placementId, [FromQuery] GetListRequest request)
 		{
 			var query = new GetAllCoursePlacementQuestionsQuery(instituteId, fieldId, courseId, placementId, request.Offset, request.Count, request.Keyword);
 
@@ -47,7 +47,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpDelete("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/placement/{placementId:required}/question/{questionId:required}")]
-		public async Task<ActionResult> DeleteCoursePlacementQuestionAsync([FromQuery] string instituteId, [FromQuery] string fieldId, [FromQuery] string courseId, [FromQuery] string placementId, [FromQuery] string questionId)
+		public async Task<ActionResult> DeleteCoursePlacementQuestionAsync([FromRoute] string instituteId, [FromRoute] string fieldId, [FromRoute] string courseId, [FromRoute] string placementId, [FromRoute] string questionId)
 		{
 			var command = new DeleteCoursePlacementQuestionCommand(instituteId, fieldId, courseId, placementId, questionId);
 

@@ -16,8 +16,8 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpPost("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/session/{sessionId:required}/lessonplan/{lessonplanId:required}/post")]
-		public async Task<ActionResult<PostBaseViewModel>> CreateAsync([FromQuery] string instituteId, [FromQuery] string fieldId,
-			[FromQuery] string courseId, [FromQuery] string sessionId, [FromQuery] string lessonplanId, [FromBody] CreatePostViewModel request)
+		public async Task<ActionResult<PostBaseViewModel>> CreateAsync([FromRoute] string instituteId, [FromRoute] string fieldId,
+			[FromRoute] string courseId, [FromRoute] string sessionId, [FromRoute] string lessonplanId, [FromBody] CreatePostViewModel request)
 		{
 			var command = request.ToCommand(instituteId, fieldId, courseId, sessionId, lessonplanId);
 
@@ -34,8 +34,8 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
 		[HttpGet("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/session/{sessionId:required}/lessonplan/{lessonplanId:required}/post/{postId:required}")]
-		public async Task<ActionResult<PostBaseViewModel>> GetPostByIdAsync([FromQuery] string instituteId, [FromQuery] string fieldId,
-			[FromQuery] string courseId, [FromQuery] string sessionId, [FromQuery] string lessonplanId, [FromQuery] string postId)
+		public async Task<ActionResult<PostBaseViewModel>> GetPostByIdAsync([FromRoute] string instituteId, [FromRoute] string fieldId,
+			[FromRoute] string courseId, [FromRoute] string sessionId, [FromRoute] string lessonplanId, [FromRoute] string postId)
 		{
 			var query = new GetPostByIdQuery(instituteId, fieldId, courseId, sessionId, lessonplanId, postId);
 
@@ -52,8 +52,8 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
 		[HttpGet("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/session/{sessionId:required}/lessonplan/{lessonplanId:required}/post/")]
-		public async Task<ActionResult<Pagination<PostBaseViewModel>>> GetPostListAsync([FromQuery] string instituteId, [FromQuery] string fieldId,
-			[FromQuery] string courseId, [FromQuery] string sessionId, [FromQuery] string lessonplanId, [FromQuery] GetListRequest request)
+		public async Task<ActionResult<Pagination<PostBaseViewModel>>> GetPostListAsync([FromRoute] string instituteId, [FromRoute] string fieldId,
+			[FromRoute] string courseId, [FromRoute] string sessionId, [FromRoute] string lessonplanId, [FromQuery] GetListRequest request)
 		{
 			var query = new GetAllPostsQuery(instituteId, fieldId, courseId, sessionId, lessonplanId, request.Offset, request.Count, request.Keyword);
 
@@ -70,8 +70,8 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpPut("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/session/{sessionId:required}/lessonplan/{lessonplanId:required}/post/{postId:required}")]
-		public async Task<ActionResult<PostBaseViewModel>> UpdateAsync([FromQuery] string instituteId, [FromQuery] string fieldId,
-			[FromQuery] string courseId, [FromQuery] string sessionId, [FromQuery] string lessonplanId, [FromQuery] string postId,
+		public async Task<ActionResult<PostBaseViewModel>> UpdateAsync([FromRoute] string instituteId, [FromRoute] string fieldId,
+			[FromRoute] string courseId, [FromRoute] string sessionId, [FromRoute] string lessonplanId, [FromRoute] string postId,
 			[FromBody] CreatePostViewModel request)
 		{
 			var command = request.ToCommand(instituteId, fieldId, courseId, sessionId, lessonplanId, postId);
@@ -88,8 +88,8 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpDelete("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}/session/{sessionId:required}/lessonplan/{lessonplanId:required}/post/{postId:required}")]
-		public async Task<ActionResult> DeletePostAsync([FromQuery] string instituteId, [FromQuery] string fieldId,
-			[FromQuery] string courseId, [FromQuery] string sessionId, [FromQuery] string lessonplanId, [FromQuery] string postId)
+		public async Task<ActionResult> DeletePostAsync([FromRoute] string instituteId, [FromRoute] string fieldId,
+			[FromRoute] string courseId, [FromRoute] string sessionId, [FromRoute] string lessonplanId, [FromRoute] string postId)
 		{
 			var command = new DeletePostCommand(instituteId, fieldId, courseId, sessionId, lessonplanId, postId);
 			

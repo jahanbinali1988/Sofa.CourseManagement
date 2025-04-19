@@ -52,7 +52,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="400">Entity has missing/invalid values</response>
 		/// <response code="404">Entity not found</response>
 		[HttpGet("{id:required}")]
-		public async Task<ActionResult<InstituteViewModel>> GetInstituteByIdAsync([FromQuery] string id)
+		public async Task<ActionResult<InstituteViewModel>> GetInstituteByIdAsync([FromRoute] string id)
 		{
 			var query = new GetInstituteByIdQuery(id);
 
@@ -86,7 +86,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpPut("{id:required}")]
-		public async Task<ActionResult<InstituteViewModel>> UpdateInstituteAsync([FromQuery] string id, [FromBody] CreateInstituteViewModel request)
+		public async Task<ActionResult<InstituteViewModel>> UpdateInstituteAsync([FromRoute] string id, [FromBody] CreateInstituteViewModel request)
 		{
 			var command = request.ToCommand(id);
 
@@ -103,7 +103,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpPut("{id:required}/address")]
-		public async Task<ActionResult> UpdateInstituteAddressAsync([FromQuery] string id, [FromBody] UpsertInstituteAddressViewModel request)
+		public async Task<ActionResult> UpdateInstituteAddressAsync([FromRoute] string id, [FromBody] UpsertInstituteAddressViewModel request)
 		{
 			var command = request.ToCommand(id);
 
@@ -119,7 +119,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
 		[HttpDelete("{id:required}")]
-		public async Task<ActionResult> DeleteInstituteAsync([FromQuery] string id)
+		public async Task<ActionResult> DeleteInstituteAsync([FromRoute] string id)
 		{
 			var command = new DeleteInstituteCommand(id);
 			
