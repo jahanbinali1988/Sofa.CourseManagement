@@ -87,5 +87,14 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities.Courses
 		{
 			_courseUsers.Remove(courseUser);
 		}
+
+		public void AddPlacement(CoursePlacement coursePlacement)
+		{
+			_placements.Add(coursePlacement);
+		}
+		public void DeletePlacement(CoursePlacement coursePlacement)
+		{
+			_placements.Remove(coursePlacement);
+		}
 	}
 }

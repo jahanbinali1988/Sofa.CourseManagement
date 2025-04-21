@@ -14,6 +14,8 @@ namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes
 		protected override IQueryable<Institute> ConfigureInclude(IQueryable<Institute> query)
 		{
 			return query.AsQueryable()
+				.Include(x => x.InstituteUsers)
+				.Include(x=> x.InstituteUsers).ThenInclude(x=> x.User)
 				.Include(x=> x.Fields).ThenInclude(x => x.Questions).ThenInclude(x => x.QuestionChoices)
 				.Include(x => x.Fields).ThenInclude(x => x.Questions)
 				.Include(x => x.Fields).ThenInclude(x=> x.Courses).ThenInclude(x=> x.CourseUsers)

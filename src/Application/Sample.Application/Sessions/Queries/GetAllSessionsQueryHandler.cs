@@ -31,9 +31,9 @@ namespace Sofa.CourseManagement.Application.Sessions.Queries
 			if (course == null)
 				return null;
 
-			var sessions = course.Sessions.Where(c => c.Title.Value.ToLower().Contains(request.Keyword));
+			var sessions = course.Sessions.Where(c => string.IsNullOrEmpty(request.Keyword) || c.Title.Value.ToLower().Contains(request.Keyword));
 			var sessionsDtos = sessions
-				.Skip(request.Offset - 1 * request.Count)
+				.Skip(request.Offset * request.Count)
 				.Take(request.Count)
 				.Select(s => new SessionDto()
 				{

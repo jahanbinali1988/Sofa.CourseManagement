@@ -2,7 +2,6 @@
 using Sofa.CourseManagement.Application.Contract.Institutes.Queries;
 using Sofa.CourseManagement.Domain.Institutes;
 using Sofa.CourseManagement.SharedKernel.Application;
-using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;

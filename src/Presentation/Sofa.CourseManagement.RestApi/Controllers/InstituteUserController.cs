@@ -37,7 +37,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		[HttpGet("/institute/{instituteId:required}/user")]
 		public async Task<ActionResult<Pagination<InstituteUserViewModel>>> GetInstituteUserListAsync([FromRoute] string instituteId, [FromQuery] GetListRequest request)
 		{
-			var query = new GetAllInstituteUsersQuery(request.Offset, request.Count, request.Keyword, null, instituteId);
+			var query = new GetAllInstituteUsersQuery(request.Offset, request.Count, request.Keyword, instituteId);
 
 			var instituteUsers = await _mediator.Send(query, HttpContext.RequestAborted);
 

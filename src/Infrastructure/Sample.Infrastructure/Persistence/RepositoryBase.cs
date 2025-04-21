@@ -64,6 +64,7 @@ namespace Sofa.CourseManagement.Infrastructure.Persistence
 		{
 			return DbContext.Set<TEntity>()
 				.Apply(ConfigureInclude)
+				.Where(c => !c.IsDeleted)
 				.SingleOrDefaultAsync(x => x.Id.Equals(id) && !x.IsDeleted, cancellationToken);
 		}
 
@@ -73,7 +74,7 @@ namespace Sofa.CourseManagement.Infrastructure.Persistence
 				.Apply(ConfigureInclude)
 				.Where(predicate)
 				.Where(c=> !c.IsDeleted)
-				.Skip((offset - 1) * count)
+				.Skip(offset * count)
 				.Take(count)
 				.ToListAsync();
 		}

@@ -15,7 +15,7 @@ using Sofa.CourseManagement.SharedKernel.Application;
 namespace Sofa.CourseManagement.RestApi.Controllers
 {
 	[ApiController]
-    [Route("institute")]
+    [Route("/institute")]
     public partial class InstituteController : BaseController
     {
         private readonly ILogger<InstituteController> _logger;
@@ -75,7 +75,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 
             var institutes = await _mediator.Send(query, HttpContext.RequestAborted);
 
-            return institutes.Map();
+            return  institutes.Map();
         }
 
 		/// <summary>

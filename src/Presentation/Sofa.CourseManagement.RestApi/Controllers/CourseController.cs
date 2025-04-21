@@ -83,7 +83,7 @@ namespace Sofa.CourseManagement.RestApi.Controllers
 		/// <param name="id"></param>
 		/// <response code="201" >Entity created</response>
 		/// <response code="400">Entity has missing/invalid values</response>
-		[HttpDelete("/institute/{instituteId:required}/field/{fieldId:required}/course/{id:required}")]
+		[HttpDelete("/institute/{instituteId:required}/field/{fieldId:required}/course/{courseId:required}")]
 		public async Task<ActionResult> DeleteCourseAsync([FromRoute] string instituteId, [FromRoute] string fieldId, [FromRoute] string courseId)
 		{
 			var command = new DeleteCourseCommand(instituteId, fieldId, courseId);

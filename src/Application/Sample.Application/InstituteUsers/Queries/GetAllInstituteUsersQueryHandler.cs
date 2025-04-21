@@ -25,7 +25,7 @@ namespace Sofa.CourseManagement.Application.InstituteUsers.Queries
 		public async Task<Pagination<InstituteUserDto>> Handle(GetAllInstituteUsersQuery request, CancellationToken cancellationToken)
 		{
 			List<InstituteUserDto> instituteUsers = new List<InstituteUserDto>();
-			if (request.UserId == null)
+			if (request.UserId != null)
 				instituteUsers = await GetInstituteUsersByUserIdAsync(request.UserId.Value, cancellationToken);
 			else
 				instituteUsers = await GetInstituteUsersByInstituteIdAsync(request.InstituteId.Value, cancellationToken);
@@ -39,21 +39,30 @@ namespace Sofa.CourseManagement.Application.InstituteUsers.Queries
 
 		private async Task<List<InstituteUserDto>> GetInstituteUsersByInstituteIdAsync(Guid instituteId, CancellationToken cancellationToken)
 		{
+			var result = new List<InstituteUserDto>();
+
 			var institute = await _instituteRepository.GetAsync(instituteId, cancellationToken);
 			if (institute == null)
 				throw new EntityNotFoundException($"Could not find Institute entity with Id {instituteId}");
 
-			return institute.InstituteUsers.Select(s => new InstituteUserDto()
+			foreach (var instituteUser in institute.InstituteUsers)
 			{
-				Id = s.Id,
-				UserId = s.UserId,
-				InstituteId = s.InstituteId,
-				FirstName = s.User.FirstName.Value,
-				InstituteTitle = s.Institute.Title.Value,
-				LastName = s.User.LastName.Value,
-				UserName = s.User.UserName.Value,
-				UserPhoneNumber = s.User.PhoneNumber.Value
-			}).ToList();
+				var user = await _userRepository.GetAsync(instituteUser.UserId, cancellationToken);
+				var dto = new InstituteUserDto()
+				{
+					Id = instituteUser.Id,
+					UserId = user.Id,
+					InstituteId = instituteUser.InstituteId,
+					FirstName = user.FirstName.Value,
+					InstituteTitle = instituteUser.Institute.Title.Value,
+					LastName = user.LastName.Value,
+					UserName = user.UserName.Value,
+					UserPhoneNumber = user.PhoneNumber.Value
+				};
+				result.Add(dto);
+			}
+
+			return result;
 		}
 
 		private async Task<List<InstituteUserDto>> GetInstituteUsersByUserIdAsync(Guid userId, CancellationToken cancellationToken)

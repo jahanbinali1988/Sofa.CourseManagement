@@ -1,13 +1,13 @@
 ﻿using Sofa.CourseManagement.Application.Contract.Shared;
+using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
 using Sofa.CourseManagement.Domain.Contract.Users.Enums;
-using Sofa.CourseManagement.Domain.Institutes.ValueObjects;
 using Sofa.CourseManagement.SharedKernel.Application;
 
 namespace Sofa.CourseManagement.Application.Contract.FieldQuestions.Commands
 {
 	public class UpdateFieldQuestionCommand : CommandBase
 	{
-		public UpdateFieldQuestionCommand(string instituteId, string fieldId, string questionId, string title, string content, LevelEnum level, QuestionType type)
+		public UpdateFieldQuestionCommand(string instituteId, string fieldId, string questionId, string title, string content, LevelEnum level, QuestionTypeEnum type)
 		{
 			InstituteId = instituteId;
 			FieldId = fieldId;
@@ -24,6 +24,6 @@ namespace Sofa.CourseManagement.Application.Contract.FieldQuestions.Commands
 		public string Title { get; }
 		public string Content { get; }
 		public LevelEnum Level { get; }
-		public QuestionType Type { get; }
+		public QuestionTypeEnum Type { get; }
 	}
 }

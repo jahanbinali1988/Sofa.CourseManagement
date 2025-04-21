@@ -13,8 +13,8 @@ namespace Sofa.CourseManagement.Application.Contract.CourseLanguages.Queries
 			CourseId = courseId;
 		}
 
-		public string InstituteId { get; }
-		public string FieldId { get; }
-		public string CourseId { get; }
+		public Id InstituteId { get; }
+		public Id FieldId { get; }
+		public Id CourseId { get; }
 	}
 }

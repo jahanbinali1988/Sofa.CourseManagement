@@ -1,4 +1,5 @@
 ﻿using Sofa.CourseManagement.Application.Contract.CourseLanguages.Dtos;
+using Sofa.CourseManagement.Application.Contract.Shared;
 using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
 using Sofa.CourseManagement.SharedKernel.Application;
 
@@ -15,9 +16,9 @@ namespace Sofa.CourseManagement.Application.Contract.CourseLanguages.Commands
 			CourseTitle = courseTitle;
 		}
 
-		public string InstituteId { get; }
-		public string FieldId { get; }
-		public string CourseId { get; }
+		public Id InstituteId { get; }
+		public Id FieldId { get; }
+		public Id CourseId { get; }
 		public LanguageEnum Language { get; }
 		public string CourseTitle { get; }
 	}

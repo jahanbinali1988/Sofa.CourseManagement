@@ -17,7 +17,7 @@ namespace Sofa.CourseManagement.Application.Contract.FieldQuestions.Queries
 			FieldId = fieldId;
 		}
 
-		public string InstituteId { get; }
-		public string FieldId { get; }
+		public Id InstituteId { get; }
+		public Id FieldId { get; }
 	}
 }

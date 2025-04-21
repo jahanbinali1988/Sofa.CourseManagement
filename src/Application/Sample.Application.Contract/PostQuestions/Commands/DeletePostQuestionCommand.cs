@@ -1,4 +1,5 @@
-﻿using Sofa.CourseManagement.SharedKernel.Application;
+﻿using Sofa.CourseManagement.Application.Contract.Shared;
+using Sofa.CourseManagement.SharedKernel.Application;
 
 namespace Sofa.CourseManagement.Application.Contract.PostQuestions.Commands
 {
@@ -15,12 +16,12 @@ namespace Sofa.CourseManagement.Application.Contract.PostQuestions.Commands
 			QuestionId = questionId;
 		}
 
-		public string InstituteId { get; }
-		public string FieldId { get; }
-		public string CourseId { get; }
-		public string SessionId { get; }
-		public string LessonplanId { get; }
-		public string PostId { get; }
-		public string QuestionId { get; }
+		public Id InstituteId { get; }
+		public Id FieldId { get; }
+		public Id CourseId { get; }
+		public Id SessionId { get; }
+		public Id LessonplanId { get; }
+		public Id PostId { get; }
+		public Id QuestionId { get; }
 	}
 }

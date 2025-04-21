@@ -1,4 +1,5 @@
 ﻿using Sofa.CourseManagement.Application.Contract.CoursePlacements.Dtos;
+using Sofa.CourseManagement.Application.Contract.Shared;
 using Sofa.CourseManagement.SharedKernel.Application;
 
 namespace Sofa.CourseManagement.Application.Contract.CoursePlacements.Commands
@@ -17,9 +18,9 @@ namespace Sofa.CourseManagement.Application.Contract.CoursePlacements.Commands
 			Title = title;
 		}
 
-		public string InstituteId { get; }
-		public string FieldId { get; }
-		public string CourseId { get; }
-		public string Title { get; }
+		public Id InstituteId { get; }
+		public Id FieldId { get; }
+		public Id CourseId { get; }
+		public Id Title { get; }
 	}
 }

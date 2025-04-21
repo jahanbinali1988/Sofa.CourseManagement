@@ -18,6 +18,7 @@ namespace Sofa.CourseManagement.Application.InstituteUsers.DomainEventConsumers
 		protected override async Task HandleEvent(DeleteInstituteUserDomainEvent notification, CancellationToken cancellationToken)
 		{
 			await _publisher.PublishMessageAsync(notification, "");
+
 		}
 	}
 }

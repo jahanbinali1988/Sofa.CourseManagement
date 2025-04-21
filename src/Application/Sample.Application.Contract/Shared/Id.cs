@@ -21,8 +21,15 @@ public struct Id
 	// Parse: تبدیل رشته Base32 به Id
 	public static Id Parse(string encoded)
 	{
-		var bytes = ConvertFromBase32(encoded);
-		return new Id(new Guid(bytes));
+		if (string.IsNullOrEmpty(encoded))
+		{
+			return null;
+		}
+		else
+		{
+			var bytes = ConvertFromBase32(encoded);
+			return new Id(new Guid(bytes));
+		}
 	}
 
 	// Implicit Conversion از Guid به Id

@@ -6,9 +6,9 @@ namespace Sofa.CourseManagement.RestApi.Models.InstituteUsers
 {
 	public class InstituteUserViewModel : ViewModelBase
 	{
-		public Id UserId { get; set; }
+		public string UserId { get; set; }
 		public string UserName { get; set; }
-		public Id InstituteId { get; set; }
+		public string InstituteId { get; set; }
 		public string InstituteTitle { get; set; }
 
 		internal static InstituteUserViewModel Create(InstituteUserDto s)

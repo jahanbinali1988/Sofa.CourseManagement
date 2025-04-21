@@ -8,7 +8,7 @@ namespace Sofa.CourseManagement.RestApi.Models.Courses
 	{
 		public string QuestionId { get; set; }
 		public string QuestionTitle { get; set; }
-		public int Order { get; set; }
+		public short Order { get; set; }
 
 		internal AddCoursePlacementQuestionCommand ToCommand(string instituteId, string fieldId, string courseId, string placementId)
 		{

@@ -14,4 +14,13 @@
 		<ProjectReference Include="..\Sample.Application.Contract\Sofa.CourseManagement.Application.Contract.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="CourseLanguages\DomainEventConsumers\" />
+	  <Folder Include="CoursePlacementQuestions\DomainEventConsumers\" />
+	  <Folder Include="CoursePlacements\DomainEventConsumers\" />
+	  <Folder Include="FieldQuestionChoices\DomainEventConsumers\" />
+	  <Folder Include="FieldQuestions\DomainEventConsumers\" />
+	  <Folder Include="PostQuestions\DomainEventConsumers\" />
+	</ItemGroup>
+
 </Project>

@@ -5,9 +5,9 @@ using Sofa.CourseManagement.SharedKernel.Application;
 
 namespace Sofa.CourseManagement.Application.Contract.PostQuestions.Commands
 {
-	public class CreatePostQuestionCommand : CommandBase<PostQuestionDto>
+	public class AddPostQuestionCommand : CommandBase<PostQuestionDto>
 	{
-		public CreatePostQuestionCommand(string instituteId, string fieldId, string courseId, string sessionId, string lessonplanId, 
+		public AddPostQuestionCommand(string instituteId, string fieldId, string courseId, string sessionId, string lessonplanId, 
 			string postId, PriorityEnum priority, string questionId, string questionTitle, string postTitle)
 		{
 			InstituteId = instituteId;

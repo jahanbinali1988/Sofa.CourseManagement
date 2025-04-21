@@ -6,6 +6,10 @@ namespace Sofa.CourseManagement.Application.Contract.InstituteUsers.Queries
 {
 	public class GetAllInstituteUsersQuery : GetListQueryBase, IQuery<Pagination<InstituteUserDto>>
 	{
+		public GetAllInstituteUsersQuery(int offset, int count, string keyword, string? instituteId) : base(offset, count, keyword)
+		{
+			InstituteId = instituteId;
+		}
 		public GetAllInstituteUsersQuery(int offset, int count, string keyword, string? userId, string? instituteId) : base(offset, count, keyword)
 		{
 			UserId = userId;

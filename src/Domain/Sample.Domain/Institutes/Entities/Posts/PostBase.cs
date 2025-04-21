@@ -17,8 +17,8 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities.Posts
 		public Guid LessonPlanId { get; private set; }
 		public LessonPlan LessonPlan { get; private set; }
 
-		public Guid QuestionId { get; private set; }
-		public PostQuestion Question { get; private set; }
+		public Guid? QuestionId { get; private set; }
+		public PostQuestion? Question { get; private set; }
 
 		protected PostBase() : base()
 		{
@@ -34,5 +34,15 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities.Posts
 
 		public abstract void Update(string title, string content, ContentTypeEnum contentType, short order);
 		public abstract void Delete();
+		public void AddQuestion(PostQuestion postQuestion)
+		{
+			Question = postQuestion;
+			QuestionId = postQuestion.Id;
+		}
+		public void RemoveQuestion(PostQuestion postQuestion)
+		{
+			Question = null;
+			QuestionId = null;
+		}
 	}
 }

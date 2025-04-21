@@ -6,7 +6,7 @@ namespace Sofa.CourseManagement.Application.Contract.CoursePlacementQuestions.Co
 {
 	public class AddCoursePlacementQuestionCommand : CommandBase<CoursePlacementQuestionDto>
 	{
-		public AddCoursePlacementQuestionCommand(string instituteId, string fieldId, string courseId, string placementId, string questionId, string questionTitle, int order)
+		public AddCoursePlacementQuestionCommand(string instituteId, string fieldId, string courseId, string placementId, string questionId, string questionTitle, short order)
 		{
 			InstituteId = instituteId;
 			FieldId = fieldId;
@@ -23,6 +23,6 @@ namespace Sofa.CourseManagement.Application.Contract.CoursePlacementQuestions.Co
 		public Id PlacementId { get; }
 		public Id QuestionId { get; }
 		public string QuestionTitle { get; }
-		public int Order { get; }
+		public short Order { get; }
 	}
 }

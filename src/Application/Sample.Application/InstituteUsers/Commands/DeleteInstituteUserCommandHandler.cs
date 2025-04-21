@@ -23,12 +23,12 @@ namespace Sofa.CourseManagement.Application.InstituteUsers.Commands
 			if (institute == null)
 				throw new EntityNotFoundException($"Could not find Institute entity with Id {request.InstituteId}");
 
-			var instituteUsers = institute.InstituteUsers.SingleOrDefault(c => c.UserId == request.UserId);
+			var instituteUsers = institute.InstituteUsers.FirstOrDefault(c => c.UserId == request.UserId);
 			if (instituteUsers == null)
 				throw new EntityNotFoundException($"Could not find InstituteUser entity with User Id {request.UserId}");
 
 			instituteUsers.Delete();
-			institute.DeleteUser(instituteUsers);
+			//institute.DeleteUser(instituteUsers);
 
 			await _unitOfWork.CommitAsync(cancellationToken);
 

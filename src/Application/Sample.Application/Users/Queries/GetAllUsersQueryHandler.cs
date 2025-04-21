@@ -19,8 +19,9 @@ namespace Sofa.CourseManagement.Application.Users.Queries
 
 		public async Task<Pagination<UserDto>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
 		{
-			var users = await _userRepository.GetListAsync(c=> c.
-					UserName.Value.Contains(request.Keyword) ||
+			var users = await _userRepository.GetListAsync(c =>
+					string.IsNullOrEmpty(request.Keyword) ||
+					c.UserName.Value.Contains(request.Keyword) ||
 					c.FirstName.Value.Contains(request.Keyword) ||
 					c.LastName.Value.Contains(request.Keyword) ||
 					c.Email.Value.Contains(request.Keyword) ||
@@ -30,7 +31,7 @@ namespace Sofa.CourseManagement.Application.Users.Queries
 			return new Pagination<UserDto>()
 			{
 				TotalItems = count,
-				Items = users.Select(s=> new UserDto()
+				Items = users.Select(s => new UserDto()
 				{
 					Email = s.Email.Value,
 					FirstName = s.FirstName.Value,

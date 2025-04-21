@@ -11,9 +11,9 @@ namespace Sofa.CourseManagement.RestApi.Models.Posts
 		public string QuestionTitle { get; set; }
 		public string PostTitle { get; set; }
 
-		internal CreatePostQuestionCommand ToCommand(string instituteId, string fieldId, string courseId, string sessionId, string lessonplanId, string postId)
+		internal AddPostQuestionCommand ToCommand(string instituteId, string fieldId, string courseId, string sessionId, string lessonplanId, string postId)
 		{
-			return new CreatePostQuestionCommand(instituteId, fieldId, courseId, sessionId, lessonplanId, postId, Priority, QuestionId, QuestionTitle, PostTitle);
+			return new AddPostQuestionCommand(instituteId, fieldId, courseId, sessionId, lessonplanId, postId, Priority, QuestionId, QuestionTitle, PostTitle);
 		}
 	}
 }

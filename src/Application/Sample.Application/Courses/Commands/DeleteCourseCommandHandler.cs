@@ -32,7 +32,7 @@ namespace Sofa.CourseManagement.Application.Courses.Commands
 				throw new EntityNotFoundException($"Could not find Course entity with Id {request.Id}");
 
 			course.Delete();
-			field.DeleteCourse(course);
+			//field.DeleteCourse(course);
 
 			await _unitOfWork.CommitAsync(cancellationToken);
 

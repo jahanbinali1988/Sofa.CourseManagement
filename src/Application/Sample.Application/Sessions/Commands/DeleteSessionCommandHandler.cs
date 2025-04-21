@@ -37,7 +37,7 @@ namespace Sofa.CourseManagement.Application.Sessions.Commands
 				throw new EntityNotFoundException($"Could not find Session entity with Id {request.Id}");
 
 			session.Delete();
-			course.DeleteSession(session);
+			//course.DeleteSession(session);
 
 			await _unitOfWork.CommitAsync(cancellationToken);
 
