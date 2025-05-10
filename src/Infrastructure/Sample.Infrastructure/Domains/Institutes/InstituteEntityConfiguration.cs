@@ -14,7 +14,7 @@ namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes
         {
             builder.HasIndex(x => x.Id).IsUnique();
 
-			builder.HasMany<Field>(c=> c.Fields).WithOne().HasForeignKey(x => x.InstituteId).IsRequired().OnDelete(DeleteBehavior.Cascade);
+			builder.HasMany<Field>(c=> c.Fields).WithOne(c=> c.Institute).HasForeignKey(x => x.InstituteId).IsRequired().OnDelete(DeleteBehavior.Cascade);
 			builder.Metadata.FindNavigation(nameof(Institute.Fields))?.SetPropertyAccessMode(PropertyAccessMode.Field);
 			
 			builder.HasMany<InstituteUser>(c => c.InstituteUsers).WithOne(c=> c.Institute).HasForeignKey(x => x.InstituteId).IsRequired().OnDelete(DeleteBehavior.NoAction);

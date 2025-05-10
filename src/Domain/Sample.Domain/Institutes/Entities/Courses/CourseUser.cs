@@ -19,6 +19,7 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities.Courses
 		}
 
 		public Guid CourseId { get; private set; }
+		public Course Course { get; private set; }
 		public Guid UserId { get; private set; }
 		public User User { get; private set; }
 

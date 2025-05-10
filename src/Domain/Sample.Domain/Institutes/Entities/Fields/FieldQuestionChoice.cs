@@ -22,6 +22,7 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
 		public Content Content { get; private set; }
 		public bool IsAnswer { get; private set; }
 		public Guid FieldQuestionId { get; private set; }
+		public FieldQuestion FieldQuestion { get; private set; }
 
 		private void AssignContent(string content) { this.Content = content; }
 		private void AssignIsAnswer(bool isAnswer) { this.IsAnswer = isAnswer; }

@@ -12,7 +12,9 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities.Courses
 	{
 		public Title Title { get; private set; }
 		public AgeRange AgeRange { get; private set; }
+
 		public Guid FieldId { get; private set; }
+		public Field Field { get; private set; }
 
 		public IReadOnlyList<Session> Sessions => _sessions.AsReadOnly();
 		public readonly List<Session> _sessions;

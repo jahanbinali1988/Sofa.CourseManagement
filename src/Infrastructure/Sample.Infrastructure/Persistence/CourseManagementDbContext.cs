@@ -29,7 +29,7 @@ namespace Sofa.CourseManagement.Infrastructure.Persistence
             builder.ApplyConfiguration(new FieldQuestionEntityConfiguration());
 			builder.ApplyConfiguration(new FieldQuestionChoiceEntityConfiguration());
 			builder.ApplyConfiguration(new CourseEntityConfiguration());
-			builder.ApplyConfiguration(new CourseUserEntiityConfiguration());
+			builder.ApplyConfiguration(new CourseUserEntityConfiguration());
 			builder.ApplyConfiguration(new CoursePlacementEntityConfiguration());
             builder.ApplyConfiguration(new CoursePlacementQuestionEntityConfiguration());
 			builder.ApplyConfiguration(new CourseLanguageEntityConfiguration());

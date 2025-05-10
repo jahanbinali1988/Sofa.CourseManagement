@@ -8,7 +8,7 @@ namespace Sofa.CourseManagement.Application.Contract.LessonPlans.Commands
 {
 	public class AddLessonPlanCommand : CommandBase<LessonPlanDto>
 	{
-		public string Title { get; set; }
+		public string CourseLanguageTitle { get; set; }
 		public Id SessionId { get; set; }
 		public Id InstituteId { get; set; }
 		public Id FieldId { get; set; }

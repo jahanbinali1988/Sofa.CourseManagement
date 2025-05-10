@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
 using Sofa.CourseManagement.Domain.Shared.Constants;
 using Sofa.CourseManagement.Domain.Institutes.Entities.Posts;
 

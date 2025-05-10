@@ -27,8 +27,10 @@ namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes.Entieis
 
             builder.HasQueryFilter(p => EF.Property<bool>(p, "IsDeleted") == false);
 
-            builder.HasMany(c => c.Posts).WithOne().HasForeignKey(x => x.LessonPlanId).IsRequired().OnDelete(DeleteBehavior.Cascade);
-            builder.HasOne<CourseLanguage>(c => c.CourseLanguage).WithMany().OnDelete(DeleteBehavior.NoAction); ;
+            builder.HasMany(c => c.Posts).WithOne(c=> c.LessonPlan).HasForeignKey(x => x.LessonPlanId).IsRequired().OnDelete(DeleteBehavior.Cascade);
+			builder.Metadata.FindNavigation(nameof(LessonPlan.Posts))?.SetPropertyAccessMode(PropertyAccessMode.Field);
+
+			builder.HasOne<CourseLanguage>(c => c.CourseLanguage).WithMany().OnDelete(DeleteBehavior.NoAction); ;
 
 			builder.OwnsOne(p => p.Title, m =>
             {

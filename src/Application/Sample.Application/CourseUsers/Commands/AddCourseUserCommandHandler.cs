@@ -44,7 +44,11 @@ namespace Sofa.CourseManagement.Application.CourseUsers.Commands
 			if (course == null)
 				throw new EntityNotFoundException($"Could not find Course entity with Id {courseId}");
 
-			var user = await _unitOfWork.UserRepository.GetAsync(userId, cancellationToken);
+			var instituteUser = institute.InstituteUsers.SingleOrDefault(c=> c.UserId == userId);
+			if (instituteUser == null)
+				throw new EntityNotFoundException($"Could not find User entity with Id {userId}");
+
+			var user = await  _unitOfWork.UserRepository.GetAsync(userId, cancellationToken);
 			if (user == null)
 				throw new EntityNotFoundException($"Could not find User entity with Id {userId}");
 

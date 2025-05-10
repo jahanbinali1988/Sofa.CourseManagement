@@ -3,6 +3,7 @@ using Sofa.CourseManagement.Application.Contract.CourseUsers.Queries;
 using Sofa.CourseManagement.Application.Contract.Exceptions;
 using Sofa.CourseManagement.Domain.Institutes;
 using Sofa.CourseManagement.Domain.Users;
+using Sofa.CourseManagement.Domain.Users.ValueObjects;
 using Sofa.CourseManagement.SharedKernel.Application;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace Sofa.CourseManagement.Application.CourseUsers.Queries
 		public async Task<Pagination<CourseUserDto>> Handle(GetAllCourseUsersQuery request, CancellationToken cancellationToken)
 		{
 			List<CourseUserDto> courseUsers = new List<CourseUserDto>();
-			if (request.UserId == null)
+			if (request.UserId != null)
 				courseUsers = await GetCourseUserByUserIdAsync(request.UserId.Value, request.InstituteId.Value, request.FieldId, request.CourseId, cancellationToken);
 			else
 				courseUsers = await GetCourseUserByCourseIdAsync(request.InstituteId.Value, request.FieldId, request.CourseId, cancellationToken);
@@ -51,17 +52,25 @@ namespace Sofa.CourseManagement.Application.CourseUsers.Queries
 			if (course == null)
 				throw new EntityNotFoundException($"Could not find Course entity with Id {courseId}");
 
-			return course.CourseUsers.Select(s => new CourseUserDto()
+			var courseUsers = course.CourseUsers.Select(s => new CourseUserDto()
 			{
-				FirstName = s.User.FirstName.Value,
-				LastName = s.User.LastName.Value,
 				Id = s.Id,
 				CourseId = s.CourseId,
 				CourseTitle = course.Title.Value,
 				UserId = s.UserId,
-				UserName = s.User.UserName.Value,
-				UserPhoneNumber = s.User.PhoneNumber.Value,
 			}).ToList();
+
+			foreach (var courseUser in courseUsers)
+			{
+				Guid userId = courseUser.UserId;
+				var user = await _userRepository.GetAsync(userId, cancellationToken);
+				courseUser.FirstName = user.FirstName.Value;
+				courseUser.LastName = user.LastName.Value;
+				courseUser.UserName = user.UserName.Value;
+				courseUser.UserPhoneNumber = user.PhoneNumber.Value;
+			}
+
+			return courseUsers;
 		}
 
 		private async Task<List<CourseUserDto>> GetCourseUserByUserIdAsync(Guid userId, Guid instituteId, Guid fieldId, Guid courseId, CancellationToken cancellationToken)

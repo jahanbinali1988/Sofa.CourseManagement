@@ -20,6 +20,7 @@ namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes
 				.Include(x => x.Fields).ThenInclude(x => x.Questions)
 				.Include(x => x.Fields).ThenInclude(x=> x.Courses).ThenInclude(x=> x.CourseUsers)
 				.Include(x => x.Fields).ThenInclude(x => x.Courses).ThenInclude(x => x.Placements)
+				.Include(x => x.Fields).ThenInclude(x => x.Courses).ThenInclude(x => x.Placements).ThenInclude(x=> x.Questions)
 				.Include(x => x.Fields).ThenInclude(x => x.Courses).ThenInclude(x => x.CourseLanguages)
 				.Include(x => x.Fields).ThenInclude(x => x.Courses).ThenInclude(x=> x.Sessions)
 				.Include(x => x.Fields).ThenInclude(x => x.Courses).ThenInclude(x=> x.Sessions).ThenInclude(x=> x.LessonPlans)

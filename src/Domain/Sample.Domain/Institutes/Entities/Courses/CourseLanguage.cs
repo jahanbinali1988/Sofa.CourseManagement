@@ -21,6 +21,7 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities.Courses
 
 		public Language Language { get; private set; }
 		public Guid CourseId { get; private set; }
+		public Course Course { get; private set; }
 
 		public void AssignLanguage(LanguageEnum language) { Language = language; }
 		public void AssignCourse(Guid courseId) {  CourseId = courseId; }

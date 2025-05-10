@@ -21,7 +21,7 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities.Courses
 
 		public OrderNumber Order { get; private set; }
 		public Guid PlacementId { get; private set; }
-		public CoursePlacement coursePlacement { get; private set; }
+		public CoursePlacement CoursePlacement { get; private set; }
 		public Guid QuestionId { get; private set; }
 		public FieldQuestion Question { get; private set; }
 

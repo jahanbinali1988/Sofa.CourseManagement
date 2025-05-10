@@ -40,7 +40,7 @@ namespace Sofa.CourseManagement.Application.LessonPlans.Commands
 			if (session == null)
 				throw new EntityNotFoundException($"Could not find Session entity with Id {request.SessionId}");
 
-			var lessonplan = LessonPlan.CreateInstance(_idGenerator.GetNewId(), request.Title, session.Id, request.CourseLanguageId);
+			var lessonplan = LessonPlan.CreateInstance(_idGenerator.GetNewId(), request.CourseLanguageTitle, session.Id, request.CourseLanguageId);
 			session.AddLessonPlan(lessonplan);
 
 			await _unitOfWork.CommitAsync(cancellationToken);

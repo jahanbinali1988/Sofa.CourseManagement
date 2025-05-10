@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Sofa.CourseManagement.Domain.Institutes.Entities;
 using Sofa.CourseManagement.Domain.Shared.Constants;
-using Sofa.CourseManagement.Domain.Institutes.Entities.Courses;
 
 namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes.Entieis
 {
@@ -14,9 +13,11 @@ namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes.Entieis
 			builder.HasIndex(x => x.Id)
 				.IsUnique();
 
-			builder.HasMany<FieldQuestionChoice>(c => c.QuestionChoices).WithOne().HasForeignKey(x => x.FieldQuestionId).IsRequired().OnDelete(DeleteBehavior.Cascade);
+			builder.HasMany<FieldQuestionChoice>(c => c.QuestionChoices).WithOne(c=> c.FieldQuestion).HasForeignKey(x => x.FieldQuestionId).IsRequired().OnDelete(DeleteBehavior.Cascade);
+			builder.Metadata.FindNavigation(nameof(FieldQuestion.QuestionChoices))?.SetPropertyAccessMode(PropertyAccessMode.Field);
+
 			//builder.HasMany<CoursePlacementQuestion>(c => c.CoursePlacementQuestions).WithOne().HasForeignKey(x => x.QuestionId).IsRequired().OnDelete(DeleteBehavior.Cascade);
-			
+
 			builder.OwnsOne(p => p.Title, m =>
 			{
 				m.Property(x => x.Value)
@@ -53,26 +54,6 @@ namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes.Entieis
 					.HasColumnName(nameof(FieldQuestion.Type))
 					.IsRequired(true);
 			});
-
-			base.Configure(builder);
-		}
-	}
-	internal class FieldQuestionChoiceEntityConfiguration : BaseEntityTypeConfiguration<FieldQuestionChoice>
-	{
-		public override void Configure(EntityTypeBuilder<FieldQuestionChoice> builder)
-		{
-
-			builder.HasIndex(x => x.Id)
-				.IsUnique();
-
-			builder.OwnsOne(p => p.Content, m =>
-			{
-				m.Property(x => x.Value)
-					.HasColumnName(nameof(FieldQuestion.Content))
-					.HasMaxLength(ConstantValues.MaxStringContentLength)
-					.IsRequired(true);
-			});
-			builder.Property(c => c.IsAnswer);
 
 			base.Configure(builder);
 		}

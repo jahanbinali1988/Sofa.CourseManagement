@@ -27,7 +27,7 @@ namespace Sofa.CourseManagement.Application.CourseLanguages.Queries
 				return null;
 
 			var course = field.Courses.SingleOrDefault(c => c.Id == request.CourseId);
-			if (field == null)
+			if (course == null)
 				return null;
 
 			var courseLanguageCount = course.CourseLanguages.Count();

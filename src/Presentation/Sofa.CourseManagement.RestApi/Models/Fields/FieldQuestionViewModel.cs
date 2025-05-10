@@ -1,4 +1,5 @@
 ﻿using Sofa.CourseManagement.Application.Contract.FieldQuestions.Dtos;
+using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
 using Sofa.CourseManagement.Domain.Contract.Users.Enums;
 using Sofa.CourseManagement.Domain.Institutes.ValueObjects;
 using Sofa.CourseManagement.SharedKernel.Application;
@@ -10,11 +11,18 @@ namespace Sofa.CourseManagement.RestApi.Models.Fields
 		public string Title { get; set; }
 		public string Content { get; set; }
 		public LevelEnum Level { get; set; }
-		public QuestionType Type { get; set; }
+		public QuestionTypeEnum Type { get; set; }
 
 		internal static FieldQuestionViewModel Create(FieldQuestionDto fieldQuestion)
 		{
-			throw new NotImplementedException();
+			return new FieldQuestionViewModel()
+			{
+				Content = fieldQuestion.Content,
+				Id = fieldQuestion.Id,
+				Level = fieldQuestion.Level,
+				Title = fieldQuestion.Title,
+				Type = fieldQuestion.Type
+			};
 		}
 	}
 	public static class FieldQuestionMapper

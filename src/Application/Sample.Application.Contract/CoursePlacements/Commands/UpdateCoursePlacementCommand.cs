@@ -18,6 +18,6 @@ namespace Sofa.CourseManagement.Application.Contract.CoursePlacements.Commands
 		public Id FieldId { get; }
 		public Id CourseId { get; }
 		public Id PlacementId { get; }
-		public Id Title { get; }
+		public string Title { get; }
 	}
 }

@@ -5,7 +5,8 @@ namespace Sofa.CourseManagement.RestApi.Models.LessonPlans
     public class CreateLessonPlanViewModel : ViewModelBase
 	{
 
-		public string Title { get; set; }
+		public string CourseLanguageId { get; set; }
+		public string CourseLanguageTitle { get; set; }
 		internal AddLessonPlanCommand ToCommand(string instituteId, string fieldId, string courseId, string sessionId)
 		{
 			return new AddLessonPlanCommand()
@@ -14,7 +15,8 @@ namespace Sofa.CourseManagement.RestApi.Models.LessonPlans
 				FieldId = fieldId,
 				CourseId = courseId,
 				SessionId = sessionId,
-				Title = Title,
+				CourseLanguageTitle = this.CourseLanguageTitle,
+				CourseLanguageId = this.CourseLanguageId
 			};
 		}
 
@@ -27,7 +29,7 @@ namespace Sofa.CourseManagement.RestApi.Models.LessonPlans
 				CourseId = courseId,
 				SessionId = sessionId,
 				LessonplanId = lessonplanId,
-				Title = Title,
+				Title = CourseLanguageTitle,
 			};
 		}
 	}

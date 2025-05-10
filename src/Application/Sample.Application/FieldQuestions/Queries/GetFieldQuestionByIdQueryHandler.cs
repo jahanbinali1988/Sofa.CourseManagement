@@ -3,6 +3,7 @@ using Sofa.CourseManagement.Application.Contract.FieldQuestions.Dtos;
 using Sofa.CourseManagement.Application.Contract.FieldQuestions.Queries;
 using Sofa.CourseManagement.Domain.Institutes;
 using Sofa.CourseManagement.SharedKernel.Application;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,7 +28,7 @@ namespace Sofa.CourseManagement.Application.FieldQuestions.Queries
 			if (field == null)
 				throw new EntityNotFoundException($"Could not find Field entity with Id {request.FieldId}");
 
-			var question = field.Questions.SingleOrDefault(c => c.Id == request.Id);
+			var question = field.Questions.SingleOrDefault(c => c.Id == (Guid)request.Id);
 			if (question == null)
 				throw new EntityNotFoundException($"Could not find Question entity with Id {request.Id}");
 

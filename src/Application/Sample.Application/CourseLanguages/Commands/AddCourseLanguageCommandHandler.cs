@@ -31,11 +31,11 @@ namespace Sofa.CourseManagement.Application.CourseLanguages.Commands
 				throw new EntityNotFoundException($"Could not find Field entity with Id {request.FieldId}");
 
 			var course = field.Courses.SingleOrDefault(c => c.Id == request.CourseId);
-			if (field == null)
+			if (course == null)
 				throw new EntityNotFoundException($"Could not find Course entity with Id {request.CourseId}");
 
 			var courseLanguage = CourseLanguage.CreateInstance(_idGenerator.GetNewId(), request.Language, request.CourseId);
-			field.AddCourse(course);
+			course.AddLanguage(courseLanguage);
 
 			await _unitOfWork.CommitAsync(cancellationToken);
 

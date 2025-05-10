@@ -14,8 +14,11 @@ namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes.Entieis
 			builder.HasIndex(x => x.Id)
 				.IsUnique();
 
-			builder.HasMany<Course>(c => c.Courses).WithOne().HasForeignKey(x => x.FieldId).IsRequired().OnDelete(DeleteBehavior.Cascade);
-			builder.HasMany<FieldQuestion>(c => c.Questions).WithOne().HasForeignKey(x => x.FieldId).IsRequired().OnDelete(DeleteBehavior.Cascade);
+			builder.HasMany<Course>(c => c.Courses).WithOne(c=> c.Field).HasForeignKey(x => x.FieldId).IsRequired().OnDelete(DeleteBehavior.Cascade);
+			builder.Metadata.FindNavigation(nameof(Field.Courses))?.SetPropertyAccessMode(PropertyAccessMode.Field);
+
+			builder.HasMany<FieldQuestion>(c => c.Questions).WithOne(c=> c.Field).HasForeignKey(x => x.FieldId).IsRequired().OnDelete(DeleteBehavior.Cascade);
+			builder.Metadata.FindNavigation(nameof(Field.Questions))?.SetPropertyAccessMode(PropertyAccessMode.Field);
 
 			builder.OwnsOne(p => p.Title, m =>
 			{

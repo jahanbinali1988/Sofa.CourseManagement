@@ -66,7 +66,6 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     InstituteId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    InstituteId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
@@ -81,11 +80,6 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                         principalTable: "Institutes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Field_Institutes_InstituteId1",
-                        column: x => x.InstituteId1,
-                        principalTable: "Institutes",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -158,7 +152,6 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                     Type = table.Column<int>(type: "int", nullable: true),
                     TypeTitle = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     FieldId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FieldId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
@@ -173,11 +166,6 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                         principalTable: "Field",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_FieldQuestion_Field_FieldId1",
-                        column: x => x.FieldId1,
-                        principalTable: "Field",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -210,7 +198,6 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     CourseId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CourseId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
@@ -225,11 +212,6 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                         principalTable: "Course",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CoursePlacement_Course_CourseId1",
-                        column: x => x.CourseId1,
-                        principalTable: "Course",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -239,7 +221,6 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CourseId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     DeletedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
@@ -252,16 +233,10 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                         name: "FK_CourseUser_Course_CourseId",
                         column: x => x.CourseId,
                         principalTable: "Course",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_CourseUser_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "User",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_CourseUser_User_UserId1",
-                        column: x => x.UserId1,
                         principalTable: "User",
                         principalColumn: "Id");
                 });
@@ -274,7 +249,6 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                     Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     OccurredDate = table.Column<DateTimeOffset>(type: "datetimeoffset", maxLength: 34, nullable: true),
                     CourseId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CourseId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
@@ -289,11 +263,6 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                         principalTable: "Course",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Session_Course_CourseId1",
-                        column: x => x.CourseId1,
-                        principalTable: "Course",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -351,8 +320,8 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Order = table.Column<short>(type: "smallint", nullable: true),
                     PlacementId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    coursePlacementId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     QuestionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CoursePlacementId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
@@ -362,16 +331,16 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_CoursePlacementQuestion", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_CoursePlacementQuestion_CoursePlacement_CoursePlacementId",
+                        column: x => x.CoursePlacementId,
+                        principalTable: "CoursePlacement",
+                        principalColumn: "Id");
+                    table.ForeignKey(
                         name: "FK_CoursePlacementQuestion_CoursePlacement_PlacementId",
                         column: x => x.PlacementId,
                         principalTable: "CoursePlacement",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CoursePlacementQuestion_CoursePlacement_coursePlacementId",
-                        column: x => x.coursePlacementId,
-                        principalTable: "CoursePlacement",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_CoursePlacementQuestion_FieldQuestion_QuestionId",
                         column: x => x.QuestionId,
@@ -386,7 +355,6 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     SessionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SessionId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CourseLanguageId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ModifiedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
@@ -407,11 +375,6 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                         principalTable: "Session",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_LessonPlan_Session_SessionId1",
-                        column: x => x.SessionId1,
-                        principalTable: "Session",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -425,8 +388,7 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                     ContentType = table.Column<int>(type: "int", nullable: true),
                     ContentTypeTitle = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     LessonPlanId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    LessonPlanId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    QuestionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    QuestionId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
@@ -441,11 +403,6 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                         principalTable: "LessonPlan",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_PostBase_LessonPlan_LessonPlanId1",
-                        column: x => x.LessonPlanId1,
-                        principalTable: "LessonPlan",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_PostBase_PostQuestion_QuestionId",
                         column: x => x.QuestionId,
@@ -549,20 +506,15 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                 column: "CourseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CoursePlacement_CourseId1",
-                table: "CoursePlacement",
-                column: "CourseId1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_CoursePlacement_Id",
                 table: "CoursePlacement",
                 column: "Id",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_CoursePlacementQuestion_coursePlacementId",
+                name: "IX_CoursePlacementQuestion_CoursePlacementId",
                 table: "CoursePlacementQuestion",
-                column: "coursePlacementId");
+                column: "CoursePlacementId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CoursePlacementQuestion_Id",
@@ -597,11 +549,6 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CourseUser_UserId1",
-                table: "CourseUser",
-                column: "UserId1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Field_Id",
                 table: "Field",
                 column: "Id",
@@ -613,19 +560,9 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                 column: "InstituteId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Field_InstituteId1",
-                table: "Field",
-                column: "InstituteId1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_FieldQuestion_FieldId",
                 table: "FieldQuestion",
                 column: "FieldId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_FieldQuestion_FieldId1",
-                table: "FieldQuestion",
-                column: "FieldId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_FieldQuestion_Id",
@@ -694,11 +631,6 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                 column: "SessionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_LessonPlan_SessionId1",
-                table: "LessonPlan",
-                column: "SessionId1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_PostBase_Id",
                 table: "PostBase",
                 column: "Id",
@@ -710,15 +642,11 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                 column: "LessonPlanId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PostBase_LessonPlanId1",
-                table: "PostBase",
-                column: "LessonPlanId1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_PostBase_QuestionId",
                 table: "PostBase",
                 column: "QuestionId",
-                unique: true);
+                unique: true,
+                filter: "[QuestionId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PostQuestion_Id",
@@ -735,11 +663,6 @@ namespace Sofa.CourseManagement.Infrastructure.Migrations
                 name: "IX_Session_CourseId",
                 table: "Session",
                 column: "CourseId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Session_CourseId1",
-                table: "Session",
-                column: "CourseId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Session_Id",

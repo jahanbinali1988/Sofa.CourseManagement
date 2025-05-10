@@ -25,10 +25,13 @@ namespace Sofa.CourseManagement.RestApi.Models.Courses
 	{
 		public static Pagination<CoursePlacementQuestionViewModel> Map(this Pagination<CoursePlacementQuestionDto> dtos)
 		{
+			if (dtos == null)
+				return new Pagination<CoursePlacementQuestionViewModel> { Items = Enumerable.Empty<CoursePlacementQuestionViewModel>(), TotalItems = 0 };
+
 			return new Pagination<CoursePlacementQuestionViewModel>()
 			{
-				Items = dtos.Items.Select(s => CoursePlacementQuestionViewModel.Create(s)),
-				TotalItems = dtos.TotalItems
+				Items = dtos!.Items.Select(s => CoursePlacementQuestionViewModel.Create(s)),
+				TotalItems = dtos!.TotalItems
 			};
 		}
 	}

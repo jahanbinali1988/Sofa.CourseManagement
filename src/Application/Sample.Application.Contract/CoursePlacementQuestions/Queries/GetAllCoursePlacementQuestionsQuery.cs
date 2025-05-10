@@ -11,6 +11,7 @@ namespace Sofa.CourseManagement.Application.Contract.CoursePlacementQuestions.Qu
 			InstituteId = instituteId;
 			FieldId = fieldId;
 			CourseId = courseId;
+			PlacementId = placementId;
 		}
 
 		public Id InstituteId { get; }

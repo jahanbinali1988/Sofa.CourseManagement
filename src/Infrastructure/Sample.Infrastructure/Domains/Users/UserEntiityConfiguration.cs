@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using Sofa.CourseManagement.Domain.Users;
 using Sofa.CourseManagement.Domain.Shared.Constants;
+using Sofa.CourseManagement.Domain.Institutes.Entities.Courses;
+using System.Reflection.Emit;
+using Sofa.CourseManagement.Domain.Institutes;
 
 namespace Sofa.CourseManagement.Infrastructure.Domains.Users
 {
@@ -25,10 +28,13 @@ namespace Sofa.CourseManagement.Infrastructure.Domains.Users
 
             builder.HasQueryFilter(p => EF.Property<bool>(p, "IsDeleted") == false);
 
-            builder.HasMany(c => c.CourseUsers).WithOne().HasForeignKey(x => x.UserId).IsRequired().OnDelete(DeleteBehavior.NoAction);
-            builder.HasMany(c => c.InstituteUsers).WithOne().HasForeignKey(x => x.UserId).IsRequired().OnDelete(DeleteBehavior.NoAction);
+			builder.HasMany(c => c.CourseUsers).WithOne(cu => cu.User).HasForeignKey(x => x.UserId).IsRequired().OnDelete(DeleteBehavior.NoAction);
+			builder.Metadata.FindNavigation(nameof(User.CourseUsers))?.SetPropertyAccessMode(PropertyAccessMode.Field);
+            
+			builder.HasMany(c => c.InstituteUsers).WithOne().HasForeignKey(x => x.UserId).IsRequired().OnDelete(DeleteBehavior.NoAction);
+			builder.Metadata.FindNavigation(nameof(Institute.InstituteUsers))?.SetPropertyAccessMode(PropertyAccessMode.Field);
 
-            builder.Property(x => x.PasswordHash).HasMaxLength(64);
+			builder.Property(x => x.PasswordHash).HasMaxLength(64);
 
             builder.OwnsOne(p => p.UserName, m =>
             {

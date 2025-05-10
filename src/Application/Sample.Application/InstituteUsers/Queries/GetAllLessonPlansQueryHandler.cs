@@ -37,7 +37,7 @@ namespace Sofa.CourseManagement.Application.InstituteUsers.Queries
 				return null;
 
 			var lessonPlans = session.LessonPlans
-				.Skip(request.Offset - 1 * request.Count)
+				.Skip(request.Offset * request.Count)
 				.Take(request.Count)
 				.Select(s=> new LessonPlanDto()
 			{

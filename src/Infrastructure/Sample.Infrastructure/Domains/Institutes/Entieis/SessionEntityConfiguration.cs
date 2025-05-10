@@ -13,7 +13,8 @@ namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes.Entieis
 			builder.HasIndex(x => x.Id)
 				.IsUnique();
 
-			builder.HasMany<LessonPlan>(c => c.LessonPlans).WithOne().HasForeignKey(x => x.SessionId).IsRequired().OnDelete(DeleteBehavior.Cascade);
+			builder.HasMany<LessonPlan>(c => c.LessonPlans).WithOne(c=> c.Session).HasForeignKey(x => x.SessionId).IsRequired().OnDelete(DeleteBehavior.Cascade);
+			builder.Metadata.FindNavigation(nameof(Session.LessonPlans))?.SetPropertyAccessMode(PropertyAccessMode.Field);
 
 			builder.OwnsOne(p => p.Title, m =>
 			{

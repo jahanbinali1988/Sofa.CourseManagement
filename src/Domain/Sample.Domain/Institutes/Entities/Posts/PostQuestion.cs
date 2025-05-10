@@ -21,6 +21,7 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities.Posts
 		}
 
 		public Priority Priority { get; private set; }
+
 		public Guid QuestionId { get; private set; }
 		public FieldQuestion Question { get; private set; }
 		public Guid PostId { get; private set; }
