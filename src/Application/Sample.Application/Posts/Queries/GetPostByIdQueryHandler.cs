@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Sofa.CourseManagement.Application.Posts.Queries
 {
-	internal class GetPostByIdQueryHandler : IQueryHandler<GetPostByIdQuery, PostBaseDto>
+	internal class GetPostByIdQueryHandler : IQueryHandler<GetPostByIdQuery, PostDto>
 	{
 		private readonly IInstituteRepository _instituteRepository;
 		private readonly IUnitOfWork _unitOfWork;
@@ -21,7 +21,7 @@ namespace Sofa.CourseManagement.Application.Posts.Queries
 			_unitOfWork = unitOfWork;
 		}
 
-		public async Task<PostBaseDto> Handle(GetPostByIdQuery request, CancellationToken cancellationToken)
+		public async Task<PostDto> Handle(GetPostByIdQuery request, CancellationToken cancellationToken)
 		{
 			var institute = await _instituteRepository.GetAsync(request.InstituteId, cancellationToken);
 			if (institute == null)
@@ -47,7 +47,7 @@ namespace Sofa.CourseManagement.Application.Posts.Queries
 			if (post == null)
 				throw new EntityNotFoundException($"Could not find Post entity with Id {request.Id}");
 
-			return new PostBaseDto()
+			return new PostDto()
 			{
 				Id = post.Id,
 				Content = post.Content.Value,

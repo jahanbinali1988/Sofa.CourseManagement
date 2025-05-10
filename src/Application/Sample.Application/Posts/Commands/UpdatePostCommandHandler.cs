@@ -1,8 +1,6 @@
 ﻿using MediatR;
 using Sofa.CourseManagement.Application.Contract.Exceptions;
 using Sofa.CourseManagement.Application.Contract.Posts.Commands;
-using Sofa.CourseManagement.Application.Contract.Posts.Converter;
-using Sofa.CourseManagement.Application.Contract.Posts.Dtos;
 using Sofa.CourseManagement.Domain.Institutes.Entities.LessonPlans;
 using Sofa.CourseManagement.Domain.Shared;
 using Sofa.CourseManagement.SharedKernel.Application;
@@ -46,20 +44,11 @@ namespace Sofa.CourseManagement.Application.Posts.Commands
 			if (post == null)
 				throw new EntityNotFoundException($"Could not find Post entity with Id {request.Id}");
 
-
-			var postDto = Convert(request);
-			post.Update(postDto.Title, postDto.Content, postDto.ContentType, postDto.Order);
+			post.Update(request.Title, request.Content, request.ContentType, request.Order);
 
 			await _unitOfWork.CommitAsync(cancellationToken);
 
 			return Unit.Value;
-		}
-
-		private PostBaseDto Convert(UpdatePostCommand request)
-		{
-			var post = PostFactory.Instance.SetContentType(request.ContentType).SetJson(request.Post.ToString()).CreatePost();
-
-			return post;
 		}
 	}
 }

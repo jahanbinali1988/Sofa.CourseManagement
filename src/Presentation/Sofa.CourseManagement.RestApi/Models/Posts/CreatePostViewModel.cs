@@ -5,8 +5,10 @@ namespace Sofa.CourseManagement.RestApi.Models.Posts
 {
 	public class CreatePostViewModel : ViewModelBase
 	{
+		public string Title { get; set; }
+		public string Content { get; set; }
 		public ContentTypeEnum ContentType { get; set; }
-		public dynamic Post { get; set; }
+		public short Order { get; set; }
 
 		internal AddPostCommand ToCommand(string instituteId, string fieldId, string courseId, string sessionId, 
 			string lessonplanId)
@@ -17,9 +19,11 @@ namespace Sofa.CourseManagement.RestApi.Models.Posts
 				FieldId = fieldId,
 				CourseId = courseId,
 				LessonPlanId = lessonplanId,
-				Post = Post,
-				ContentType = ContentType,
-				SessionId = sessionId
+				SessionId = sessionId,
+				ContentType = this.ContentType,
+				Title = this.Title,
+				Content = this.Content,
+				Order = this.Order
 			};
 		}
 
@@ -34,8 +38,10 @@ namespace Sofa.CourseManagement.RestApi.Models.Posts
 				SessionId = sessionId,
 				LessonPlanId = lessonplanId,
 				Id = postId,
-				Post = Post,
-				ContentType = ContentType,
+				ContentType = this.ContentType,
+				Title = this.Title,
+				Content = this.Content,
+				Order = this.Order
 			};
 		}
 

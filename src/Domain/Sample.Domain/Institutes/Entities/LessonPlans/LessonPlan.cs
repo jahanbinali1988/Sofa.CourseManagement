@@ -18,12 +18,12 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities.LessonPlans
 		public Guid CourseLanguageId { get; private set; }
 		public CourseLanguage CourseLanguage { get; private set; }
 
-		public IReadOnlyCollection<PostBase> Posts => _posts.AsReadOnly();
-		private readonly List<PostBase> _posts;
+		public IReadOnlyCollection<Post> Posts => _posts.AsReadOnly();
+		private readonly List<Post> _posts;
 
 		private LessonPlan() : base()
 		{
-			_posts = new List<PostBase>();
+			_posts = new List<Post>();
 		}
 		public LessonPlan(Guid id, string title, Guid sessionId, Guid courseLanguageId) : this()
 		{
@@ -57,11 +57,11 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities.LessonPlans
 			MarkAsDeleted();
 			AddDomainEvent(new DeleteLessonPlanDomainEvent(Id));
 		}
-		public void AddPost(PostBase post)
+		public void AddPost(Post post)
 		{
 			_posts.Add(post);
 		}
-		public void DeletePost(PostBase post)
+		public void DeletePost(Post post)
 		{
 			_posts.Remove(post);
 		}

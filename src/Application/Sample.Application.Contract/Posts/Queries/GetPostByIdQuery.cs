@@ -4,7 +4,7 @@ using Sofa.CourseManagement.SharedKernel.Application;
 
 namespace Sofa.CourseManagement.Application.Contract.Posts.Queries
 {
-	public class GetPostByIdQuery : GetByIdQueryBase, IQuery<PostBaseDto>
+	public class GetPostByIdQuery : GetByIdQueryBase, IQuery<PostDto>
 	{
 		public Id InstituteId { get; }
 		public Id FieldId { get; }

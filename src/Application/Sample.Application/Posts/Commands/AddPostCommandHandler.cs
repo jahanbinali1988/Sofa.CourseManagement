@@ -1,6 +1,5 @@
 ﻿using Sofa.CourseManagement.Application.Contract.Exceptions;
 using Sofa.CourseManagement.Application.Contract.Posts.Commands;
-using Sofa.CourseManagement.Application.Contract.Posts.Converter;
 using Sofa.CourseManagement.Application.Contract.Posts.Dtos;
 using Sofa.CourseManagement.Domain.Institutes.Entities.LessonPlans;
 using Sofa.CourseManagement.Domain.Institutes.Entities.Posts;
@@ -13,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Sofa.CourseManagement.Application.Posts.Commands
 {
-	internal class AddPostCommandHandler : ICommandHandler<AddPostCommand, PostBaseDto>
+	internal class AddPostCommandHandler : ICommandHandler<AddPostCommand, PostDto>
 	{
 		private readonly ICourseManagementUnitOfWork _unitOfWork;
 		private readonly IIdGenerator _idGenerator;
@@ -23,7 +22,7 @@ namespace Sofa.CourseManagement.Application.Posts.Commands
 			_idGenerator = idGenerator;
 		}
 
-		public async Task<PostBaseDto> Handle(AddPostCommand request, CancellationToken cancellationToken)
+		public async Task<PostDto> Handle(AddPostCommand request, CancellationToken cancellationToken)
 		{
 			var institute = await _unitOfWork.InstituteRepository.GetAsync(request.InstituteId, cancellationToken);
 			if (institute == null)
@@ -45,13 +44,12 @@ namespace Sofa.CourseManagement.Application.Posts.Commands
 			if (lessonplan == null)
 				throw new EntityNotFoundException($"Could not find LessonPlan entity with Id {request.LessonPlanId}");
 
-			var postDto = Convert(request);
-			var post = CreateEntity(postDto);
+			var post = Post.CreateInstance(_idGenerator.GetNewId(), request.Title, request.Order, request.Content, request.ContentType, request.LessonPlanId);
 			lessonplan.AddPost(post);
 
 			await _unitOfWork.CommitAsync(cancellationToken);
 
-			return new PostBaseDto()
+			return new PostDto()
 			{
 				Id = post.Id,
 				LessonPlanId = lessonplan.Id,
@@ -60,32 +58,6 @@ namespace Sofa.CourseManagement.Application.Posts.Commands
 				Order = post.Order.Value,
 				Title = post.Title.Value
 			};
-		}
-
-		private PostBaseDto Convert(AddPostCommand request)
-		{
-			var post = PostFactory.Instance.SetContentType(request.ContentType).SetJson(request.Post.ToString()).CreatePost();
-			
-			return (PostBaseDto)post;
-		}
-
-		private PostBase? CreateEntity(PostBaseDto postBaseDto)
-		{
-			switch (postBaseDto.ContentType)
-			{
-				case Domain.Contract.Institutes.Enums.ContentTypeEnum.Text:
-					return TextPost.CreateInstance(_idGenerator.GetNewId(), postBaseDto.Title, postBaseDto.Order, postBaseDto.Content, postBaseDto.LessonPlanId);
-				case Domain.Contract.Institutes.Enums.ContentTypeEnum.Image:
-					return ImagePost.CreateInstance(_idGenerator.GetNewId(), postBaseDto.Title, postBaseDto.Order, postBaseDto.Content, postBaseDto.LessonPlanId);
-				case Domain.Contract.Institutes.Enums.ContentTypeEnum.Sound:
-					return SoundPost.CreateInstance(_idGenerator.GetNewId(), postBaseDto.Title, postBaseDto.Order, postBaseDto.Content, postBaseDto.LessonPlanId);
-				case Domain.Contract.Institutes.Enums.ContentTypeEnum.Video:
-					return VideoPost.CreateInstance(_idGenerator.GetNewId(), postBaseDto.Title, postBaseDto.Order, postBaseDto.Content, postBaseDto.LessonPlanId);
-				default:
-					break;
-			}
-
-			return null;
 		}
 	}
 }

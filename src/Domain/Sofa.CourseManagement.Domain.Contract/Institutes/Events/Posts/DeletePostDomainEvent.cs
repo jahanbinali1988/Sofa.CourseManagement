@@ -2,13 +2,13 @@
 
 namespace Sofa.CourseManagement.Domain.Contract.Institutes.Events.Posts
 {
-	public class DeleteVideoPostDomainEvent : DomainEventBase
+	public class DeletePostDomainEvent : DomainEventBase
 	{
-		public DeleteVideoPostDomainEvent() : base()
+		public DeletePostDomainEvent() : base()
 		{
 
 		}
-		public DeleteVideoPostDomainEvent(Guid id) : this()
+		public DeletePostDomainEvent(Guid id) : this()
 		{
 			Id = id;
 		}

@@ -1,13 +1,13 @@
 ﻿using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
+using Sofa.CourseManagement.Domain.Contract.Institutes.Events.Posts;
 using Sofa.CourseManagement.Domain.Institutes.Entities.LessonPlans;
-using Sofa.CourseManagement.Domain.Institutes.Entities.Sessions;
 using Sofa.CourseManagement.Domain.Institutes.ValueObjects;
 using Sofa.CourseManagement.SharedKernel.SeedWork;
 using System;
 
 namespace Sofa.CourseManagement.Domain.Institutes.Entities.Posts
 {
-	public abstract class PostBase : Entity<Guid>
+	public class Post : Entity<Guid>
 	{
 		public Title Title { get; private set; }
 		public OrderNumber Order { get; private set; }
@@ -20,7 +20,7 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities.Posts
 		public Guid? QuestionId { get; private set; }
 		public PostQuestion? Question { get; private set; }
 
-		protected PostBase() : base()
+		protected Post() : base()
 		{
 
 		}
@@ -32,8 +32,39 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities.Posts
 		protected void AssignLessonPlan(Guid lessonPlanId) { LessonPlanId = lessonPlanId; }
 		protected void AssignQuestion(Guid questionId) { QuestionId = questionId; }
 
-		public abstract void Update(string title, string content, ContentTypeEnum contentType, short order);
-		public abstract void Delete();
+		public static Post CreateInstance(Guid id, string title, short order, string content, ContentTypeEnum contentTypeEnum, Guid LessonPlanId)
+		{
+			var post = new Post();
+
+			post.AssignId(id);
+			post.AssignTitle(title);
+			post.AssignOrder(order);
+			post.AssignContent(content);
+			post.AssignLessonPlan(LessonPlanId);
+			post.AssignContentType(contentTypeEnum);
+
+			post.AddDomainEvent(new AddPostDomainEvent(post.Id, post.Title.Value, post.Order.Value, post.Content.Value, post.ContentType.Value, post.LessonPlanId));
+
+			return post;
+		}
+
+		public void Delete()
+		{
+			MarkAsDeleted();
+			AddDomainEvent(new DeletePostDomainEvent(Id));
+		}
+
+		public void Update(string title, string content, ContentTypeEnum contentType, short order)
+		{
+			AssignTitle(title);
+			AssignContent(content);
+			AssignContentType(contentType);
+			AssignOrder(order);
+			MarkAsUpdated();
+
+			AddDomainEvent(new UpdatePostDomainEvent(Id, Title.Value, Order.Value, Content.Value, ContentType.Value, LessonPlanId));
+		}
+
 		public void AddQuestion(PostQuestion postQuestion)
 		{
 			Question = postQuestion;

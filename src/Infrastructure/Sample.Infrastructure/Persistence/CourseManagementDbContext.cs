@@ -36,10 +36,6 @@ namespace Sofa.CourseManagement.Infrastructure.Persistence
 			builder.ApplyConfiguration(new SessionEntityConfiguration());
             builder.ApplyConfiguration(new LessonPlanEntityConfigration());
             builder.ApplyConfiguration(new PostBaseEntityConfiguration());
-            builder.ApplyConfiguration(new ImagePostEntityConfiguration());
-            builder.ApplyConfiguration(new SoundPostEntityConfiguration());
-            builder.ApplyConfiguration(new TextPostEntityConfiguration());
-            builder.ApplyConfiguration(new VideoPostEntityConfiguration());
 			builder.ApplyConfiguration(new PostQuestionEntityConfiguration());
 
 			base.OnModelCreating(builder);
@@ -60,11 +56,7 @@ namespace Sofa.CourseManagement.Infrastructure.Persistence
 		public DbSet<CoursePlacementQuestion> CoursePlacementQuestions { get; set; }
 		public DbSet<Session> Sessions { get; set; }
         public DbSet<LessonPlan> LessonPlans { get; set; }
-        public DbSet<PostBase> Posts { get; set; }
-        public DbSet<ImagePost> ImagePosts { get; set; }
-        public DbSet<SoundPost> SoundPosts { get; set; }
-        public DbSet<TextPost> TextPosts { get; set; }
-        public DbSet<VideoPost> VideoPosts { get; set; }
+        public DbSet<Post> Posts { get; set; }
 		public DbSet<PostQuestion> PostQuestions { get; set; }
 
 	}

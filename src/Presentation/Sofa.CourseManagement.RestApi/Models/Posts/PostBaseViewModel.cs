@@ -12,7 +12,7 @@ namespace Sofa.CourseManagement.RestApi.Models.Posts
 		public ContentTypeEnum ContentType { get; set; }
 		public string LessonPlanId { get; set; }
 
-		internal static PostBaseViewModel Create(PostBaseDto post)
+		internal static PostBaseViewModel Create(PostDto post)
 		{
 			switch (post.ContentType)
 			{
@@ -30,7 +30,7 @@ namespace Sofa.CourseManagement.RestApi.Models.Posts
 	}
 	public static class PostBaseMapper
 	{
-		public static Pagination<PostBaseViewModel> Map(this Pagination<PostBaseDto> dto)
+		public static Pagination<PostBaseViewModel> Map(this Pagination<PostDto> dto)
 		{
 			return new Pagination<PostBaseViewModel>
 			{

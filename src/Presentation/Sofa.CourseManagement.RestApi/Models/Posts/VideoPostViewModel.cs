@@ -8,7 +8,7 @@ namespace Sofa.CourseManagement.RestApi.Models.Posts
         {
             
         }
-        public VideoPostViewModel(PostBaseDto post)
+        public VideoPostViewModel(PostDto post)
 		{
 			base.Id = post.Id;
 			base.Order = post.Order;

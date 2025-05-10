@@ -4,7 +4,7 @@ using Sofa.CourseManagement.SharedKernel.Application;
 
 namespace Sofa.CourseManagement.Application.Contract.Posts.Queries
 {
-	public class GetAllPostsQuery : GetListQueryBase, IQuery<Pagination<PostBaseDto>>
+	public class GetAllPostsQuery : GetListQueryBase, IQuery<Pagination<PostDto>>
 	{
 		public Id InstituteId { get; }
 		public Id FieldId { get; }

@@ -1,10 +1,9 @@
 ﻿using Sofa.CourseManagement.Application.Contract.Shared;
 using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
-using System;
 
 namespace Sofa.CourseManagement.Application.Contract.Posts.Dtos
 {
-	public class PostBaseDto : EntityBaseDto
+	public class PostDto : EntityBaseDto
 	{
 		public string lessonPlanTitle { get; set; }
 		public string Title { get; set; }

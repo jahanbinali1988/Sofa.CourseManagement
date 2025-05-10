@@ -6,14 +6,16 @@ using System;
 
 namespace Sofa.CourseManagement.Application.Contract.Posts.Commands
 {
-	public class AddPostCommand : CommandBase<PostBaseDto>
+	public class AddPostCommand : CommandBase<PostDto>
 	{
-		public ContentTypeEnum ContentType { get; set; }
-		public dynamic Post { get; set; }
 		public Id LessonPlanId { get; set; }
 		public Id SessionId { get; set; }
 		public Id InstituteId { get; set; }
 		public Id FieldId { get; set; }
 		public Id CourseId { get; set; }
+		public string Title { get; set; }
+		public string Content { get; set; }
+		public ContentTypeEnum ContentType { get; set; }
+		public short Order { get; set; }
 	}
 }

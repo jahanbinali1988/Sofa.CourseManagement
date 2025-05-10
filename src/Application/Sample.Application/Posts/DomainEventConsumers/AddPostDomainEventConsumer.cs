@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace Sofa.CourseManagement.Application.Posts.DomainEventConsumers
 {
-	public class AddSoundPostDomainEventConsumer : DomainEventHandler<AddSoundPostDomainEvent>
+	public class AddPostDomainEventConsumer : DomainEventHandler<AddPostDomainEvent>
 	{
-		private readonly IRabbitMQPublisher<AddSoundPostDomainEvent> _publisher;
-		public AddSoundPostDomainEventConsumer(ILogger<AddSoundPostDomainEventConsumer> logger, IRabbitMQPublisher<AddSoundPostDomainEvent> publisher) : base(logger)
+		private readonly IRabbitMQPublisher<AddPostDomainEvent> _publisher;
+		public AddPostDomainEventConsumer(ILogger<AddPostDomainEventConsumer> logger, IRabbitMQPublisher<AddPostDomainEvent> publisher) : base(logger)
 		{
 			_publisher = publisher;
 		}
 
-		protected override async Task HandleEvent(AddSoundPostDomainEvent notification, CancellationToken cancellationToken)
+		protected override async Task HandleEvent(AddPostDomainEvent notification, CancellationToken cancellationToken)
 		{
 			await _publisher.PublishMessageAsync(notification, "");
 		}

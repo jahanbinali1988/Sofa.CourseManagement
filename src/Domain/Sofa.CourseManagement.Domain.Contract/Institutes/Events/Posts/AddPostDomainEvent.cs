@@ -3,13 +3,13 @@ using Sofa.CourseManagement.SharedKernel.EventProcessing.DomainEvent;
 
 namespace Sofa.CourseManagement.Domain.Contract.Institutes.Events.Posts
 {
-	public class UpdateSoundPostDomainEvent : DomainEventBase
+	public class AddPostDomainEvent : DomainEventBase
 	{
-		public UpdateSoundPostDomainEvent() : base()
+		public AddPostDomainEvent() : base()
 		{
 
 		}
-		public UpdateSoundPostDomainEvent(Guid id, string title, short order, string content, ContentTypeEnum contentType, Guid lessonPlanId) : this()
+		public AddPostDomainEvent(Guid id, string title, short order, string content, ContentTypeEnum contentType, Guid lessonPlanId) : this()
 		{
 			Id = id;
 			Title = title;

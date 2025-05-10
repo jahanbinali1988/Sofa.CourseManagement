@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Sofa.CourseManagement.Application.Posts.Queries
 {
-	internal class GetAllPostsQueryHandler : IQueryHandler<GetAllPostsQuery, Pagination<PostBaseDto>>
+	internal class GetAllPostsQueryHandler : IQueryHandler<GetAllPostsQuery, Pagination<PostDto>>
 	{
 		private readonly IInstituteRepository _instituteRepository;
 		private readonly IUnitOfWork _unitOfWork;
@@ -20,7 +20,7 @@ namespace Sofa.CourseManagement.Application.Posts.Queries
 			_unitOfWork = unitOfWork;
 		}
 
-		public async Task<Pagination<PostBaseDto>> Handle(GetAllPostsQuery request, CancellationToken cancellationToken)
+		public async Task<Pagination<PostDto>> Handle(GetAllPostsQuery request, CancellationToken cancellationToken)
 		{
 			var institute = await _instituteRepository.GetAsync(request.InstituteId, cancellationToken);
 			if (institute == null)
@@ -42,11 +42,11 @@ namespace Sofa.CourseManagement.Application.Posts.Queries
 			if (lessonplan == null)
 				return null;
 
-			var posts = lessonplan.Posts.Where(c => c.Title.Value.ToLower().Contains(request.Keyword));
+			var posts = lessonplan.Posts.Where(c => string.IsNullOrEmpty(request.Keyword) || c.Title.Value.ToLower().Contains(request.Keyword));
 			var postDtos = posts
-				.Skip(request.Offset - 1 * request.Count)
+				.Skip(request.Offset * request.Count)
 				.Take(request.Count)
-				.Select(s => new PostBaseDto()
+				.Select(s => new PostDto()
 				{
 					Id = s.Id,
 					Title = s.Title.Value,
@@ -63,7 +63,7 @@ namespace Sofa.CourseManagement.Application.Posts.Queries
 					Order = s.Order.Value
 				});
 
-			return new Pagination<PostBaseDto>()
+			return new Pagination<PostDto>()
 			{
 				Items = postDtos,
 				TotalItems = posts.Count()
