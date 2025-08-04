@@ -4,7 +4,7 @@ using Sofa.CourseManagement.Application.Contract.Exceptions;
 using Sofa.CourseManagement.Domain.Institutes;
 using Sofa.CourseManagement.Domain.Users;
 using Sofa.CourseManagement.Domain.Users.ValueObjects;
-using Sofa.CourseManagement.SharedKernel.Application;
+using Sofa.SharedKernel.Application;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -6,8 +6,8 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Sofa.CourseManagement.Infrastructure.Persistence.Extensions;
-using Sofa.CourseManagement.SharedKernel.SeedWork;
-using Sofa.CourseManagement.SharedKernel.Shared;
+using Sofa.SharedKernel.SeedWork;
+using Sofa.SharedKernel.Shared;
 using System.Collections.Generic;
 
 namespace Sofa.CourseManagement.Infrastructure.Persistence

@@ -1,7 +1,7 @@
 ﻿using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
 using Sofa.CourseManagement.Domain.Contract.Institutes.Events.PostQuestions;
 using Sofa.CourseManagement.Domain.Institutes.ValueObjects;
-using Sofa.CourseManagement.SharedKernel.SeedWork;
+using Sofa.SharedKernel.SeedWork;
 using System;
 
 namespace Sofa.CourseManagement.Domain.Institutes.Entities.Posts

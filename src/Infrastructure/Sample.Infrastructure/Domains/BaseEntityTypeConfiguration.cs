@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using System;
-using Sofa.CourseManagement.SharedKernel.SeedWork;
+using Sofa.SharedKernel.SeedWork;
 
 namespace Sofa.CourseManagement.Infrastructure.Domains
 {

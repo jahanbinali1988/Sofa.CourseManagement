@@ -5,8 +5,8 @@ using Sofa.CourseManagement.RestApi.Extensions;
 using Sofa.CourseManagement.RestApi.Models;
 using System.Net;
 using Mapster;
-using Sofa.CourseManagement.SharedKernel.SeedWork;
-using Sofa.CourseManagement.SharedKernel.Application;
+using Sofa.SharedKernel.SeedWork;
+using Sofa.SharedKernel.Application;
 using Sofa.CourseManagement.Application.Contract.Exceptions;
 
 namespace Sofa.CourseManagement.RestApi.Controllers

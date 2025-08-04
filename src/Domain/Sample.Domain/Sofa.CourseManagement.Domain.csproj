@@ -9,9 +9,9 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+		<PackageReference Include="Sofa.SharedKernel" Version="1.0.0" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\..\SharedKernel\Sample.SharedKernel\Sofa.CourseManagement.SharedKernel.csproj" />
 		<ProjectReference Include="..\Sofa.CourseManagement.Domain.Contract\Sofa.CourseManagement.Domain.Contract.csproj" />
 	</ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 ﻿using Sofa.CourseManagement.Application.Contract.Posts.Dtos;
 using Sofa.CourseManagement.Application.Contract.Shared;
 using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
-using Sofa.CourseManagement.SharedKernel.Application;
+using Sofa.SharedKernel.Application;
 using System;
 
 namespace Sofa.CourseManagement.Application.Contract.Posts.Commands

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Sofa.CourseManagement.Application.Contract.CourseUsers.Dtos;
-using Sofa.CourseManagement.SharedKernel.Application;
+using Sofa.SharedKernel.Application;
 
 namespace Sofa.CourseManagement.RestApi.Models.Courses
 {

@@ -7,10 +7,10 @@
 	<ItemGroup>
 		<PackageReference Include="Mapster" />
 		<PackageReference Include="Microsoft.Extensions.Http.Polly" />
+		<PackageReference Include="Sofa.SharedKernel" Version="1.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\..\SharedKernel\Sample.SharedKernel\Sofa.CourseManagement.SharedKernel.csproj" />
 		<ProjectReference Include="..\Sample.Application.Contract\Sofa.CourseManagement.Application.Contract.csproj" />
 	</ItemGroup>
 

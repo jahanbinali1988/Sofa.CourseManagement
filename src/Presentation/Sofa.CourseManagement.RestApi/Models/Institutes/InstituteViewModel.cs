@@ -1,6 +1,6 @@
 ﻿using Sofa.CourseManagement.Application.Contract.Institutes.Dtos;
 using Sofa.CourseManagement.Domain.Institutes.ValueObjects;
-using Sofa.CourseManagement.SharedKernel.Application;
+using Sofa.SharedKernel.Application;
 
 namespace Sofa.CourseManagement.RestApi.Models.Institutes
 {

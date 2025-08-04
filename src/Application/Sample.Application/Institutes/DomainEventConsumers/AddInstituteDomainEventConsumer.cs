@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Sofa.CourseManagement.Domain.Contract.Institutes.Events.Institutes;
-using Sofa.CourseManagement.SharedKernel.EventProcessing.DomainEvent;
-using Sofa.CourseManagement.SharedKernel.ServiceBus;
+using Sofa.SharedKernel.EventProcessing.DomainEvent;
+using Sofa.SharedKernel.ServiceBus;
 using System;
 using System.Collections.Generic;
 using System.Linq;

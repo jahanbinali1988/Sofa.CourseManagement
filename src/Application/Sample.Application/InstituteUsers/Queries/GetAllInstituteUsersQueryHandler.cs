@@ -3,7 +3,7 @@ using Sofa.CourseManagement.Application.Contract.InstituteUsers.Dtos;
 using Sofa.CourseManagement.Application.Contract.InstituteUsers.Queries;
 using Sofa.CourseManagement.Domain.Institutes;
 using Sofa.CourseManagement.Domain.Users;
-using Sofa.CourseManagement.SharedKernel.Application;
+using Sofa.SharedKernel.Application;
 using System;
 using System.Collections.Generic;
 using System.Linq;

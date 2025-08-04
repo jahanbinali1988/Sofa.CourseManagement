@@ -1,6 +1,6 @@
 ﻿using Sofa.CourseManagement.Domain.Institutes;
 using Sofa.CourseManagement.Domain.Users;
-using Sofa.CourseManagement.SharedKernel.SeedWork;
+using Sofa.SharedKernel.SeedWork;
 
 namespace Sofa.CourseManagement.Domain.Shared
 {

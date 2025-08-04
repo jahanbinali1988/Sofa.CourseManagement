@@ -17,10 +17,10 @@
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" />
 		<PackageReference Include="Microsoft.Extensions.Configuration" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" />
+		<PackageReference Include="Sofa.SharedKernel" Version="1.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\..\SharedKernel\Sample.SharedKernel\Sofa.CourseManagement.SharedKernel.csproj" />
 		<ProjectReference Include="..\..\Application\Sample.Application.Contract\Sofa.CourseManagement.Application.Contract.csproj" />
 		<ProjectReference Include="..\..\Domain\Sample.Domain\Sofa.CourseManagement.Domain.csproj" />
 	</ItemGroup>

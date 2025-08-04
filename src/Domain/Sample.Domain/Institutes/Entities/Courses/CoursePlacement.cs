@@ -1,6 +1,6 @@
 ﻿using Sofa.CourseManagement.Domain.Contract.Institutes.Events.CoursePlacements;
 using Sofa.CourseManagement.Domain.Institutes.ValueObjects;
-using Sofa.CourseManagement.SharedKernel.SeedWork;
+using Sofa.SharedKernel.SeedWork;
 using System;
 using System.Collections.Generic;
 

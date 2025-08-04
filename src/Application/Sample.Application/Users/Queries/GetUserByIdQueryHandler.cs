@@ -2,7 +2,7 @@
 using Sofa.CourseManagement.Application.Contract.Users.Dtos;
 using Sofa.CourseManagement.Application.Contract.Users.Queries;
 using Sofa.CourseManagement.Domain.Users;
-using Sofa.CourseManagement.SharedKernel.Application;
+using Sofa.SharedKernel.Application;
 using System.Threading;
 using System.Threading.Tasks;
 

@@ -1,4 +1,4 @@
-﻿using Sofa.CourseManagement.SharedKernel.SeedWork;
+﻿using Sofa.SharedKernel.SeedWork;
 using System;
 using System.Collections.Generic;
 

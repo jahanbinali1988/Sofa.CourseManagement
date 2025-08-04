@@ -1,7 +1,7 @@
 ﻿using Sofa.CourseManagement.Application.Contract.FieldQuestionChoices.Dtos;
 using Sofa.CourseManagement.Application.Contract.FieldQuestionChoices.Queries;
 using Sofa.CourseManagement.Domain.Institutes;
-using Sofa.CourseManagement.SharedKernel.Application;
+using Sofa.SharedKernel.Application;
 using System;
 using System.Linq;
 using System.Threading;

@@ -1,5 +1,5 @@
 ﻿using Sofa.CourseManagement.Domain.Contract.Users.Enums;
-using Sofa.CourseManagement.SharedKernel.SeedWork;
+using Sofa.SharedKernel.SeedWork;
 
 namespace Sofa.CourseManagement.Domain.Institutes.ValueObjects
 {

@@ -3,8 +3,8 @@ using Sofa.CourseManagement.Application.Contract.InstituteUsers.Commands;
 using Sofa.CourseManagement.Application.Contract.InstituteUsers.Dtos;
 using Sofa.CourseManagement.Domain.Institutes.Entities.Users;
 using Sofa.CourseManagement.Domain.Shared;
-using Sofa.CourseManagement.SharedKernel.Application;
-using Sofa.CourseManagement.SharedKernel.Generators;
+using Sofa.SharedKernel.Application;
+using Sofa.SharedKernel.Generators;
 using System.Threading;
 using System.Threading.Tasks;
 

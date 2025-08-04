@@ -1,7 +1,7 @@
 ﻿using Sofa.CourseManagement.Application.Contract.Fields.Dtos;
 using Sofa.CourseManagement.Application.Contract.LessonPlans.Dtos;
 using Sofa.CourseManagement.RestApi.Models.Fields;
-using Sofa.CourseManagement.SharedKernel.Application;
+using Sofa.SharedKernel.Application;
 
 namespace Sofa.CourseManagement.RestApi.Models.LessonPlans
 {

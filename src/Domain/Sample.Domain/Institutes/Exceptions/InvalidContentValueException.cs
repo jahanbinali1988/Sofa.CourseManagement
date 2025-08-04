@@ -1,5 +1,5 @@
 ﻿using Sofa.CourseManagement.Domain.Shared.Exceptions;
-using Sofa.CourseManagement.SharedKernel.Shared;
+using Sofa.SharedKernel.Shared;
 using System;
 
 namespace Sofa.CourseManagement.Domain.Institutes.Exceptions

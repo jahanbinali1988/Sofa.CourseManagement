@@ -2,7 +2,7 @@
 using Microsoft.OpenApi.Models;
 using Sofa.CourseManagement.Application;
 using Sofa.CourseManagement.Infrastructure;
-using Sofa.CourseManagement.SharedKernel.Generators;
+using Sofa.SharedKernel.Generators;
 using System.Reflection;
 using System.Reflection.Emit;
 

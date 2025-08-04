@@ -1,4 +1,4 @@
-﻿using Sofa.CourseManagement.SharedKernel.Shared;
+﻿using Sofa.SharedKernel.Shared;
 
 namespace Sofa.CourseManagement.Domain.Institutes
 {

@@ -2,7 +2,7 @@
 using Sofa.CourseManagement.Application.Contract.CoursePlacementQuestions.Commands;
 using Sofa.CourseManagement.Application.Contract.Exceptions;
 using Sofa.CourseManagement.Domain.Shared;
-using Sofa.CourseManagement.SharedKernel.Application;
+using Sofa.SharedKernel.Application;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;

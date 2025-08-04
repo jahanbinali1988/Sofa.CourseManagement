@@ -1,4 +1,4 @@
-﻿using Sofa.CourseManagement.SharedKernel.SeedWork;
+﻿using Sofa.SharedKernel.SeedWork;
 using System.Collections.Generic;
 
 namespace Sofa.CourseManagement.Domain.Institutes.ValueObjects

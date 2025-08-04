@@ -3,7 +3,7 @@ using Sofa.CourseManagement.Domain.Contract.Institutes.Events.FieldQuestions;
 using Sofa.CourseManagement.Domain.Contract.Users.Enums;
 using Sofa.CourseManagement.Domain.Institutes.Entities.Courses;
 using Sofa.CourseManagement.Domain.Institutes.ValueObjects;
-using Sofa.CourseManagement.SharedKernel.SeedWork;
+using Sofa.SharedKernel.SeedWork;
 using System;
 using System.Collections.Generic;
 

@@ -1,6 +1,6 @@
 ﻿using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
 using Sofa.CourseManagement.Domain.Contract.Users.Enums;
-using Sofa.CourseManagement.SharedKernel.EventProcessing.DomainEvent;
+using Sofa.SharedKernel.EventProcessing.DomainEvent;
 
 namespace Sofa.CourseManagement.Domain.Contract.Institutes.Events.FieldQuestions
 {

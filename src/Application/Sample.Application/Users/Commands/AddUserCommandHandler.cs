@@ -2,8 +2,8 @@
 using Sofa.CourseManagement.Application.Contract.Users.Dtos;
 using Sofa.CourseManagement.Domain.Shared;
 using Sofa.CourseManagement.Domain.Users;
-using Sofa.CourseManagement.SharedKernel.Application;
-using Sofa.CourseManagement.SharedKernel.Generators;
+using Sofa.SharedKernel.Application;
+using Sofa.SharedKernel.Generators;
 using System.Threading;
 using System.Threading.Tasks;
 

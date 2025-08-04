@@ -2,7 +2,7 @@
 using Sofa.CourseManagement.Domain.Institutes.Entities.Courses;
 using Sofa.CourseManagement.Domain.Institutes.Entities.LessonPlans;
 using Sofa.CourseManagement.Domain.Institutes.ValueObjects;
-using Sofa.CourseManagement.SharedKernel.SeedWork;
+using Sofa.SharedKernel.SeedWork;
 using System;
 using System.Collections.Generic;
 

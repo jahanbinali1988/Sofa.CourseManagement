@@ -2,8 +2,8 @@
 using MediatR;
 using System.Threading.Tasks;
 using Sofa.CourseManagement.Infrastructure.Persistence;
-using Sofa.CourseManagement.SharedKernel.EventProcessing.DomainEvent;
-using Sofa.CourseManagement.SharedKernel.SeedWork;
+using Sofa.SharedKernel.EventProcessing.DomainEvent;
+using Sofa.SharedKernel.SeedWork;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 

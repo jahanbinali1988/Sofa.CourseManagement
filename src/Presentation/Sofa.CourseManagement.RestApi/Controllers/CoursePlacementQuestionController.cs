@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Sofa.CourseManagement.RestApi.Models.Courses;
 using Sofa.CourseManagement.RestApi.Models;
-using Sofa.CourseManagement.SharedKernel.Application;
+using Sofa.SharedKernel.Application;
 using Sofa.CourseManagement.Application.Contract.CoursePlacementQuestions.Commands;
 using Sofa.CourseManagement.Application.Contract.CoursePlacementQuestions.Queries;
 

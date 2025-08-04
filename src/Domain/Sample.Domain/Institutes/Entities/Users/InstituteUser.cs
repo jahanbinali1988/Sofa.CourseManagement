@@ -1,6 +1,6 @@
 ﻿using Sofa.CourseManagement.Domain.Contract.Institutes.Events.InstituteUsers;
 using Sofa.CourseManagement.Domain.Users;
-using Sofa.CourseManagement.SharedKernel.SeedWork;
+using Sofa.SharedKernel.SeedWork;
 using System;
 
 namespace Sofa.CourseManagement.Domain.Institutes.Entities.Users

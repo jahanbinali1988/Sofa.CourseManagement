@@ -3,7 +3,7 @@ using Sofa.CourseManagement.RestApi.Models;
 using Sofa.CourseManagement.RestApi.Models.Sessions;
 using Sofa.CourseManagement.Application.Contract.Sessions.Commands;
 using Sofa.CourseManagement.Application.Contract.Sessions.Queries;
-using Sofa.CourseManagement.SharedKernel.Application;
+using Sofa.SharedKernel.Application;
 
 namespace Sofa.CourseManagement.RestApi.Controllers
 {

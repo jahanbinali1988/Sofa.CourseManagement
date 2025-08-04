@@ -1,5 +1,5 @@
 ﻿//using Sofa.CourseManagement.Domain.Shared;
-//using Sofa.CourseManagement.SharedKernel.SeedWork;
+//using Sofa.SharedKernel.SeedWork;
 //using System;
 //using System.Collections;
 //using System.Collections.Generic;

@@ -10,7 +10,7 @@ using Sofa.CourseManagement.Application.Contract.InstituteUsers.Commands;
 using Sofa.CourseManagement.Application.Contract.InstituteUsers.Dtos;
 using Sofa.CourseManagement.Application.Contract.InstituteUsers.Queries;
 using Sofa.CourseManagement.RestApi.Models.InstituteUsers;
-using Sofa.CourseManagement.SharedKernel.Application;
+using Sofa.SharedKernel.Application;
 
 namespace Sofa.CourseManagement.RestApi.Controllers
 {

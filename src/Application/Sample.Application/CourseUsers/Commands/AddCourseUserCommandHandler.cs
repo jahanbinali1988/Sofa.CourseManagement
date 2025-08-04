@@ -2,8 +2,8 @@
 using Sofa.CourseManagement.Application.Contract.CourseUsers.Dtos;
 using Sofa.CourseManagement.Application.Contract.Exceptions;
 using Sofa.CourseManagement.Domain.Shared;
-using Sofa.CourseManagement.SharedKernel.Application;
-using Sofa.CourseManagement.SharedKernel.Generators;
+using Sofa.SharedKernel.Application;
+using Sofa.SharedKernel.Generators;
 using System;
 using System.Linq;
 using System.Threading;

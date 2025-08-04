@@ -1,7 +1,7 @@
 ﻿using Sofa.CourseManagement.Domain.Institutes.Entities.LessonPlans;
 using Sofa.CourseManagement.Domain.Institutes.Services;
-using Sofa.CourseManagement.SharedKernel.SeedWork;
-using Sofa.CourseManagement.SharedKernel.Shared;
+using Sofa.SharedKernel.SeedWork;
+using Sofa.SharedKernel.Shared;
 using System.Threading.Tasks;
 
 namespace Sofa.CourseManagement.Domain.Institutes.Rules

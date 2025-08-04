@@ -1,7 +1,7 @@
 ﻿using Sofa.CourseManagement.Domain.Institutes;
 using Sofa.CourseManagement.Domain.Shared;
 using Sofa.CourseManagement.Domain.Users;
-using Sofa.CourseManagement.SharedKernel.EventProcessing.DomainEvent;
+using Sofa.SharedKernel.EventProcessing.DomainEvent;
 using System;
 using System.Threading;
 using System.Threading.Tasks;

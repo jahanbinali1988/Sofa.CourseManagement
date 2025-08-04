@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Sofa.CourseManagement.RestApi.Models.Fields;
 using Sofa.CourseManagement.RestApi.Models;
-using Sofa.CourseManagement.SharedKernel.Application;
+using Sofa.SharedKernel.Application;
 using Sofa.CourseManagement.RestApi.Models.InstituteUsers;
 using Sofa.CourseManagement.Application.Contract.InstituteUsers.Commands;
 using Sofa.CourseManagement.Application.Contract.InstituteUsers.Queries;

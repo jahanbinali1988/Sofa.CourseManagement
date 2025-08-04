@@ -2,15 +2,15 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Sofa.CourseManagement.Infrastructure.Persistence;
-using Sofa.CourseManagement.SharedKernel.EventProcessing.DomainEvent;
+using Sofa.SharedKernel.EventProcessing.DomainEvent;
 using Sofa.CourseManagement.Infrastructure.EventProcessing;
 using Sofa.CourseManagement.Domain.Institutes;
 using Sofa.CourseManagement.Infrastructure.Domains.Institutes;
 using Sofa.CourseManagement.Infrastructure.Domains.Users;
 using Sofa.CourseManagement.Domain.Users;
-using Sofa.CourseManagement.SharedKernel.SeedWork;
+using Sofa.SharedKernel.SeedWork;
 using Sofa.CourseManagement.Domain.Shared;
-using Sofa.CourseManagement.SharedKernel.ServiceBus;
+using Sofa.SharedKernel.ServiceBus;
 using Microsoft.Identity.Client;
 
 namespace Sofa.CourseManagement.Infrastructure
