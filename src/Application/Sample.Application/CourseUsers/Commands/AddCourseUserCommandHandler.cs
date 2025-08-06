@@ -52,7 +52,7 @@ namespace Sofa.CourseManagement.Application.CourseUsers.Commands
 			if (user == null)
 				throw new EntityNotFoundException($"Could not find User entity with Id {userId}");
 
-			var courseUser = Domain.Institutes.Entities.Courses.CourseUser.CreateInstance(_idGenerator.GetNewId(), courseId, userId);
+			var courseUser = Domain.Institutes.Entities.Courses.CourseUser.CreateInstance(_idGenerator.GetNewId(), courseId, userId, fieldId, instituteId);
 			course.AddUser(courseUser);
 
 			await _unitOfWork.CommitAsync(cancellationToken);
@@ -88,7 +88,7 @@ namespace Sofa.CourseManagement.Application.CourseUsers.Commands
 			if (user == null)
 				throw new EntityNotFoundException($"Could not find User entity with Id {userId}");
 
-			var courseUser = CourseUser.CreateInstance(_idGenerator.GetNewId(), courseId, userId);
+			var courseUser = CourseUser.CreateInstance(_idGenerator.GetNewId(), courseId, userId, fieldId, instituteId);
 			user.AddCourse(courseUser);
 
 			await _unitOfWork.CommitAsync(cancellationToken);

@@ -32,7 +32,7 @@ namespace Sofa.CourseManagement.Application.Courses.Commands
 			if (field == null)
 				throw new EntityNotFoundException($"Could not find Field entity with Id {request.FieldId}");
 
-			var course = Course.CreateInstance(_idGenerator.GetNewId(), request.Title, request.AgeRange, request.FieldId);
+			var course = Course.CreateInstance(_idGenerator.GetNewId(), request.Title, request.AgeRange, request.FieldId, request.InstituteId);
 			field.AddCourse(course);
 
 			await _unitOfWork.CommitAsync(cancellationToken);

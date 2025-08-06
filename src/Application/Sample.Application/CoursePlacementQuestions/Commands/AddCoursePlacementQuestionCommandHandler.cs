@@ -42,7 +42,7 @@ namespace Sofa.CourseManagement.Application.CoursePlacementQuestions.Commands
 			if (placement == null)
 				throw new EntityNotFoundException($"Could not find Placement entity with Id {request.PlacementId}");
 
-			var question = CoursePlacementQuestion.CreateInstance(_idGenerator.GetNewId(), request.Order, request.PlacementId, request.QuestionId);
+			var question = CoursePlacementQuestion.CreateInstance(_idGenerator.GetNewId(), request.Order, request.PlacementId, request.QuestionId, request.CourseId, request.FieldId, request.InstituteId);
 			placement.AddQuestion(question);
 
 			await _unitOfWork.CommitAsync(cancellationToken);

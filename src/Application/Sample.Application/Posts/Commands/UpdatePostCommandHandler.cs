@@ -44,7 +44,7 @@ namespace Sofa.CourseManagement.Application.Posts.Commands
 			if (post == null)
 				throw new EntityNotFoundException($"Could not find Post entity with Id {request.Id}");
 
-			post.Update(request.Title, request.Content, request.ContentType, request.Order);
+			post.Update(request.Title, request.Content, request.ContentType, request.Order, request.LessonPlanId, request.SessionId, request.CourseId, request.FieldId, request.InstituteId);
 
 			await _unitOfWork.CommitAsync(cancellationToken);
 

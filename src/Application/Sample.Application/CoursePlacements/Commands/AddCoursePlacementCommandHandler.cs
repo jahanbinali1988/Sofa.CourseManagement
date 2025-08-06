@@ -34,7 +34,7 @@ namespace Sofa.CourseManagement.Application.CoursePlacements.Commands
 			if (course == null)
 				throw new EntityNotFoundException($"Could not find Course entity with Id {request.CourseId}");
 
-			var coursePlacement = CoursePlacement.CreateInstance(_idGenerator.GetNewId(), request.Title, request.CourseId);
+			var coursePlacement = CoursePlacement.CreateInstance(_idGenerator.GetNewId(), request.Title, request.CourseId, request.FieldId, request.InstituteId);
 			course.AddPlacement(coursePlacement);
 
 			await _unitOfWork.CommitAsync(cancellationToken);

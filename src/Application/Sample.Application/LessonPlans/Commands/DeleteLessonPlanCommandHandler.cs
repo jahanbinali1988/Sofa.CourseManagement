@@ -40,7 +40,7 @@ namespace Sofa.CourseManagement.Application.LessonPlans.Commands
 			if (lessonplan == null)
 				throw new EntityNotFoundException($"Could not find LessonPlan entity with Id {request.LessonPlanId}");
 
-			lessonplan.Delete();
+			lessonplan.Delete(request.SessionId, request.CourseId, request.FieldId, request.InstituteId);
 			session.DeleteLessonPlan(lessonplan);
 
 			await _unitOfWork.CommitAsync(cancellationToken);

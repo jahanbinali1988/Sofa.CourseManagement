@@ -30,11 +30,11 @@ namespace Sofa.CourseManagement.Application.FieldQuestionChoices.Commands
 			if (field == null)
 				throw new EntityNotFoundException($"Could not find Field Question entity with Id {request.FieldQuestionId}");
 
-			var choice = field.Courses.SingleOrDefault(c => c.Id == request.FieldQuestionChoiceId);
+			var choice = question.QuestionChoices.SingleOrDefault(c => c.Id == request.FieldQuestionChoiceId);
 			if (choice == null)
 				throw new EntityNotFoundException($"Could not find Choice entity with Id {request.FieldQuestionChoiceId}");
 
-			choice.Delete();
+			choice.Delete(question.Id, request.FieldId, request.InstituteId);
 
 			await _unitOfWork.CommitAsync(cancellationToken);
 

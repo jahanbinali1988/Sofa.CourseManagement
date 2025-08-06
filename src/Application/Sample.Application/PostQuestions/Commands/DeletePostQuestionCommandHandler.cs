@@ -49,7 +49,7 @@ namespace Sofa.CourseManagement.Application.PostQuestions.Commands
 			if (post.Question == null)
 				throw new EntityNotFoundException($"Could not find Post Question entity with Id {request.QuestionId}");
 
-			post.Question.Delete();
+			post.Question.Delete(request.PostId, request.LessonplanId, request.SessionId, request.CourseId, request.FieldId, request.InstituteId);
 
 			await _unitOfWork.CommitAsync(cancellationToken);
 

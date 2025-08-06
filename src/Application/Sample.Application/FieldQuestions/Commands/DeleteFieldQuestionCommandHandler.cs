@@ -30,7 +30,7 @@ namespace Sofa.CourseManagement.Application.FieldQuestions.Commands
 			if (question == null)
 				throw new EntityNotFoundException($"Could not find Question entity with Id {request.QuestionId}");
 
-			question.Delete();
+			question.Delete(request.FieldId, request.InstituteId);
 
 			await _unitOfWork.CommitAsync(cancellationToken);
 

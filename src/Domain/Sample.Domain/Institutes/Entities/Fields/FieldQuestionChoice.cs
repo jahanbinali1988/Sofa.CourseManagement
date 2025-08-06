@@ -36,10 +36,10 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
 
 			return instance;
 		}
-		public void Delete()
+		public void Delete(Guid questionId, Guid fieldId, Guid instituteId)
 		{
 			MarkAsDeleted();
-			AddDomainEvent(new DeleteFieldQuestionChoiceDomainEvent(this.Id));
+			AddDomainEvent(new DeleteFieldQuestionChoiceDomainEvent(this.Id, questionId, fieldId, instituteId));
 		}
 		public void Update(string content, bool isAnswer, Guid questionId, Guid fieldId, Guid instituteId)
 		{

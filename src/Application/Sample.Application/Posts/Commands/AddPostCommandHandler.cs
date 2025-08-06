@@ -44,7 +44,7 @@ namespace Sofa.CourseManagement.Application.Posts.Commands
 			if (lessonplan == null)
 				throw new EntityNotFoundException($"Could not find LessonPlan entity with Id {request.LessonPlanId}");
 
-			var post = Post.CreateInstance(_idGenerator.GetNewId(), request.Title, request.Order, request.Content, request.ContentType, request.LessonPlanId);
+			var post = Post.CreateInstance(_idGenerator.GetNewId(), request.Title, request.Order, request.Content, request.ContentType, request.LessonPlanId, request.SessionId, request.CourseId, request.FieldId, request.InstituteId);
 			lessonplan.AddPost(post);
 
 			await _unitOfWork.CommitAsync(cancellationToken);

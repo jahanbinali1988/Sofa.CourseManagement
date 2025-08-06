@@ -43,11 +43,11 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities.Courses
 
 			MarkAsUpdated();
 		}
-		public void Delete(Guid fieldId, Guid instituteId)
+		public void Delete(Guid courseId, Guid userId, Guid fieldId, Guid instituteId)
 		{
 			MarkAsDeleted();
 
-			AddDomainEvent(new DeleteCourseUserDomainEvent(Id, fieldId, instituteId));
+			AddDomainEvent(new DeleteCourseUserDomainEvent(Id, courseId, userId, fieldId, instituteId));
 		}
 	}
 }

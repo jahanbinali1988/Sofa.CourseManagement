@@ -34,7 +34,7 @@ namespace Sofa.CourseManagement.Application.CoursePlacements.Commands
 			if (coursePlacement == null)
 				throw new EntityNotFoundException($"Could not find Course Placement entity with Id {request.Id}");
 
-			coursePlacement.Delete();
+			coursePlacement.Delete(request.FieldId, request.InstituteId);
 
 			await _unitOfWork.CommitAsync(cancellationToken);
 

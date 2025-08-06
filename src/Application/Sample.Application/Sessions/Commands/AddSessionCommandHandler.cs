@@ -35,7 +35,7 @@ namespace Sofa.CourseManagement.Application.Sessions.Commands
 			if (course == null)
 				throw new EntityNotFoundException($"Could not find Course entity with Id {request.CourseId}");
 
-			var session = Session.CreateInstance(_idGenerator.GetNewId(), request.Title, request.CourseId, request.OccurredDate);
+			var session = Session.CreateInstance(_idGenerator.GetNewId(), request.Title, request.CourseId, request.OccurredDate, request.FieldId, request.InstituteId);
 
 			course.AddSession(session);
 

@@ -35,7 +35,7 @@ namespace Sofa.CourseManagement.Application.CourseUsers.Commands
 			if (courseUser == null)
 				throw new EntityNotFoundException($"Could not find courseUser entity with User Id {request.UserId}");
 
-			courseUser.Delete();
+			courseUser.Delete(request.CourseId.Value, request.UserId.Value, request.FieldId.Value, request.InstituteId.Value);
 			course.DeleteUser(courseUser);
 
 			await _unitOfWork.CommitAsync(cancellationToken);

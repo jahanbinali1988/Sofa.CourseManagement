@@ -34,7 +34,7 @@ namespace Sofa.CourseManagement.Application.CourseLanguages.Commands
 			if (courseLanguage == null)
 				throw new EntityNotFoundException($"Could not find Course Language entity with Id {request.LanguageId}");
 
-			courseLanguage.Delete();
+			courseLanguage.Delete(request.FieldId, request.InstituteId);
 			//field.DeleteCourse(course);
 
 			await _unitOfWork.CommitAsync(cancellationToken);

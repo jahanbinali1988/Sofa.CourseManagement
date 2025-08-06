@@ -31,7 +31,7 @@ namespace Sofa.CourseManagement.Application.FieldQuestions.Commands
 			if (field == null)
 				throw new EntityNotFoundException($"Could not find Field entity with Id {request.FieldId}");
 
-			var question = FieldQuestion.CreateInstance(_idGenerator.GetNewId(), request.Title, request.Content, request.Level, request.Type, request.FieldId);
+			var question = FieldQuestion.CreateInstance(_idGenerator.GetNewId(), request.Title, request.Content, request.Level, request.Type, request.FieldId, request.InstituteId);
 			field.AddQuestion(question);
 
 			await _unitOfWork.CommitAsync(cancellationToken);

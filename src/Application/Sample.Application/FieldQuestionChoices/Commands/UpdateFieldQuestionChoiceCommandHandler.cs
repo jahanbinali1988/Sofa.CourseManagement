@@ -34,7 +34,7 @@ namespace Sofa.CourseManagement.Application.FieldQuestionChoices.Commands
 			if (choice == null)
 				throw new EntityNotFoundException($"Could not find Choice entity with Id {request.FieldQuestionChoiceId}");
 
-			choice.Update(request.Content, request.IsAnswer, request.FieldQuestionId);
+			choice.Update(request.Content, request.IsAnswer, request.FieldQuestionId, request.FieldId, request.InstituteId);
 
 			await _unitOfWork.CommitAsync(cancellationToken);
 

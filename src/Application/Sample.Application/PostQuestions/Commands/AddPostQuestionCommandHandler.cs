@@ -50,18 +50,18 @@ namespace Sofa.CourseManagement.Application.PostQuestions.Commands
 			if (lessonplan == null)
 				throw new EntityNotFoundException($"Could not find Post entity with Id {request.PostId}");
 
-			var posQuestion = PostQuestion.CreateInstance(_idGenerator.GetNewId(), request.Priority, request.QuestionId, request.PostId);
-			post.AddQuestion(posQuestion);
+			var postQuestion = PostQuestion.CreateInstance(_idGenerator.GetNewId(), request.Priority, request.QuestionId, request.PostId, request.LessonplanId, request.SessionId, request.CourseId, request.FieldId, request.InstituteId);
+			post.AddQuestion(postQuestion);
 
 			await _unitOfWork.CommitAsync(cancellationToken);
 
 			return new PostQuestionDto()
 			{
-				Id = posQuestion.Id,
-				QuestionId = posQuestion.QuestionId,
+				Id = postQuestion.Id,
+				QuestionId = postQuestion.QuestionId,
 				PostId = post.Id,
 				PostTitle = post.Title.Value,
-				Priority = posQuestion.Priority.Value,
+				Priority = postQuestion.Priority.Value,
 				QuestionTitle = question.Title.Value
 			};
 		}

@@ -30,7 +30,7 @@ namespace Sofa.CourseManagement.Application.FieldQuestions.Commands
 			if (question == null)
 				throw new EntityNotFoundException($"Could not find Question entity with Id {request.QuestionId}");
 
-			question.Update(request.Title, request.Content, request.Level, request.Type, request.FieldId);
+			question.Update(request.Title, request.Content, request.Level, request.Type, request.FieldId, request.InstituteId);
 
 			await _unitOfWork.CommitAsync(cancellationToken);
 

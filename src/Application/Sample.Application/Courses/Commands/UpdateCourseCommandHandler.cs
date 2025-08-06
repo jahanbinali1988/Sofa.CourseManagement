@@ -31,7 +31,7 @@ namespace Sofa.CourseManagement.Application.Courses.Commands
 			if (course == null)
 				throw new EntityNotFoundException($"Could not find Course entity with Id {request.Id}");
 
-			course.Update(request.Title, request.AgeRange);
+			course.Update(request.Title, request.AgeRange, request.FieldId, request.InstituteId);
 			await _unitOfWork.CommitAsync(cancellationToken);
 
 			return Unit.Value;

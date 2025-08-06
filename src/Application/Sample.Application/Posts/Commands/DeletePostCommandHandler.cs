@@ -44,7 +44,7 @@ namespace Sofa.CourseManagement.Application.Posts.Commands
 			if (post == null)
 				throw new EntityNotFoundException($"Could not find Post entity with Id {request.PostId}");
 
-			post.Delete();
+			post.Delete(request.LessonPlanId, request.SessionId, request.CourseId, request.FieldId, request.InstituteId);
 
 			lessonplan.DeletePost(post);
 
