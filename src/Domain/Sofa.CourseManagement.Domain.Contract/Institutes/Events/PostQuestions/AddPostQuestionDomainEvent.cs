@@ -9,17 +9,27 @@ namespace Sofa.CourseManagement.Domain.Contract.Institutes.Events.PostQuestions
 		{
 			
 		}
-		public AddPostQuestionDomainEvent(Guid id, PriorityEnum priority, Guid questionId, Guid postId) : this()
+		public AddPostQuestionDomainEvent(Guid id, PriorityEnum priority, Guid questionId, Guid postId, Guid lessonPlanId, Guid sessionId, Guid courseId, Guid fieldId, Guid instituteId) : this()
 		{
 			Id = id;
 			Priority = priority;
 			QuestionId = questionId;
 			PostId = postId;
+			LessonPlanId = lessonPlanId;
+			SessionId = sessionId;
+			CourseId = courseId;
+			FieldId = fieldId;
+			InstituteId = instituteId;
 		}
 
-		public Guid Id { get; }
-		public PriorityEnum Priority { get; }
-		public Guid QuestionId { get; }
-		public Guid PostId { get; }
+		public Guid Id { get; set; }
+		public PriorityEnum Priority { get; set; }
+		public Guid QuestionId { get; set; }
+		public Guid PostId { get; set; }
+		public Guid LessonPlanId { get; set; }
+		public Guid SessionId { get; set; }
+		public Guid CourseId { get; set; }
+		public Guid FieldId { get; set; }
+		public Guid InstituteId { get; set; }
 	}
 }

@@ -35,26 +35,26 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities.Sessions
 		private void AssignCourseId(Guid courseId) { this.CourseId = courseId; }
 		private void AssignOccurredDate(DateTimeOffset occurredDate) { OccurredDate = occurredDate; }
 
-		public static Session CreateInstance(Guid id, string title, Guid courseId, DateTimeOffset occurredDate)
+		public static Session CreateInstance(Guid id, string title, Guid courseId, DateTimeOffset occurredDate, Guid fieldId, Guid instituteId)
 		{
 			var session = new Session(id, title, occurredDate, courseId);
 
-			session.AddDomainEvent(new AddSessionDomainEvent(session.Id, session.Title.Value, session.OccurredDate.Value, session.CourseId));
+			session.AddDomainEvent(new AddSessionDomainEvent(session.Id, session.Title.Value, session.OccurredDate.Value, session.CourseId, fieldId, instituteId));
 
 			return session;
 		}
-		public void Update(string title, DateTimeOffset occurredDate)
+		public void Update(string title, DateTimeOffset occurredDate, Guid fieldId, Guid instituteId)
 		{
 			AssignTitle(title);
 			AssignOccurredDate(occurredDate);
 			MarkAsUpdated();
 
-			AddDomainEvent(new UpdateSessionDomainEvent(Id, Title.Value, OccurredDate.Value, CourseId));
+			AddDomainEvent(new UpdateSessionDomainEvent(Id, Title.Value, OccurredDate.Value, CourseId, fieldId, instituteId));
 		}
-		public void Delete()
+		public void Delete(Guid fieldId, Guid instituteId)
 		{
 			MarkAsDeleted();
-			AddDomainEvent(new DeleteSessionDomainEvent(Id));
+			AddDomainEvent(new DeleteSessionDomainEvent(Id, CourseId, fieldId, instituteId));
 		}
 		public void AddLessonPlan(LessonPlan lessonplan)
 		{

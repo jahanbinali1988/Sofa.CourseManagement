@@ -29,28 +29,28 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities.Courses
 		private void AssignPlacement(Guid placementId) { this.PlacementId = placementId; }
 		private void AssignQuestion(Guid questionId) { this.QuestionId = questionId; }
 
-		public static CoursePlacementQuestion CreateInstance(Guid id, short order, Guid placementId, Guid questionId)
+		public static CoursePlacementQuestion CreateInstance(Guid id, short order, Guid placementId, Guid questionId, Guid courseId, Guid fieldId, Guid instituteId)
 		{
 			var instance = new CoursePlacementQuestion(id, order, placementId, questionId);
 
-			instance.AddDomainEvent(new AddCoursePlacementQuestionDomainEvent(id, order, placementId, questionId));
+			instance.AddDomainEvent(new AddCoursePlacementQuestionDomainEvent(id, order, placementId, questionId, courseId, fieldId, instituteId));
 
 			return instance;
 		}
-		public void Update(short order, Guid placementId, Guid questionId)
+		public void Update(short order, Guid placementId, Guid questionId, Guid courseId, Guid fieldId, Guid instituteId)
 		{
 			AssignOrder(order);
 			AssignPlacement(placementId);
 			AssignQuestion(questionId);
 			MarkAsUpdated();
 			
-			AddDomainEvent(new UpdateCoursePlacementQuestionDomainEvent(Id, order, placementId, questionId));
+			AddDomainEvent(new UpdateCoursePlacementQuestionDomainEvent(Id, order, placementId, questionId, courseId, fieldId, instituteId));
 		}
-		public void Delete()
+		public void Delete(Guid placementId, Guid courseId, Guid fieldId, Guid instituteId)
 		{
 			MarkAsDeleted();
 			
-			AddDomainEvent(new DeleteCoursePlacementQuestionDomainEvent(Id));
+			AddDomainEvent(new DeleteCoursePlacementQuestionDomainEvent(Id, placementId, courseId, fieldId, instituteId));
 
 		}
 	}

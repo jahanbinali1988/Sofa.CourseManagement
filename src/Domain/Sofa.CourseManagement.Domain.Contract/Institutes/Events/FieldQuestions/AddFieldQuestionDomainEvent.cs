@@ -10,7 +10,7 @@ namespace Sofa.CourseManagement.Domain.Contract.Institutes.Events.FieldQuestions
 		{
 			
 		}
-		public AddFieldQuestionDomainEvent(Guid id, string title, string content, LevelEnum level, QuestionTypeEnum type, Guid fieldId) : this()
+		public AddFieldQuestionDomainEvent(Guid id, string title, string content, LevelEnum level, QuestionTypeEnum type, Guid fieldId, Guid instituteId) : this()
 		{
 			Id = id;
 			Title = title;
@@ -18,6 +18,7 @@ namespace Sofa.CourseManagement.Domain.Contract.Institutes.Events.FieldQuestions
 			Level = level;
 			Type = type;
 			FieldId = fieldId;
+			InstituteId = instituteId;
 		}
 
 		public Guid Id { get; set; }
@@ -27,5 +28,6 @@ namespace Sofa.CourseManagement.Domain.Contract.Institutes.Events.FieldQuestions
 		public QuestionTypeEnum Type { get; set; }
 
 		public Guid FieldId { get; set; }
+		public Guid InstituteId { get; set; }
 	}
 }

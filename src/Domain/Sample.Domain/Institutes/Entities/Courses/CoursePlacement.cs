@@ -30,23 +30,23 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities.Courses
 		private void AssignTitle(string title) { this.Title = title; }
 		private void AssignCourse(Guid courseId) { this.CourseId = courseId; }
 
-		public static CoursePlacement CreateInstance(Guid id, string title, Guid courseId)
+		public static CoursePlacement CreateInstance(Guid id, string title, Guid courseId, Guid fieldId, Guid instituteId)
 		{
 			var instance = new CoursePlacement(id, title, courseId);
 
-			instance.AddDomainEvent(new AddCoursePlacementDomainEvent(id, title, courseId));
+			instance.AddDomainEvent(new AddCoursePlacementDomainEvent(id, title, courseId, fieldId, instituteId));
 
 			return instance;
 		} 
-		public void Update(string title, Guid courseId)
+		public void Update(string title, Guid courseId, Guid fieldId, Guid instituteId)
 		{
 			base.MarkAsUpdated();
-			base.AddDomainEvent(new UpdateCoursePlacementDomainEvent(Id, title, courseId));
+			base.AddDomainEvent(new UpdateCoursePlacementDomainEvent(Id, title, courseId, fieldId, instituteId));
 		}
-		public void Delete()
+		public void Delete(Guid fieldId, Guid instituteId)
 		{
 			base.MarkAsDeleted();
-			base.AddDomainEvent(new DeleteCoursePlacementDomainEvent(Id));
+			base.AddDomainEvent(new DeleteCoursePlacementDomainEvent(Id, CourseId, fieldId, instituteId));
 		}
 		public void AddQuestion(CoursePlacementQuestion question)
 		{

@@ -30,28 +30,28 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities.Posts
 		private void AssignQuestion(Guid questionId) { this.QuestionId = questionId; }
 		private void AssignPost(Guid postId) {  this.PostId = postId; }
 
-		public static PostQuestion CreateInstance(Guid id, PriorityEnum priority, Guid questionId, Guid postId) 
+		public static PostQuestion CreateInstance(Guid id, PriorityEnum priority, Guid questionId, Guid postId, Guid lessonPlanId, Guid sessionId, Guid courseId, Guid fieldId, Guid instituteId) 
 		{
 			var instance = new PostQuestion(id, priority, questionId, postId);
 
-			instance.AddDomainEvent(new AddPostQuestionDomainEvent(id, priority, questionId, postId));
+			instance.AddDomainEvent(new AddPostQuestionDomainEvent(id, priority, questionId, postId, lessonPlanId, sessionId, courseId, fieldId, instituteId));
 
 			return instance;
 		}
-		public void Update(PriorityEnum priority, Guid questionId, Guid postId)
+		public void Update(PriorityEnum priority, Guid questionId, Guid postId, Guid lessonPlanId, Guid sessionId, Guid courseId, Guid fieldId, Guid instituteId)
 		{
 			AssignPriority(priority);
 			AssignQuestion(questionId);
 			AssignPost(postId);
 			MarkAsUpdated();
 
-			AddDomainEvent(new UpdatePostQuestionDomainEvent(Id, priority, questionId, postId));
+			AddDomainEvent(new UpdatePostQuestionDomainEvent(Id, priority, questionId, postId, lessonPlanId, sessionId, courseId, fieldId, instituteId));
 		}
-		public void Delete()
+		public void Delete(Guid postId, Guid lessonPlanId, Guid sessionId, Guid courseId, Guid fieldId, Guid instituteId)
 		{
 			MarkAsDeleted();
 
-			AddDomainEvent(new DeletePostQuestionDomainEvent(Id));
+			AddDomainEvent(new DeletePostQuestionDomainEvent(Id, postId, lessonPlanId, sessionId, courseId, fieldId, instituteId));
 		}
 	}
 }

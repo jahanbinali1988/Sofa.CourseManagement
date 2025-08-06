@@ -44,26 +44,26 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities.Courses
 		private void AssignAgeRange(AgeRangeEnum ageRange) { AgeRange = ageRange; }
 		private void AssignFieldId(Guid fieldId) { FieldId = fieldId; }
 
-		public static Course CreateInstance(Guid id, string title, AgeRangeEnum ageRange, Guid fieldId)
+		public static Course CreateInstance(Guid id, string title, AgeRangeEnum ageRange, Guid fieldId, Guid instituteId)
 		{
 			var course = new Course(id, title, ageRange, fieldId);
 
-			course.AddDomainEvent(new AddCourseDomainEvent(course.Id, course.Title.Value, course.AgeRange.Value, course.FieldId));
+			course.AddDomainEvent(new AddCourseDomainEvent(course.Id, course.Title.Value, course.AgeRange.Value, course.FieldId, instituteId));
 
 			return course;
 		}
-		public void Update(string title, AgeRangeEnum ageRange)
+		public void Update(string title, AgeRangeEnum ageRange, Guid fieldId, Guid instituteId)
 		{
 			AssignTitle(title);
 			AssignAgeRange(ageRange);
 			MarkAsUpdated();
 
-			AddDomainEvent(new UpdateCourseDomainEvent(Id, Title.Value, AgeRange.Value, FieldId));
+			AddDomainEvent(new UpdateCourseDomainEvent(Id, Title.Value, AgeRange.Value, fieldId, instituteId));
 		}
-		public void Delete()
+		public void Delete(Guid fieldId, Guid instituteId)
 		{
 			MarkAsDeleted();
-			AddDomainEvent(new DeleteCourseDomainEvent(Id));
+			AddDomainEvent(new DeleteCourseDomainEvent(Id, fieldId, instituteId));
 		}
 		public void AddSession(Session session)
 		{

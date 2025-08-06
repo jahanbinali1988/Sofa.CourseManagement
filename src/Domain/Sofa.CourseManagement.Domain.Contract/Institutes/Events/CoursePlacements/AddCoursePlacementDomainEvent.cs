@@ -8,15 +8,19 @@ namespace Sofa.CourseManagement.Domain.Contract.Institutes.Events.CoursePlacemen
 		{
 			
 		}
-		public AddCoursePlacementDomainEvent(Guid id, string title, Guid courseId) : this()
+		public AddCoursePlacementDomainEvent(Guid id, string title, Guid courseId, Guid fieldId, Guid instituteId) : this()
 		{
 			Id = id;
 			Title = title;
 			CourseId = courseId;
+			FieldId = fieldId;
+			InstituteId = instituteId;
 		}
 
-		public Guid Id { get; }
-		public string Title { get; }
-		public Guid CourseId { get; }
+		public Guid Id { get; set; }
+		public string Title { get; set; }
+		public Guid CourseId { get; set; }
+		public Guid FieldId { get; set; }
+		public Guid InstituteId { get; set; }
 	}
 }

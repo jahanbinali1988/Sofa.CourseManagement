@@ -45,21 +45,21 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
 		private void AssignType(QuestionTypeEnum type) { this.Type = type; }
 		private void AssignField(Guid fieldId) { this.FieldId = fieldId; }
 
-		public static FieldQuestion CreateInstance(Guid id, string title, string content, LevelEnum level, QuestionTypeEnum questionType, Guid fieldId)
+		public static FieldQuestion CreateInstance(Guid id, string title, string content, LevelEnum level, QuestionTypeEnum questionType, Guid fieldId, Guid instituteId)
 		{
 			var instance = new FieldQuestion(id, title, content, level, questionType, fieldId);
 
-			instance.AddDomainEvent(new AddFieldQuestionDomainEvent(id, title, content, level, questionType, fieldId));
+			instance.AddDomainEvent(new AddFieldQuestionDomainEvent(id, title, content, level, questionType, fieldId, instituteId));
 
 			return instance;
 		}
-		public void Delete()
+		public void Delete(Guid fieldId, Guid instituteId)
 		{
 			MarkAsDeleted();
 
-			this.AddDomainEvent(new DeleteFieldQuestionDomainEvent(this.Id));
+			this.AddDomainEvent(new DeleteFieldQuestionDomainEvent(this.Id, fieldId, instituteId));
 		}
-		public void Update(string title, string content, LevelEnum level, QuestionTypeEnum questionType, Guid fieldId)
+		public void Update(string title, string content, LevelEnum level, QuestionTypeEnum questionType, Guid fieldId, Guid instituteId)
 		{
 			AssignContent(content);
 			AssignLevel(level);
@@ -67,7 +67,7 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
 			AssignField(fieldId);
 			base.MarkAsUpdated();
 
-			this.AddDomainEvent(new AddFieldQuestionDomainEvent(Id, title, content, level, questionType, fieldId));
+			this.AddDomainEvent(new UpdateFieldQuestionDomainEvent(Id, title, content, level, questionType, fieldId, instituteId));
 		}
 		public void AddChoice(FieldQuestionChoice choice)
 		{

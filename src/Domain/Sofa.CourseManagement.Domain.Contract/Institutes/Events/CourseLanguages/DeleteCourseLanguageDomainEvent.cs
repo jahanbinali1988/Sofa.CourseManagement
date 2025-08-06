@@ -8,11 +8,17 @@ namespace Sofa.CourseManagement.Domain.Contract.Institutes.Events.CourseLanguage
 		{
 			
 		}
-		public DeleteCourseLanguageDomainEvent(Guid id)
+		public DeleteCourseLanguageDomainEvent(Guid id, Guid courseId, Guid fieldId, Guid instituteId)
 		{
 			Id = id;
+			CourseId = courseId;
+			FieldId = fieldId;
+			InstituteId = instituteId;
 		}
 
-		public Guid Id { get; }
+		public Guid Id { get; set; }
+		public Guid CourseId { get; set; }
+		public Guid FieldId { get; set; }
+		public Guid InstituteId { get; set; }
 	}
 }

@@ -26,26 +26,26 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities.Courses
 		public void AssignLanguage(LanguageEnum language) { Language = language; }
 		public void AssignCourse(Guid courseId) {  CourseId = courseId; }
 
-		public static CourseLanguage CreateInstance(Guid id, LanguageEnum language, Guid courseId) 
+		public static CourseLanguage CreateInstance(Guid id, LanguageEnum language, Guid courseId, Guid fieldId, Guid instituteId) 
 		{
 			var instance = new CourseLanguage(id, language, courseId);
 
-			instance.AddDomainEvent(new AddCourseLanguageDomainEvent(id, language, courseId));
+			instance.AddDomainEvent(new AddCourseLanguageDomainEvent(id, language, courseId, fieldId, instituteId));
 
 			return instance;
 		}
-		public void Delete()
+		public void Delete(Guid fieldId, Guid instituteId)
 		{
 			MarkAsDeleted();
-			AddDomainEvent(new DeleteCourseLanguageDomainEvent(Id));
+			AddDomainEvent(new DeleteCourseLanguageDomainEvent(Id, CourseId, fieldId, instituteId));
 		}
-		public void Update(LanguageEnum language, Guid courseId)
+		public void Update(LanguageEnum language, Guid courseId, Guid fieldId, Guid instituteId)
 		{
 			AssignLanguage(language);
 			AssignCourse(courseId);
 			base.MarkAsUpdated();
 
-			AddDomainEvent(new UpdateCourseLanguageDomainEvent(Id, language, courseId));
+			AddDomainEvent(new UpdateCourseLanguageDomainEvent(Id, language, courseId, fieldId, instituteId));
 		}
 	}
 }

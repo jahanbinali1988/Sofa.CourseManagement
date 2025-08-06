@@ -26,28 +26,28 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities.Courses
 		private void AssignCourse(Guid courseId) { this.CourseId = courseId; }
 		private void AssignUser(Guid userId) { this.UserId = userId; }
 
-		public static CourseUser CreateInstance(Guid id, Guid courseId, Guid userId) 
+		public static CourseUser CreateInstance(Guid id, Guid courseId, Guid userId, Guid fieldId, Guid instituteId) 
 		{
 			var instance = new CourseUser(id, courseId, userId);
 
-			instance.AddDomainEvent(new AddCourseUserDomainEvent(id, courseId, userId));
+			instance.AddDomainEvent(new AddCourseUserDomainEvent(id, courseId, userId, fieldId, instituteId));
 			
 			return instance;
 		}
-		public void Update(Guid courseId, Guid userId)
+		public void Update(Guid courseId, Guid userId, Guid fieldId, Guid instituteId)
 		{
 			AssignCourse(courseId);
 			AssignUser(userId);
 
-			AddDomainEvent(new UpdateCourseUserDomainEvent(Id, courseId, userId));
+			AddDomainEvent(new UpdateCourseUserDomainEvent(Id, courseId, userId, fieldId, instituteId));
 
 			MarkAsUpdated();
 		}
-		public void Delete()
+		public void Delete(Guid fieldId, Guid instituteId)
 		{
 			MarkAsDeleted();
 
-			AddDomainEvent(new DeleteCourseUserDomainEvent(Id));
+			AddDomainEvent(new DeleteCourseUserDomainEvent(Id, fieldId, instituteId));
 		}
 	}
 }

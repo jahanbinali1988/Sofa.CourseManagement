@@ -32,7 +32,7 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities.Posts
 		protected void AssignLessonPlan(Guid lessonPlanId) { LessonPlanId = lessonPlanId; }
 		protected void AssignQuestion(Guid questionId) { QuestionId = questionId; }
 
-		public static Post CreateInstance(Guid id, string title, short order, string content, ContentTypeEnum contentTypeEnum, Guid LessonPlanId)
+		public static Post CreateInstance(Guid id, string title, short order, string content, ContentTypeEnum contentTypeEnum, Guid lessonPlanId, Guid sessionId, Guid courseId, Guid fieldId, Guid instituteId)
 		{
 			var post = new Post();
 
@@ -40,21 +40,21 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities.Posts
 			post.AssignTitle(title);
 			post.AssignOrder(order);
 			post.AssignContent(content);
-			post.AssignLessonPlan(LessonPlanId);
+			post.AssignLessonPlan(lessonPlanId);
 			post.AssignContentType(contentTypeEnum);
 
-			post.AddDomainEvent(new AddPostDomainEvent(post.Id, post.Title.Value, post.Order.Value, post.Content.Value, post.ContentType.Value, post.LessonPlanId));
+			post.AddDomainEvent(new AddPostDomainEvent(post.Id, post.Title.Value, post.Order.Value, post.Content.Value, post.ContentType.Value, lessonPlanId, sessionId, courseId, fieldId, instituteId));
 
 			return post;
 		}
 
-		public void Delete()
+		public void Delete(Guid lessonPlanId, Guid sessionId, Guid courseId, Guid fieldId, Guid instituteId)
 		{
 			MarkAsDeleted();
-			AddDomainEvent(new DeletePostDomainEvent(Id));
+			AddDomainEvent(new DeletePostDomainEvent(Id, lessonPlanId, sessionId, courseId, fieldId, instituteId));
 		}
 
-		public void Update(string title, string content, ContentTypeEnum contentType, short order)
+		public void Update(string title, string content, ContentTypeEnum contentType, short order, Guid lessonPlanId, Guid sessionId, Guid courseId, Guid fieldId, Guid instituteId)
 		{
 			AssignTitle(title);
 			AssignContent(content);
@@ -62,7 +62,7 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities.Posts
 			AssignOrder(order);
 			MarkAsUpdated();
 
-			AddDomainEvent(new UpdatePostDomainEvent(Id, Title.Value, Order.Value, Content.Value, ContentType.Value, LessonPlanId));
+			AddDomainEvent(new UpdatePostDomainEvent(Id, Title.Value, Order.Value, Content.Value, ContentType.Value, lessonPlanId, sessionId, courseId, fieldId, instituteId));
 		}
 
 		public void AddQuestion(PostQuestion postQuestion)

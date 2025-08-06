@@ -55,7 +55,7 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
 		public void Delete()
 		{
 			MarkAsDeleted();
-			AddDomainEvent(new DeleteFieldDomainEvent(Id));
+			AddDomainEvent(new DeleteFieldDomainEvent(Id, InstituteId));
 		}
 		public void AddCourse(Course course)
 		{

@@ -8,11 +8,19 @@ namespace Sofa.CourseManagement.Domain.Contract.Institutes.Events.CoursePlacemen
 		{
 			
 		}
-		public DeleteCoursePlacementQuestionDomainEvent(Guid id)
+		public DeleteCoursePlacementQuestionDomainEvent(Guid id, Guid placementId, Guid courseId, Guid fieldId, Guid instituteId)
 		{
 			Id = id;
+			PlacementId = placementId;
+			CourseId = courseId;
+			FieldId = fieldId;
+			InstituteId = instituteId;
 		}
 
-		public Guid Id { get; }
+		public Guid Id { get; set; }
+		public Guid PlacementId { get; set; }
+		public Guid CourseId { get; set; }
+		public Guid FieldId { get; set; }
+		public Guid InstituteId { get; set; }
 	}
 }

@@ -37,25 +37,25 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities.LessonPlans
 		private void AssignSession(Guid sessionId) { SessionId = sessionId; }
 		private void AssignLanguage(Guid courseLanguageId) { CourseLanguageId = courseLanguageId; }
 
-		public static LessonPlan CreateInstance(Guid id, string title, Guid sessionId, Guid courseLanguageId)
+		public static LessonPlan CreateInstance(Guid id, string title, Guid sessionId, Guid courseLanguageId, Guid courseId, Guid fieldId, Guid instituteId)
 		{
 			var lessonPlan = new LessonPlan(id, title, sessionId, courseLanguageId);
 
-			lessonPlan.AddDomainEvent(new AddLessonPlanDomainEvent(lessonPlan.Id, lessonPlan.Title.Value, lessonPlan.SessionId, lessonPlan.CourseLanguageId));
+			lessonPlan.AddDomainEvent(new AddLessonPlanDomainEvent(lessonPlan.Id, lessonPlan.Title.Value, lessonPlan.SessionId, lessonPlan.CourseLanguageId, courseId, fieldId, instituteId));
 
 			return lessonPlan;
 		}
-		public void Update(string title)
+		public void Update(string title, Guid courseId, Guid fieldId, Guid instituteId)
 		{
 			AssignTitle(title);
 			MarkAsUpdated();
 
-			AddDomainEvent(new UpdateLessonPlanDomainEvent(Id, title, SessionId, CourseLanguageId));
+			AddDomainEvent(new UpdateLessonPlanDomainEvent(Id, title, SessionId, CourseLanguageId, courseId, fieldId, instituteId));
 		}
-		public void Delete()
+		public void Delete(Guid sessionId, Guid courseId, Guid fieldId, Guid instituteId)
 		{
 			MarkAsDeleted();
-			AddDomainEvent(new DeleteLessonPlanDomainEvent(Id));
+			AddDomainEvent(new DeleteLessonPlanDomainEvent(Id, sessionId, courseId, fieldId, instituteId));
 		}
 		public void AddPost(Post post)
 		{

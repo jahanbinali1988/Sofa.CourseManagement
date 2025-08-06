@@ -9,7 +9,7 @@ namespace Sofa.CourseManagement.Domain.Contract.Institutes.Events.Posts
 		{
 
 		}
-		public AddPostDomainEvent(Guid id, string title, short order, string content, ContentTypeEnum contentType, Guid lessonPlanId) : this()
+		public AddPostDomainEvent(Guid id, string title, short order, string content, ContentTypeEnum contentType, Guid lessonPlanId, Guid sessionId, Guid courseId, Guid fieldId, Guid instituteId) : this()
 		{
 			Id = id;
 			Title = title;
@@ -17,6 +17,10 @@ namespace Sofa.CourseManagement.Domain.Contract.Institutes.Events.Posts
 			Content = content;
 			ContentType = contentType;
 			LessonPlanId = lessonPlanId;
+			SessionId = sessionId;
+			CourseId = courseId;
+			FieldId = fieldId;
+			InstituteId = instituteId;
 		}
 		public Guid Id { get; set; }
 		public string Title { get; set; }
@@ -24,5 +28,9 @@ namespace Sofa.CourseManagement.Domain.Contract.Institutes.Events.Posts
 		public string Content { get; set; }
 		public ContentTypeEnum ContentType { get; set; }
 		public Guid LessonPlanId { get; set; }
+		public Guid SessionId { get; set; }
+		public Guid CourseId { get; set; }
+		public Guid FieldId { get; set; }
+		public Guid InstituteId { get; set; }
 	}
 }

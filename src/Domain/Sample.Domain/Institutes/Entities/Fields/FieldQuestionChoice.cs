@@ -28,11 +28,11 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
 		private void AssignIsAnswer(bool isAnswer) { this.IsAnswer = isAnswer; }
 		private void AssignQuestion(Guid questionId) { this.FieldQuestionId = questionId; }
 
-		public static FieldQuestionChoice CreateInstance(Guid id, string content, bool isAnswer, Guid questionId) 
+		public static FieldQuestionChoice CreateInstance(Guid id, string content, bool isAnswer, Guid questionId, Guid fieldId, Guid instituteId) 
 		{
 			var instance = new FieldQuestionChoice(id, content, isAnswer, questionId);
 
-			instance.AddDomainEvent(new AddFieldQuestionChoiceDomainEvent(id, content, isAnswer, questionId));
+			instance.AddDomainEvent(new AddFieldQuestionChoiceDomainEvent(id, content, isAnswer, questionId, fieldId, instituteId));
 
 			return instance;
 		}
@@ -41,14 +41,14 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities
 			MarkAsDeleted();
 			AddDomainEvent(new DeleteFieldQuestionChoiceDomainEvent(this.Id));
 		}
-		public void Update(string content, bool isAnswer, Guid questionId)
+		public void Update(string content, bool isAnswer, Guid questionId, Guid fieldId, Guid instituteId)
 		{
 			AssignContent(content);
 			AssignIsAnswer(isAnswer);
 			AssignQuestion(questionId);
 			base.MarkAsUpdated();
 
-			AddDomainEvent(new UpdateFieldQuestionChoiceDomainEvent(Id, content, isAnswer, questionId));
+			AddDomainEvent(new UpdateFieldQuestionChoiceDomainEvent(Id, content, isAnswer, questionId, fieldId, instituteId));
 		}
 	}
 }
