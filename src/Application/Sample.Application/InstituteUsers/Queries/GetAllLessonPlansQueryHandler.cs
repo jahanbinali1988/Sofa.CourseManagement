@@ -39,18 +39,18 @@ namespace Sofa.CourseManagement.Application.InstituteUsers.Queries
 			var lessonPlans = session.LessonPlans
 				.Skip(request.Offset * request.Count)
 				.Take(request.Count)
-				.Select(s=> new LessonPlanDto()
-			{
-				Id = s.Id,
-				Title = s.Title.Value,
-				InstituteTitle = institute.Title.Value,
-				InstituteId = request.InstituteId,
-				FieldId = field.Id,
-				FieldTitle = field.Title.Value,
-				CourseId = course.Id,
-				CourseTitle = course.Title.Value,
-				OccurredDate = session.OccurredDate.Value,
-			});
+				.Select(s => new LessonPlanDto()
+				{
+					Id = s.Id,
+					Title = s.Title.Value,
+					InstituteTitle = institute.Title.Value,
+					InstituteId = request.InstituteId,
+					FieldId = field.Id,
+					FieldTitle = field.Title.Value,
+					CourseId = course.Id,
+					CourseTitle = course.Title.Value,
+					Priority = session.Priority,
+				});
 
 			return new Pagination<LessonPlanDto>()
 			{

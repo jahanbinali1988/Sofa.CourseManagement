@@ -1,11 +1,12 @@
 ﻿using Sofa.CourseManagement.Application.Contract.Sessions.Commands;
+using Sofa.CourseManagement.Domain.Institutes.ValueObjects;
 
 namespace Sofa.CourseManagement.RestApi.Models.Sessions
 {
 	public class CreateSessionViewModel : ViewModelBase
 	{
 		public string Title { get; set; }
-		public DateTimeOffset OccurredDate { get; set; }
+		public byte Priority { get; set; }
 
 		internal AddSessionCommand ToCommand(string instituteId, string fieldId, string courseId)
 		{
@@ -15,7 +16,7 @@ namespace Sofa.CourseManagement.RestApi.Models.Sessions
 				InstituteId = instituteId,
 				FieldId = fieldId,
 				CourseId = courseId,
-				OccurredDate = OccurredDate
+				Priority = Priority
 			};
 		}
 
@@ -28,7 +29,7 @@ namespace Sofa.CourseManagement.RestApi.Models.Sessions
 				FieldId = fieldId,
 				CourseId = courseId,
 				Id = id,
-				OccurredDate = OccurredDate
+				Priority = Priority
 			};
 		}
 	}

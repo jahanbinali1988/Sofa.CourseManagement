@@ -15,6 +15,6 @@ namespace Sofa.CourseManagement.Application.Contract.LessonPlans.Dtos
 		public string FieldTitle { get; set; }
 		public Id CourseId { get; set; }
 		public string CourseTitle { get; set; }
-		public DateTimeOffset? OccurredDate { get; set; }
+		public byte Priority { get; set; }
 	}
 }

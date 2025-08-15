@@ -40,7 +40,7 @@ namespace Sofa.CourseManagement.Application.Sessions.Queries
 			{
 				Id = session.Id,
 				Title = session.Title.Value,
-				OccurredDate = session.OccurredDate.Value,
+				Priority = session.Priority,
 				InstituteId = institute.Id,
 				InstituteTitle = institute.Title.Value,
 				FieldId = field.Id,

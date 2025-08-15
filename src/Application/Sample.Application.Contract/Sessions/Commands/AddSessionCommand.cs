@@ -11,6 +11,6 @@ namespace Sofa.CourseManagement.Application.Contract.Sessions.Commands
 		public Id InstituteId { get; set; }
 		public Id FieldId { get; set; }
 		public Id CourseId { get; set; }
-		public DateTimeOffset OccurredDate { get; set; }
+		public byte Priority { get; set; }
 	}
 }

@@ -45,7 +45,7 @@ namespace Sofa.CourseManagement.Application.Sessions.Queries
 					FieldTitle = field.Title.Value,
 					CourseId = course.Id,
 					CourseTitle = course.Title.Value,
-					OccurredDate = s.OccurredDate.Value,
+					Priority = s.Priority,
 				});
 
 			return new Pagination<SessionDto>()

@@ -11,7 +11,7 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities.Sessions
 	public class Session : Entity<Guid>
 	{
 		public Title Title { get; private set; }
-		public OccurredDate OccurredDate { get; private set; }
+		public byte Priority { get; private set; }
 		
 		public Guid CourseId { get; private set; }
 		public Course Course { get; private set; }
@@ -23,33 +23,33 @@ namespace Sofa.CourseManagement.Domain.Institutes.Entities.Sessions
 		{
 			_lessonPlans = new List<LessonPlan>();
 		}
-		private Session(Guid id, string title, DateTimeOffset occrredDate, Guid courseId) : this()
+		private Session(Guid id, string title, byte priority, Guid courseId) : this()
 		{
 			AssignId(id);
 			AssignTitle(title);
-			AssignOccurredDate(occrredDate);
+			AssignPriority(priority);
 			AssignCourseId(courseId);
 		}
 
 		private void AssignTitle(string title) { Title = title; }
 		private void AssignCourseId(Guid courseId) { this.CourseId = courseId; }
-		private void AssignOccurredDate(DateTimeOffset occurredDate) { OccurredDate = occurredDate; }
+		private void AssignPriority(byte priority) { Priority = priority; }
 
-		public static Session CreateInstance(Guid id, string title, Guid courseId, DateTimeOffset occurredDate, Guid fieldId, Guid instituteId)
+		public static Session CreateInstance(Guid id, string title, Guid courseId, byte priority, Guid fieldId, Guid instituteId)
 		{
-			var session = new Session(id, title, occurredDate, courseId);
+			var session = new Session(id, title, priority, courseId);
 
-			session.AddDomainEvent(new AddSessionDomainEvent(session.Id, session.Title.Value, session.OccurredDate.Value, session.CourseId, fieldId, instituteId));
+			session.AddDomainEvent(new AddSessionDomainEvent(session.Id, session.Title.Value, session.Priority, session.CourseId, fieldId, instituteId));
 
 			return session;
 		}
-		public void Update(string title, DateTimeOffset occurredDate, Guid fieldId, Guid instituteId)
+		public void Update(string title, byte priority, Guid fieldId, Guid instituteId)
 		{
 			AssignTitle(title);
-			AssignOccurredDate(occurredDate);
+			AssignPriority(priority);
 			MarkAsUpdated();
 
-			AddDomainEvent(new UpdateSessionDomainEvent(Id, Title.Value, OccurredDate.Value, CourseId, fieldId, instituteId));
+			AddDomainEvent(new UpdateSessionDomainEvent(Id, Title.Value, priority, CourseId, fieldId, instituteId));
 		}
 		public void Delete(Guid fieldId, Guid instituteId)
 		{
