@@ -1,4 +1,4 @@
-﻿using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
+﻿using Sofa.SharedBusinessEntities;
 using Sofa.SharedKernel.SeedWork;
 
 namespace Sofa.CourseManagement.Domain.Institutes.ValueObjects

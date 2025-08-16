@@ -1,5 +1,5 @@
 ﻿using Sofa.CourseManagement.Application.Contract.CourseLanguages.Commands;
-using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
+using Sofa.SharedBusinessEntities;
 
 namespace Sofa.CourseManagement.RestApi.Models.Courses
 {

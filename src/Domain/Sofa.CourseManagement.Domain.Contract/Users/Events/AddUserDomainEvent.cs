@@ -1,4 +1,4 @@
-﻿using Sofa.CourseManagement.Domain.Contract.Users.Enums;
+﻿using Sofa.SharedBusinessEntities;
 using Sofa.SharedKernel.EventProcessing.DomainEvent;
 
 namespace Sofa.CourseManagement.Domain.Contract.Users.Events

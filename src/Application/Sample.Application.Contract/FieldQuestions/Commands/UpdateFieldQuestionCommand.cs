@@ -1,6 +1,5 @@
 ﻿using Sofa.CourseManagement.Application.Contract.Shared;
-using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
-using Sofa.CourseManagement.Domain.Contract.Users.Enums;
+using Sofa.SharedBusinessEntities;
 using Sofa.SharedKernel.Application;
 
 namespace Sofa.CourseManagement.Application.Contract.FieldQuestions.Commands

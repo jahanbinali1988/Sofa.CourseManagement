@@ -4,11 +4,17 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <Version>1.0.5</Version>
+    <Version>1.0.6</Version>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Sofa.SharedBusinessEntities" Version="1.0.0" />
     <PackageReference Include="Sofa.SharedKernel" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Institutes\Enums\" />
+    <Folder Include="Users\Enums\" />
   </ItemGroup>
 
 </Project>

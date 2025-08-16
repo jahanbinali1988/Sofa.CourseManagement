@@ -1,6 +1,6 @@
 ﻿using Sofa.CourseManagement.Application.Contract.Posts.Dtos;
 using Sofa.CourseManagement.Application.Contract.Shared;
-using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
+using Sofa.SharedBusinessEntities;
 using Sofa.SharedKernel.Application;
 using System;
 

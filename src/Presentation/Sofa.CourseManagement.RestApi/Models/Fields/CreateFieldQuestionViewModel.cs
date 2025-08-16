@@ -1,6 +1,5 @@
 ﻿using Sofa.CourseManagement.Application.Contract.FieldQuestions.Commands;
-using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
-using Sofa.CourseManagement.Domain.Contract.Users.Enums;
+using Sofa.SharedBusinessEntities;
 
 namespace Sofa.CourseManagement.RestApi.Models.Fields
 {

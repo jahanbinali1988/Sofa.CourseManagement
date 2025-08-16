@@ -1,8 +1,8 @@
-﻿using Sofa.CourseManagement.Domain.Contract.Users.Enums;
-using Sofa.CourseManagement.Domain.Contract.Users.Events;
+﻿using Sofa.CourseManagement.Domain.Contract.Users.Events;
 using Sofa.CourseManagement.Domain.Institutes.Entities.Courses;
 using Sofa.CourseManagement.Domain.Institutes.Entities.Users;
 using Sofa.CourseManagement.Domain.Users.ValueObjects;
+using Sofa.SharedBusinessEntities;
 using Sofa.SharedKernel.Generators;
 using Sofa.SharedKernel.SeedWork;
 using System;

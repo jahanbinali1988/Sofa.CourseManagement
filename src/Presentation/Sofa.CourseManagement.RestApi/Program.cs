@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Sofa.CourseManagement.Domain.Contract.Users.Enums;
 using Sofa.CourseManagement.RestApi.Extensions;
+using Sofa.SharedBusinessEntities;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);

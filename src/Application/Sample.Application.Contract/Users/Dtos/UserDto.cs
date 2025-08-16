@@ -1,5 +1,5 @@
 ﻿using Sofa.CourseManagement.Application.Contract.Shared;
-using Sofa.CourseManagement.Domain.Contract.Users.Enums;
+using Sofa.SharedBusinessEntities;
 
 namespace Sofa.CourseManagement.Application.Contract.Users.Dtos
 {

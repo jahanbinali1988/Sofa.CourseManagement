@@ -1,7 +1,7 @@
 ﻿using Sofa.CourseManagement.Application.Contract.Courses.Dtos;
 using Sofa.CourseManagement.Application.Contract.Users.Dtos;
-using Sofa.CourseManagement.Domain.Contract.Users.Enums;
 using Sofa.CourseManagement.RestApi.Models.Courses;
+using Sofa.SharedBusinessEntities;
 using Sofa.SharedKernel.Application;
 
 namespace Sofa.CourseManagement.RestApi.Models.Users

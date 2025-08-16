@@ -1,5 +1,5 @@
 ﻿using Sofa.CourseManagement.Application.Contract.Shared;
-using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
+using Sofa.SharedBusinessEntities;
 using System;
 
 namespace Sofa.CourseManagement.Application.Contract.Courses.Dtos

@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Sofa.CourseManagement.Application.Contract.PostQuestions.Commands;
-using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
+using Sofa.SharedBusinessEntities;
 
 namespace Sofa.CourseManagement.RestApi.Models.Posts
 {

@@ -1,5 +1,5 @@
 ﻿using Sofa.CourseManagement.Application.Contract.Posts.Dtos;
-using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
+using Sofa.SharedBusinessEntities;
 using Sofa.SharedKernel.Application;
 
 namespace Sofa.CourseManagement.RestApi.Models.Posts

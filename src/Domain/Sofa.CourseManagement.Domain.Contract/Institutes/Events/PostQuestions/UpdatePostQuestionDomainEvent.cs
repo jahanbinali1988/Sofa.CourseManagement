@@ -1,4 +1,4 @@
-﻿using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
+﻿using Sofa.SharedBusinessEntities;
 using Sofa.SharedKernel.EventProcessing.DomainEvent;
 
 namespace Sofa.CourseManagement.Domain.Contract.Institutes.Events.PostQuestions

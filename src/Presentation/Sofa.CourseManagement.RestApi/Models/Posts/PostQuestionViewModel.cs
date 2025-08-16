@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Sofa.CourseManagement.Application.Contract.PostQuestions.Dtos;
-using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
+using Sofa.SharedBusinessEntities;
 
 namespace Sofa.CourseManagement.RestApi.Models.Posts
 {

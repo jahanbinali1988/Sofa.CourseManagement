@@ -1,7 +1,6 @@
 ﻿using Sofa.CourseManagement.Application.Contract.Shared;
-using Sofa.CourseManagement.Domain.Contract.Institutes.Enums;
-using Sofa.CourseManagement.Domain.Contract.Users.Enums;
 using Sofa.CourseManagement.Domain.Institutes.ValueObjects;
+using Sofa.SharedBusinessEntities;
 
 namespace Sofa.CourseManagement.Application.Contract.FieldQuestions.Dtos
 {
