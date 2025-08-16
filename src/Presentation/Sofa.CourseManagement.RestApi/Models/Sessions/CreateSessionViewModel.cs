@@ -6,7 +6,7 @@ namespace Sofa.CourseManagement.RestApi.Models.Sessions
 	public class CreateSessionViewModel : ViewModelBase
 	{
 		public string Title { get; set; }
-		public byte Priority { get; set; }
+		public byte Order { get; set; }
 
 		internal AddSessionCommand ToCommand(string instituteId, string fieldId, string courseId)
 		{
@@ -16,7 +16,7 @@ namespace Sofa.CourseManagement.RestApi.Models.Sessions
 				InstituteId = instituteId,
 				FieldId = fieldId,
 				CourseId = courseId,
-				Priority = Priority
+				Order = Order
 			};
 		}
 
@@ -29,7 +29,7 @@ namespace Sofa.CourseManagement.RestApi.Models.Sessions
 				FieldId = fieldId,
 				CourseId = courseId,
 				Id = id,
-				Priority = Priority
+				Order = Order
 			};
 		}
 	}

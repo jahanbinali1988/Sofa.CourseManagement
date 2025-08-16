@@ -49,7 +49,7 @@ namespace Sofa.CourseManagement.Application.InstituteUsers.Queries
 					FieldTitle = field.Title.Value,
 					CourseId = course.Id,
 					CourseTitle = course.Title.Value,
-					Priority = session.Priority,
+					Priority = session.Order,
 				});
 
 			return new Pagination<LessonPlanDto>()

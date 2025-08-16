@@ -35,7 +35,7 @@ namespace Sofa.CourseManagement.Application.Sessions.Commands
 			if (session == null)
 				throw new EntityNotFoundException($"Could not find Session entity with Id {request.Id}");
 
-			session.Update(request.Title, request.Priority, request.FieldId, request.InstituteId);
+			session.Update(request.Title, request.Order, request.FieldId, request.InstituteId);
 
 			await _unitOfWork.CommitAsync(cancellationToken);
 

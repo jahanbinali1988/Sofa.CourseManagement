@@ -8,18 +8,18 @@ namespace Sofa.CourseManagement.Domain.Contract.Institutes.Events.Sessions
         {
             
         }
-        public AddSessionDomainEvent(Guid id, string title, byte priority, Guid courseId, Guid fieldId, Guid instituteId) : this()
+        public AddSessionDomainEvent(Guid id, string title, byte order, Guid courseId, Guid fieldId, Guid instituteId) : this()
 		{
 			Id = id;
 			Title = title;
-			Priority = priority;
+			Order = order;
 			CourseId = courseId;
 			FieldId = fieldId;
 			InstituteId = instituteId;
 		}
 		public Guid Id { get; set; }
         public string Title { get; set; }
-		public byte Priority { get; set; }
+		public byte Order { get; set; }
 		public Guid CourseId { get; set; }
 		public Guid FieldId { get; set; }
 		public Guid InstituteId { get; set; }

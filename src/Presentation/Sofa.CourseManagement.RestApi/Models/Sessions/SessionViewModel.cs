@@ -14,7 +14,7 @@ namespace Sofa.CourseManagement.RestApi.Models.Sessions
 		public string FieldTitle { get; set; }
 		public string InstituteId { get; set; }
 		public string InstituteTitle { get; set; }
-		public byte Priority { get; set; }
+		public byte Order { get; set; }
 
 		internal static SessionViewModel Create(SessionDto session)
 		{
@@ -28,7 +28,7 @@ namespace Sofa.CourseManagement.RestApi.Models.Sessions
 				FieldTitle = session.FieldTitle,
 				InstituteId = session.InstituteId,
 				InstituteTitle = session.InstituteTitle,
-				Priority = session.Priority
+				Order = session.Order
 			};
 		}
 	}

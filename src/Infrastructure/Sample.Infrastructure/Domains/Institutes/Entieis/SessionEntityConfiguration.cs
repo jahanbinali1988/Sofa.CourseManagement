@@ -23,7 +23,7 @@ namespace Sofa.CourseManagement.Infrastructure.Domains.Institutes.Entieis
 					.HasMaxLength(ConstantValues.MaxStringTitleLength)
 					.IsRequired(true);
 			});
-			builder.Property(c => c.Priority);
+			builder.Property(c => c.Order);
 
 			base.Configure(builder);
 		}

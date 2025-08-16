@@ -6,7 +6,7 @@ namespace Sofa.CourseManagement.Application.Contract.Sessions.Dtos
 	public class SessionDto : EntityBaseDto
 	{
 		public string Title { get; set; }
-		public byte Priority { get; set; }
+		public byte Order { get; set; }
 		public Id CourseId { get; set; }
 		public string CourseTitle { get; set; }
 		public Id FieldId { get; set; }
